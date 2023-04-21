@@ -18,27 +18,61 @@
         android:fontFamily="serif-monospace"
         android:textStyle="bold"
         android:textColor="#FF9800"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        />
 
-    <Button
-        android:id="@+id/bttLights"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#1BBAB2B2"
-        android:text="Manage Lights"
-        android:textColor="#FFF3CF"
-        android:fontFamily="monospace"
-        android:layout_marginTop="20dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/bttShutters"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/lamp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            />
+
+        <Button
+            android:id="@+id/bttLights"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1BBAB2B2"
+            android:text="Manage Lights"
+            android:textColor="#FFF3CF"
+            android:fontFamily="monospace"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#1BBAB2B2"
-        android:text="Manage Shutters"
-        android:textColor="#FFF3CF"
-        android:fontFamily="monospace"
-        android:layout_marginTop="20dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/shutters"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            />
+
+        <Button
+            android:id="@+id/bttShutters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1BBAB2B2"
+            android:text="Manage Shutters"
+            android:textColor="#FFF3CF"
+            android:fontFamily="monospace"
+            />
+    </LinearLayout>
+
 
 
 
