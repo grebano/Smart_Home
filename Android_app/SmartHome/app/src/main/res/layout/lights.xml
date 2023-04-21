@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/Background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:visibility="visible">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turn on and off your lights"
+            android:textSize="17dp"
+            android:fontFamily="serif-monospace"
+            android:textStyle="bold"
+            android:textColor="@color/Title"
+            />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/lamp"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSwitch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvSwitch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lamp 1 :"
+            android:textSize="20dp"
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/textColor"
+            android:layout_marginRight="20dp"
+            />
+
+        <Button
+            android:id="@+id/bttSwitch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Toggle"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSwitch2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvSwitch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lamp 2 :"
+            android:textSize="20dp"
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/textColor"
+            android:layout_marginRight="20dp"
+            />
+
+        <Button
+            android:id="@+id/bttSwitch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Toggle"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
