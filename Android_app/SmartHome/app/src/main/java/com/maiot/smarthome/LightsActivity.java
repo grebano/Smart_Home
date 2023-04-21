@@ -1,6 +1,7 @@
 package com.maiot.smarthome;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,5 +12,6 @@ public class LightsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lights);
+        Intent intent = getIntent();
     }
 }
