@@ -30,4 +30,17 @@
         android:fontFamily="monospace"
         android:layout_marginTop="20dp"/>
 
+    <Button
+        android:id="@+id/bttShutters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#1BBAB2B2"
+        android:text="Manage Shutters"
+        android:textColor="#FFF3CF"
+        android:fontFamily="monospace"
+        android:layout_marginTop="20dp"/>
+
+
+
+
 </LinearLayout>
