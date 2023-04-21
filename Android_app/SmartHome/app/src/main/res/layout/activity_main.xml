@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:layout_gravity="center_horizontal"
-    android:background="#2E2C2C">
+    android:background="@color/Background">
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:textSize="25dp"
         android:fontFamily="serif-monospace"
         android:textStyle="bold"
-        android:textColor="#FF9800"
+        android:textColor="@color/Title"
         android:layout_marginTop="10dp"
         />
 
@@ -26,23 +26,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/lamp"
             android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
             />
 
         <Button
             android:id="@+id/bttLights"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#1BBAB2B2"
+            android:backgroundTint="@color/ButtonBackground"
             android:text="Manage Lights"
-            android:textColor="#FFF3CF"
+            android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
     </LinearLayout>
@@ -52,23 +51,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/shutters"
             android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
             />
 
         <Button
             android:id="@+id/bttShutters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#1BBAB2B2"
+            android:backgroundTint="@color/ButtonBackground"
             android:text="Manage Shutters"
-            android:textColor="#FFF3CF"
+            android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
     </LinearLayout>
