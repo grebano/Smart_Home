@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Turn on and off your lights"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:fontFamily="serif-monospace"
             android:textStyle="bold"
             android:textColor="@color/Title"
@@ -62,6 +62,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
             android:text="Auto"
+            android:textSize="15dp"
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
@@ -72,6 +73,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
             android:text="Manual"
+            android:textSize="15dp"
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             android:layout_marginLeft="20dp"
@@ -124,10 +126,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
-            android:text="Toggle"
+            android:text="Turn On "
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
+
+        <ImageView
+            android:id="@+id/imgLamp1_Off"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/lamp_off"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
+        <ImageView
+            android:id="@+id/imgLamp1_On"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/lamp"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
 
     </LinearLayout>
 
@@ -156,10 +177,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
-            android:text="Toggle"
+            android:text="Turn On "
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
+
+        <ImageView
+            android:id="@+id/imgLamp2_Off"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/lamp_off"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
+        <ImageView
+            android:id="@+id/imgLamp2_On"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/lamp"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
 
     </LinearLayout>
 
