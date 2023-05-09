@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LightsActivity"
+            android:name=".Activities.LightsActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.maiot.smarthome.LightsActivity" />
+                <action android:name="com.maiot.smarthome.Activities.LightsActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

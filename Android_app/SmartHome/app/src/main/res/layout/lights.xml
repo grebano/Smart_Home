@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:visibility="visible">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Turn on and off your lights"
-            android:textSize="17dp"
+            android:textSize="18dp"
             android:fontFamily="serif-monospace"
             android:textStyle="bold"
             android:textColor="@color/Title"
@@ -35,14 +35,78 @@
 
     </LinearLayout>
 
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose mode :"
+        android:textSize="17dp"
+        android:fontFamily="monospace"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="30dp"
+        />
+
+
     <LinearLayout
-        android:id="@+id/llSwitch1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:visibility="visible">
+
+        <Button
+            android:id="@+id/bttLightsModeAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Auto"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+
+        <Button
+            android:id="@+id/bttLightsModeManual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Manual"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            android:layout_marginLeft="20dp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Automatic: Lights will follow you around the house"
+        android:textSize="10dp"
+        android:fontFamily="monospace"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual: Turn on/off single lights at your choice"
+        android:textSize="10dp"
+        android:fontFamily="monospace"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="10dp"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/llSwitch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/tvSwitch1"
@@ -74,7 +138,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/tvSwitch2"

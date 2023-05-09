@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">SmartHome</string>
-    <string name="LAUNCH_LIGHTS_ACTIVITY">com.maiot.smarthome.LightsActivity</string>
+    <string name="LAUNCH_LIGHTS_ACTIVITY">com.maiot.smarthome.Activities.LightsActivity</string>
     <string name="LABEL_MESSAGE_LIGHTS">Label_Message_lights</string>
 </resources>

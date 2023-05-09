@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.SmartHome" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary brand color. -->
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/Background</item>
+        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.SmartHome" parent="Base.Theme.SmartHome" />
