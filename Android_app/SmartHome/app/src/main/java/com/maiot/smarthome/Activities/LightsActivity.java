@@ -28,9 +28,9 @@ public class LightsActivity extends AppCompatActivity {
     private Button bttSwitch2 = null;
 
     // immagini dello stato delle lampade
-    private ImageView imgLamp1_On = null;;
+    private ImageView imgLamp1_On = null;
     private ImageView imgLamp1_Off = null;
-    private ImageView imgLamp2_On = null;;
+    private ImageView imgLamp2_On = null;
     private ImageView imgLamp2_Off = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class LightsActivity extends AppCompatActivity {
             bttSwitch2.setVisibility(View.VISIBLE);
             bttSwitch2.setClickable(true);
 
-            // possibilità di click
+            // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
             bttLightsModeAuto.setClickable(true);
         });
@@ -113,7 +113,7 @@ public class LightsActivity extends AppCompatActivity {
             bttSwitch2.setVisibility(View.INVISIBLE);
             bttSwitch2.setClickable(false);
 
-            // possibilità di click
+            // possibilità di click della modalità
             bttLightsModeAuto.setClickable(false);
             bttLightsModeManual.setClickable(true);
         });
@@ -147,7 +147,7 @@ public class LightsActivity extends AppCompatActivity {
         bttSwitch2 = findViewById(R.id.bttSwitch2);
         bttSwitch2.setOnClickListener(view -> {
 
-            // inversione dello stato della lampada 1
+            // inversione dello stato della lampada 2
             if(imgLamp2_Off.getVisibility() == View.VISIBLE)
             {
                 imgLamp2_Off.setVisibility(View.INVISIBLE);
