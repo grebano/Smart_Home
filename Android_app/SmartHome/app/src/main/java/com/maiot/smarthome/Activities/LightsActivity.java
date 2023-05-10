@@ -54,6 +54,12 @@ public class LightsActivity extends AppCompatActivity {
         imgLamp2_Off = findViewById(R.id.imgLamp2_Off);
         imgLamp2_On = findViewById(R.id.imgLamp2_On);
 
+        // visibilità immagini stato
+        imgLamp1_Off.setVisibility(View.VISIBLE);
+        imgLamp2_Off.setVisibility(View.VISIBLE);
+        imgLamp1_On.setVisibility(View.INVISIBLE);
+        imgLamp2_On.setVisibility(View.INVISIBLE);
+
         // settaggio click listeners e view nelle due modalità
         automaticModeViews();
         manualModeViews();
@@ -68,13 +74,6 @@ public class LightsActivity extends AppCompatActivity {
     private void manualModeViews(){
         // è stata scelta la modalità manuale
         bttLightsModeManual = findViewById(R.id.bttLightsModeManual);
-
-        // visibilità immagini stato
-        imgLamp1_Off.setVisibility(View.VISIBLE);
-        imgLamp2_Off.setVisibility(View.VISIBLE);
-        imgLamp1_On.setVisibility(View.INVISIBLE);
-        imgLamp2_On.setVisibility(View.INVISIBLE);
-
         bttLightsModeManual.setOnClickListener(view -> {
             // visibilità layout
             llSwitch1.setVisibility(View.VISIBLE);
@@ -95,13 +94,6 @@ public class LightsActivity extends AppCompatActivity {
     private void automaticModeViews(){
         // è stata scelta la modalità automatica
         bttLightsModeAuto = findViewById(R.id.bttLightsModeAuto);
-
-        // visibilità immagini stato
-        imgLamp1_Off.setVisibility(View.VISIBLE);
-        imgLamp2_Off.setVisibility(View.VISIBLE);
-        imgLamp1_On.setVisibility(View.INVISIBLE);
-        imgLamp2_On.setVisibility(View.INVISIBLE);
-
         bttLightsModeAuto.setOnClickListener(view -> {
             // visibilità layout
             llSwitch1.setVisibility(View.VISIBLE);
