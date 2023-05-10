@@ -8,11 +8,13 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import Interfaces.WifiScanCompleted;
+import Miscellaneous.Constants;
 
 public class WifiReceiver extends BroadcastReceiver {
 
@@ -45,32 +47,18 @@ public class WifiReceiver extends BroadcastReceiver {
         };
         Collections.sort(wifiScan, comparator);
 
-        //conto le reti in 5GHz e in 2.4GHz
-        int fiveG = 0;
-        int twoG = 0;
-        for(int i=0; i<wifiScan.size();i++){
-            if(wifiScan.get(i).frequency < 3500){
-                twoG ++;
-            }
-            else{
-                fiveG ++;
-            }
-        }
+        // lista di stringhe che ritorno come output
+        ArrayList<String[]> nets = null;
 
-        String res = "";
-        res += "<b>Number of Networks: " + wifiScan.size() + "</b><br><br>";
-        res += "<b>   5GHz Networks count: </b>"+ fiveG +"<br>";
-        res += "<b> 2.4GHz Networks count:  </b>"+ twoG +"<br><br>";
-
+        // aggiungo alla lista il Mac e la potenza dei router
         for(int i = 0; i < wifiScan.size(); i++){
-            res += (i+1) + "<b>) SSID: </b>" + wifiScan.get(i).SSID + "<br>";
-            res += "<b> MAC: </b>" + wifiScan.get(i).BSSID + "<br>";
-            res += "<b> Frequency: </b>" + wifiScan.get(i).frequency + " MHz <br>";
-            res += "<b> Capabilities: </b>" + wifiScan.get(i).capabilities + "<br>";
-            res += "<b> RSSI: </b>" + wifiScan.get(i).level + " dBm<br><br>";
-            //RSSI-RSS è la potenza del segnale ricevuto
+            if(wifiScan.get(i).SSID == Constants.SSID) {
+                String lev = "" + wifiScan.get(i).level;
+                String[] net = new String[]{wifiScan.get(i).BSSID, lev};
+                nets.add(net);
+            }
         }
         Log.i(TAG,"res");
-        wifiScanCompleted.onWifiScanCompleted(res);
+        wifiScanCompleted.onWifiScanCompleted(nets);
     }
 }

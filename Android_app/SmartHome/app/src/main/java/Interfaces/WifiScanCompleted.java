@@ -1,5 +1,8 @@
 package Interfaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface WifiScanCompleted {
-    public void onWifiScanCompleted (String resultHtml);
+    public void onWifiScanCompleted (ArrayList<String[]> networks);
 }
