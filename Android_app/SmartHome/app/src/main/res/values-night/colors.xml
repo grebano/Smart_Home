@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="textColor">#FFF3CF</color>
     <color name="Background">#181A1B</color>
-    <color name="Title">#FF9800</color>
+    <color name="Lights_Title">#FF9800</color>
+    <color name="Shutters_Title">#36FFE1</color>
     <color name="ButtonBackground">#1BBAB2B2</color>
 </resources>

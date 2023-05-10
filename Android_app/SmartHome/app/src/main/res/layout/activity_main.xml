@@ -16,7 +16,7 @@
         android:textSize="25dp"
         android:fontFamily="serif-monospace"
         android:textStyle="bold"
-        android:textColor="@color/Title"
+        android:textColor="@color/textColor"
         android:layout_marginTop="30dp"
         />
 

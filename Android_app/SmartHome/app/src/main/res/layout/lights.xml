@@ -23,7 +23,7 @@
             android:textSize="20dp"
             android:fontFamily="serif-monospace"
             android:textStyle="bold"
-            android:textColor="@color/Title"
+            android:textColor="@color/Lights_Title"
             />
 
         <ImageView
