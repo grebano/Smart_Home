@@ -1,20 +1,20 @@
 package com.maiot.smarthome.Activities;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+        import android.app.Activity;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.annotation.Nullable;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import com.maiot.smarthome.R;
+        import com.maiot.smarthome.R;
 
-public class LightsActivity extends AppCompatActivity {
-
+public class AutomationsActivity extends AppCompatActivity {
+/*
     // layout delle lampade
     private LinearLayout ll_Lamp_Switch1 = null;
     private LinearLayout ll_Lamp_Switch2 = null;
@@ -35,17 +35,17 @@ public class LightsActivity extends AppCompatActivity {
     private ImageView imgLamp2_On = null;
     private ImageView imgLamp2_Off = null;
     private ImageView imgLamp3_On = null;
-    private ImageView imgLamp3_Off = null;
+    private ImageView imgLamp3_Off = null; */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lights);
+        setContentView(R.layout.automations);
         Intent intent = getIntent();
 
         // inizializzazione delle views e set dei click Listener
-        initViews();
+        //initViews();
     }
-
+/*
     private void initViews()
     {
         // associazione dei layout
@@ -191,5 +191,6 @@ public class LightsActivity extends AppCompatActivity {
                 btt_Lamp_Switch3.setText("Turn On ");
             }
         });
-    }
+    }*/
 }
+

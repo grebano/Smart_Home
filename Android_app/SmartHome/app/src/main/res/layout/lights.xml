@@ -203,4 +203,55 @@
 
     </LinearLayout>
 
+    <!-- Lamp 3 layout -->
+    <LinearLayout
+        android:id="@+id/ll_Lamp_Switch3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/tv_Lamp_Switch3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lamp 3 :"
+            android:textSize="20dp"
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/textColor"
+            android:layout_marginRight="20dp"
+            />
+
+        <Button
+            android:id="@+id/btt_Lamp_Switch3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Turn On "
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+
+        <ImageView
+            android:id="@+id/imgLamp3_Off"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/modern_lamp_off"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
+        <ImageView
+            android:id="@+id/imgLamp3_On"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/modern_lamp"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
+    </LinearLayout>
+
 </LinearLayout>

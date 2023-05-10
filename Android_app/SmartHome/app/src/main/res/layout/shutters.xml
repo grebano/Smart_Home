@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
-            android:text="Turn On "
+            android:text="Open "
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
@@ -178,7 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
-            android:text="Turn On "
+            android:text="Open "
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
@@ -194,6 +194,57 @@
 
         <ImageView
             android:id="@+id/imgShut2_open"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/modern_shutters_open"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
+    </LinearLayout>
+
+    <!-- Shutter 3 layout -->
+    <LinearLayout
+        android:id="@+id/ll_Shutter_Switch3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/tv_Shutter_Switch3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shutter 3 :"
+            android:textSize="16dp"
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/textColor"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:id="@+id/btt_Shutter_Switch3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Open "
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+
+        <ImageView
+            android:id="@+id/imgShut3_closed"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/modern_shutters_closed"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible"
+            />
+
+        <ImageView
+            android:id="@+id/imgShut3_open"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/modern_shutters_open"

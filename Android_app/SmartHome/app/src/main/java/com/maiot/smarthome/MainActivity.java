@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button bttLights = null;
     private Button bttShutters = null;
+    private Button bttAutomations = null;
     private final int ACTIVITY_REQUEST_CODE = 1;
 
     @Override
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         bttShutters = findViewById(R.id.bttShutters);
         button_start_shutters_activity();
+
+        bttAutomations = findViewById(R.id.bttAutomations);
+        button_start_automations_activity();
 
     }
 
@@ -40,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
         bttShutters.setOnClickListener(view -> {
             Intent intent = new Intent(getString(R.string.LAUNCH_SHUTTERS_ACTIVITY));
             intent.putExtra(getString(R.string.LABEL_MESSAGE_SHUTTERS),"shutters");
+            //la funzione sotto vuole un intent e un intero che è quello che viene restituito nella backpropagation
+            //per capire quale activity è stata lanciata (è un id in pratica)
+            startActivity(intent);
+        });
+    }
+
+    private void button_start_automations_activity() {
+        bttAutomations.setOnClickListener(view -> {
+            Intent intent = new Intent(getString(R.string.LAUNCH_AUTOMATIONS_ACTIVITY));
+            intent.putExtra(getString(R.string.LABEL_MESSAGE_AUTOMATIONS),"automations");
             //la funzione sotto vuole un intent e un intero che è quello che viene restituito nella backpropagation
             //per capire quale activity è stata lanciata (è un id in pratica)
             startActivity(intent);
