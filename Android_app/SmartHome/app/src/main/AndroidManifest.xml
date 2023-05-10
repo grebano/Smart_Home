@@ -30,6 +30,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activities.ShuttersActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.maiot.smarthome.Activities.ShuttersActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

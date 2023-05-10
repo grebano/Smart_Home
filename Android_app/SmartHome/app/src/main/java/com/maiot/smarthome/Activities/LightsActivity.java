@@ -16,16 +16,16 @@ import com.maiot.smarthome.R;
 public class LightsActivity extends AppCompatActivity {
 
     // layout delle lampade
-    private LinearLayout llSwitch1 = null;
-    private LinearLayout llSwitch2 = null;
+    private LinearLayout ll_Lamp_Switch1 = null;
+    private LinearLayout ll_Lamp_Switch2 = null;
 
     // bottoni di scelta
     private Button bttLightsModeManual = null;
     private Button bttLightsModeAuto = null;
 
     // bottoni di comando
-    private Button bttSwitch1 = null;
-    private Button bttSwitch2 = null;
+    private Button btt_Lamp_Switch1 = null;
+    private Button btt_Lamp_Switch2 = null;
 
     // immagini dello stato delle lampade
     private ImageView imgLamp1_On = null;
@@ -45,8 +45,8 @@ public class LightsActivity extends AppCompatActivity {
     private void initViews()
     {
         // associazione dei layout
-        llSwitch1 = findViewById(R.id.llSwitch1);
-        llSwitch2 = findViewById(R.id.llSwitch2);
+        ll_Lamp_Switch1 = findViewById(R.id.ll_Lamp_Switch1);
+        ll_Lamp_Switch2 = findViewById(R.id.ll_Lamp_Switch2);
 
         // associazione immagini
         imgLamp1_Off = findViewById(R.id.imgLamp1_Off);
@@ -76,14 +76,14 @@ public class LightsActivity extends AppCompatActivity {
         bttLightsModeManual = findViewById(R.id.bttLightsModeManual);
         bttLightsModeManual.setOnClickListener(view -> {
             // visibilità layout
-            llSwitch1.setVisibility(View.VISIBLE);
-            llSwitch2.setVisibility(View.VISIBLE);
+            ll_Lamp_Switch1.setVisibility(View.VISIBLE);
+            ll_Lamp_Switch2.setVisibility(View.VISIBLE);
 
             // visibilità switch
-            bttSwitch1.setVisibility(View.VISIBLE);
-            bttSwitch1.setClickable(true);
-            bttSwitch2.setVisibility(View.VISIBLE);
-            bttSwitch2.setClickable(true);
+            btt_Lamp_Switch1.setVisibility(View.VISIBLE);
+            btt_Lamp_Switch1.setClickable(true);
+            btt_Lamp_Switch2.setVisibility(View.VISIBLE);
+            btt_Lamp_Switch2.setClickable(true);
 
             // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
@@ -96,14 +96,14 @@ public class LightsActivity extends AppCompatActivity {
         bttLightsModeAuto = findViewById(R.id.bttLightsModeAuto);
         bttLightsModeAuto.setOnClickListener(view -> {
             // visibilità layout
-            llSwitch1.setVisibility(View.VISIBLE);
-            llSwitch2.setVisibility(View.VISIBLE);
+            ll_Lamp_Switch1.setVisibility(View.VISIBLE);
+            ll_Lamp_Switch2.setVisibility(View.VISIBLE);
 
             // visibilità switch
-            bttSwitch1.setVisibility(View.INVISIBLE);
-            bttSwitch1.setClickable(false);
-            bttSwitch2.setVisibility(View.INVISIBLE);
-            bttSwitch2.setClickable(false);
+            btt_Lamp_Switch1.setVisibility(View.INVISIBLE);
+            btt_Lamp_Switch1.setClickable(false);
+            btt_Lamp_Switch2.setVisibility(View.INVISIBLE);
+            btt_Lamp_Switch2.setClickable(false);
 
             // possibilità di click della modalità
             bttLightsModeAuto.setClickable(false);
@@ -114,21 +114,21 @@ public class LightsActivity extends AppCompatActivity {
     private void lamp1StatusViews()
     {
         // associazione bottone di switch
-        bttSwitch1 = findViewById(R.id.bttSwitch1);
-        bttSwitch1.setOnClickListener(view -> {
+        btt_Lamp_Switch1 = findViewById(R.id.btt_Lamp_Switch1);
+        btt_Lamp_Switch1.setOnClickListener(view -> {
 
             // inversione dello stato della lampada 1
             if(imgLamp1_Off.getVisibility() == View.VISIBLE)
             {
                 imgLamp1_Off.setVisibility(View.INVISIBLE);
                 imgLamp1_On.setVisibility(View.VISIBLE);
-                bttSwitch1.setText("Turn Off");
+                btt_Lamp_Switch1.setText("Turn Off");
             }
             else if(imgLamp1_On.getVisibility() == View.VISIBLE)
             {
                 imgLamp1_On.setVisibility(View.INVISIBLE);
                 imgLamp1_Off.setVisibility(View.VISIBLE);
-                bttSwitch1.setText("Turn On ");
+                btt_Lamp_Switch1.setText("Turn On ");
             }
         });
     }
@@ -136,21 +136,21 @@ public class LightsActivity extends AppCompatActivity {
     private void lamp2StatusViews()
     {
         // associazione bottone di switch
-        bttSwitch2 = findViewById(R.id.bttSwitch2);
-        bttSwitch2.setOnClickListener(view -> {
+        btt_Lamp_Switch2 = findViewById(R.id.btt_Lamp_Switch2);
+        btt_Lamp_Switch2.setOnClickListener(view -> {
 
             // inversione dello stato della lampada 2
             if(imgLamp2_Off.getVisibility() == View.VISIBLE)
             {
                 imgLamp2_Off.setVisibility(View.INVISIBLE);
                 imgLamp2_On.setVisibility(View.VISIBLE);
-                bttSwitch2.setText("Turn Off");
+                btt_Lamp_Switch2.setText("Turn Off");
             }
             else if(imgLamp2_On.getVisibility() == View.VISIBLE)
             {
                 imgLamp2_On.setVisibility(View.INVISIBLE);
                 imgLamp2_Off.setVisibility(View.VISIBLE);
-                bttSwitch2.setText("Turn On ");
+                btt_Lamp_Switch2.setText("Turn On ");
             }
         });
     }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private Button bttLights = null;
+    private Button bttShutters = null;
     private final int ACTIVITY_REQUEST_CODE = 1;
 
     @Override
@@ -17,14 +18,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bttLights= findViewById(R.id.bttLights);
+        bttLights = findViewById(R.id.bttLights);
         button_start_lights_activity();
+
+        bttShutters = findViewById(R.id.bttShutters);
+        button_start_shutters_activity();
+
     }
 
     private void button_start_lights_activity() {
         bttLights.setOnClickListener(view -> {
             Intent intent = new Intent(getString(R.string.LAUNCH_LIGHTS_ACTIVITY));
-            intent.putExtra(getString(R.string.LABEL_MESSAGE_LIGHTS),"ciao");
+            intent.putExtra(getString(R.string.LABEL_MESSAGE_LIGHTS),"lamps");
+            //la funzione sotto vuole un intent e un intero che è quello che viene restituito nella backpropagation
+            //per capire quale activity è stata lanciata (è un id in pratica)
+            startActivity(intent);
+        });
+    }
+
+    private void button_start_shutters_activity() {
+        bttShutters.setOnClickListener(view -> {
+            Intent intent = new Intent(getString(R.string.LAUNCH_SHUTTERS_ACTIVITY));
+            intent.putExtra(getString(R.string.LABEL_MESSAGE_SHUTTERS),"shutters");
             //la funzione sotto vuole un intent e un intero che è quello che viene restituito nella backpropagation
             //per capire quale activity è stata lanciata (è un id in pratica)
             startActivity(intent);
