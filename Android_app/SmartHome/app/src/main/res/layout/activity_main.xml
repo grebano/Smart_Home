@@ -17,7 +17,7 @@
         android:fontFamily="serif-monospace"
         android:textStyle="bold"
         android:textColor="@color/textColor"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         />
 
     <LinearLayout
@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
             android:text="Manage Lights"
+            android:textSize="15dp"
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
@@ -49,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:gravity="center">
 
         <ImageView
@@ -65,6 +66,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
             android:text="Manage Shutters"
+            android:textSize="15dp"
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
@@ -74,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:gravity="center">
 
         <ImageView
@@ -90,6 +92,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
             android:text="Your Automations"
+            android:textSize="15dp"
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
