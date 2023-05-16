@@ -71,8 +71,8 @@ public class Shutters extends Service {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
-                if (Integer.parseInt(currentTime.split(",")[0])>= Constants.NIGHT_BEGINNING_TIME)
+                currentTime = new SimpleDateFormat("HH", Locale.getDefault()).format(new Date());
+                if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME)
                 {
                     // close shutters
                 }
