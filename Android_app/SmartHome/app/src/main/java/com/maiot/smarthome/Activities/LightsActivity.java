@@ -13,6 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class LightsActivity extends AppCompatActivity {
 
     // layout delle lampade
@@ -36,11 +41,17 @@ public class LightsActivity extends AppCompatActivity {
     private ImageView imgLamp2_Off = null;
     private ImageView imgLamp3_On = null;
     private ImageView imgLamp3_Off = null;
+
+    private HttpURLConnection http_Lamp1 = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lights);
         Intent intent = getIntent();
+
+
 
         // inizializzazione delle views e set dei click Listener
         initViews();
@@ -192,4 +203,6 @@ public class LightsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
