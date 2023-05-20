@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         // gestione dei permessi riguardanti la posizione
         getLocationPermission();
 
+        // gestione del wifi
+        wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
         // se il wifi è disattivato lo attivo e lo notifico all'utente
         if(!wifiManager.isWifiEnabled()){
             Toast.makeText(getApplicationContext(), "WiFi is Not enabled.  Enabling...", Toast.LENGTH_LONG).show();
