@@ -50,6 +50,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <service android:name="Services.ShuttersService"></service>
+
     </application>
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
