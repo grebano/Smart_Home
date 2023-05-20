@@ -2,6 +2,7 @@ package com.maiot.smarthome.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,7 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
 
+import Services.ShuttersService;
+
 public class ShuttersActivity extends AppCompatActivity {
+
+    private final String TAG = "ShuttersActivity";
 
     // layout delle lampade
     private LinearLayout ll_Shutter_Switch1 = null;
@@ -100,6 +105,14 @@ public class ShuttersActivity extends AppCompatActivity {
             // possibilità di click della modalità
             bttShuttersModeManual.setClickable(false);
             bttShuttersModeAuto.setClickable(true);
+
+            // si controlla che il servizio stia girando, nel caso lo si arresta
+            if(ShuttersService.isRunning) {
+                stopService(new Intent(this, ShuttersService.class));
+            }
+            else{
+                Log.i(TAG,"ShuttersService is not running");
+            }
         });
     }
 
@@ -123,6 +136,14 @@ public class ShuttersActivity extends AppCompatActivity {
             // possibilità di click della modalità
             bttShuttersModeAuto.setClickable(false);
             bttShuttersModeManual.setClickable(true);
+
+            // si controlla che il servizio non stia già girando e lo si lancia
+            if(!ShuttersService.isRunning) {
+                startForegroundService(new Intent(this, ShuttersService.class));
+            }
+            else{
+                Log.i(TAG,"ShuttersService is already running");
+            }
         });
     }
 
