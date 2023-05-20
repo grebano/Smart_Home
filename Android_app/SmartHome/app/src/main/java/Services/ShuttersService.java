@@ -1,11 +1,7 @@
 package Services;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
-import android.media.RingtoneManager;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -20,7 +16,7 @@ import java.util.TimerTask;
 import Miscellaneous.Constants;
 
 
-public class Shutters extends Service {
+public class ShuttersService extends Service {
 
     private final String TAG = "MyShuttersService";
     public static boolean isRunning = false;
