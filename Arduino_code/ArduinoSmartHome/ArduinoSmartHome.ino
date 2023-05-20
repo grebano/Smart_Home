@@ -2,8 +2,8 @@
 #include <ESP8266WebServer.h>
 
 // Insert right ssid and password
-const char* ssid = "ssid";
-const char* password = "passwd";
+const char* ssid = "";
+const char* password = "";
 
 // Set port 
 ESP8266WebServer server(80);
@@ -41,7 +41,10 @@ void handleOff() {
 // Handling ping command
 void handlePing() {
   setCrossOrigin();
-  server.send(200, "text/plain", status);
+  if(status)
+    server.send(200, "text/plain", "on");
+  else
+    server.send(200, "text/plain", "off");
 }
 
 // Pin configuration
