@@ -12,6 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import Services.ShuttersService;
 
 public class ShuttersActivity extends AppCompatActivity {
@@ -156,12 +163,14 @@ public class ShuttersActivity extends AppCompatActivity {
             // inversione dello stato della tapparella 1
             if(imgShut1_closed.getVisibility() == View.VISIBLE)
             {
+                setShutter("http://192.168.1.6",true);
                 imgShut1_closed.setVisibility(View.INVISIBLE);
                 imgShut1_open.setVisibility(View.VISIBLE);
                 btt_Shutter_Switch1.setText("Close");
             }
             else if(imgShut1_open.getVisibility() == View.VISIBLE)
             {
+                setShutter("http://192.168.1.6",false);
                 imgShut1_open.setVisibility(View.INVISIBLE);
                 imgShut1_closed.setVisibility(View.VISIBLE);
                 btt_Shutter_Switch1.setText("Open ");
@@ -203,6 +212,40 @@ public class ShuttersActivity extends AppCompatActivity {
                 btt_Shutter_Switch3.setText("Open ");
             }
         });
+    }
+
+    private void setShutter(String baseUrl, boolean state){
+        URL url = null;
+        if(state) {
+            try {
+                url = new URL(baseUrl + "/on");
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else{
+            try {
+                url = new URL(baseUrl + "/off");
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        HttpURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                try {
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            finally {
+                urlConnection.disconnect();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

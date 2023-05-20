@@ -12,6 +12,12 @@ import androidx.annotation.Nullable;
 
 import com.maiot.smarthome.R;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -53,6 +59,7 @@ public class ShuttersService extends Service {
 
         addNotification();
 
+        timer = new Timer();
         startCheckingTime();
 
         return START_STICKY;
@@ -67,10 +74,6 @@ public class ShuttersService extends Service {
     }
 
     private void startCheckingTime() {
-
-        // lo si mette a null se lo riutilizzassimo
-        timer = null;
-        timer = new Timer();
         // si setta l'azione che il timer deve schedulare
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -78,15 +81,19 @@ public class ShuttersService extends Service {
                 currentTime = new SimpleDateFormat("HH", Locale.getDefault()).format(new Date());
                 if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME)
                 {
+                    Log.i(TAG,"close shutters");
+                    setShutter("http://192.168.1.6", false);
                     // close shutters
                 }
-                else if (Integer.parseInt(currentTime.split(",")[0])>= Constants.MORNING_BEGINNING_TIME)
+                else
                 {
+                    Log.i(TAG,"open shutters");
+                    setShutter("http://192.168.1.6" , true);
                     // open shutters
                 }
             }
         };
-        // si schedula un'azione ogni 2sec senza delay iniziale
+        // si schedula un'azione ogni 2 min senza delay iniziale
         timer.scheduleAtFixedRate(timerTask,Constants.TIMER_DELAY_IN_MILLIS,Constants.TIMER_PERIOD_IN_MILLIS);
     }
 
@@ -104,5 +111,39 @@ public class ShuttersService extends Service {
                 .setSmallIcon(R.drawable.ic_launcher_background);
 
         startForeground(1001,notification.build());
+    }
+
+    // apre o chiude le tapparelle inviando la giusta richiesta http
+    private void setShutter(String baseUrl, boolean state){
+        URL url = null;
+        if(state) {
+            try {
+                url = new URL(baseUrl + "/on");
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else{
+            try {
+                url = new URL(baseUrl + "/off");
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        HttpURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            try {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
     }
 }
