@@ -2,11 +2,13 @@
 #include <ESP8266WebServer.h>
 
 // Insert right ssid and password
-const char* ssid = "enricostefania";
-const char* password = "3Civettesulcomo";
+const char* ssid = "ssid";
+const char* password = "passwd";
 
 // Set port 
 ESP8266WebServer server(80);
+
+bool status = false;
 
 // Set connection parameters
 IPAddress ip(192, 168, 1, 11); //ESP static ip
@@ -25,6 +27,7 @@ void handleOn() {
   digitalWrite(relayPin, LOW);
   setCrossOrigin();
   server.send(200, "text/plain", "Ligth on");
+  status = true;
 }
 
 // Handling off command
@@ -32,12 +35,13 @@ void handleOff() {
   digitalWrite(relayPin, HIGH);
   setCrossOrigin();
   server.send(200, "text/plain", "Ligth off");
+  status = false;
 }
 
 // Handling ping command
 void handlePing() {
   setCrossOrigin();
-  server.send(200, "text/plain", "ligth1");
+  server.send(200, "text/plain", status);
 }
 
 // Pin configuration
