@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -204,5 +206,45 @@ public class LightsActivity extends AppCompatActivity {
         });
     }
 
+    private void setLamp(String baseUrl, boolean state){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //doInBackground
+                URL url = null;
+                if(state) {
+                    try {
+                        url = new URL(baseUrl + "/on");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else{
+                    try {
+                        url = new URL(baseUrl + "/off");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                HttpURLConnection urlConnection = null;
+                try {
+                    urlConnection = (HttpURLConnection) url.openConnection();
+                    try {
+                        try {
+                            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    finally {
+                        urlConnection.disconnect();
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
+    }
 
 }
