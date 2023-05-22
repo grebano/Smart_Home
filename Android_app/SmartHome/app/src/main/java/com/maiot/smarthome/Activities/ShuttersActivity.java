@@ -1,5 +1,6 @@
 package com.maiot.smarthome.Activities;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +19,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.Executor;
 
 import Services.ShuttersService;
+import Devices.ShutterDevice;
 
 public class ShuttersActivity extends AppCompatActivity {
 
@@ -47,12 +48,13 @@ public class ShuttersActivity extends AppCompatActivity {
     private ImageView imgShut2_closed = null;
     private ImageView imgShut3_open = null;
     private ImageView imgShut3_closed = null;
-
+    private ShutterDevice shutter1 = new ShutterDevice(false,"192.168.1.8","");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shutters);
         Intent intent = getIntent();
+
 
         // inizializzazione delle views e set dei click Listener
         initViews();
@@ -164,14 +166,14 @@ public class ShuttersActivity extends AppCompatActivity {
             // inversione dello stato della tapparella 1
             if(imgShut1_closed.getVisibility() == View.VISIBLE)
             {
-                setShutter("http://192.168.1.6",true);
+                shutter1.setShutterStatus(true);
                 imgShut1_closed.setVisibility(View.INVISIBLE);
                 imgShut1_open.setVisibility(View.VISIBLE);
                 btt_Shutter_Switch1.setText("Close");
             }
             else if(imgShut1_open.getVisibility() == View.VISIBLE)
             {
-                setShutter("http://192.168.1.6",false);
+                shutter1.setShutterStatus(false);
                 imgShut1_open.setVisibility(View.INVISIBLE);
                 imgShut1_closed.setVisibility(View.VISIBLE);
                 btt_Shutter_Switch1.setText("Open ");
@@ -215,32 +217,89 @@ public class ShuttersActivity extends AppCompatActivity {
         });
     }
 
-    private void setShutter(String baseUrl, boolean state){
+    //--------------------------------HTTP----------------------------------------
+/*
+    private void setShutter(String baseUrl, boolean state, boolean actualState){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //doInBackground
                 URL url = null;
-                if(state) {
+                if(state != actualState) {
+                    if (state) {
+                        try {
+                            url = new URL(baseUrl + "/on");
+                        } catch (MalformedURLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        try {
+                            url = new URL(baseUrl + "/off");
+                        } catch (MalformedURLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    HttpURLConnection urlConnection = null;
                     try {
-                        url = new URL(baseUrl + "/on");
-                    } catch (MalformedURLException e) {
+                        urlConnection = (HttpURLConnection) url.openConnection();
+                        try {
+                            try {
+                                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                                in.close();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } finally {
+                            urlConnection.disconnect();
+                        }
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                    urlConnection.disconnect();
                 }
-                else{
-                    try {
-                        url = new URL(baseUrl + "/off");
-                    } catch (MalformedURLException e) {
-                        throw new RuntimeException(e);
-                    }
+            }
+        }).start();
+
+    }
+
+    private void setShutterStatus(String baseUrl, boolean state)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //doInBackground
+                URL url = null;
+                try {
+                    url = new URL(baseUrl + "/ping");
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
                 }
                 HttpURLConnection urlConnection = null;
                 try {
                     urlConnection = (HttpURLConnection) url.openConnection();
                     try {
                         try {
-                            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                            BufferedInputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                            byte[] contents = new byte[1024];
+                            int bytesRead = 0;
+                            String strContents = "";
+                            while((bytesRead = in.read(contents)) != -1) {
+                                strContents += new String(contents, 0, bytesRead);
+                            }
+                            in.close();
+                            if (strContents.equals("on"))
+                            {
+                                setShutter(baseUrl,state,true);
+                            }
+                            else if (strContents.equals("off"))
+                            {
+                                setShutter(baseUrl,state,false);
+                            }
+                            if(state)
+                                Log.i(TAG,"is: " + strContents + " --> going on");
+                            else
+                                Log.i(TAG,"is: " + strContents + " --> going off");
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -251,9 +310,9 @@ public class ShuttersActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                urlConnection.disconnect();
             }
         }).start();
-
-    }
+    }*/
 }
 

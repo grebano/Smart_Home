@@ -206,6 +206,7 @@ public class LightsActivity extends AppCompatActivity {
         });
     }
 
+    //--------------------------------HTTP----------------------------------------
     private void setLamp(String baseUrl, boolean state){
         new Thread(new Runnable() {
             @Override
