@@ -205,47 +205,4 @@ public class LightsActivity extends AppCompatActivity {
             }
         });
     }
-
-    //--------------------------------HTTP----------------------------------------
-    private void setLamp(String baseUrl, boolean state){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //doInBackground
-                URL url = null;
-                if(state) {
-                    try {
-                        url = new URL(baseUrl + "/on");
-                    } catch (MalformedURLException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                else{
-                    try {
-                        url = new URL(baseUrl + "/off");
-                    } catch (MalformedURLException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                HttpURLConnection urlConnection = null;
-                try {
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                    try {
-                        try {
-                            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    finally {
-                        urlConnection.disconnect();
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).start();
-
-    }
-
 }
