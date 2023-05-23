@@ -113,7 +113,7 @@ public class ShuttersService extends Service {
                 .setContentText("MyShuttersService is running")
                 .setContentTitle("Service is running")
                 .setOngoing(true)
-                .setSmallIcon(R.drawable.ic_launcher_background);
+                .setSmallIcon(R.drawable.ic_launcher_foreground);
 
         startForeground(1001,notification.build());
     }

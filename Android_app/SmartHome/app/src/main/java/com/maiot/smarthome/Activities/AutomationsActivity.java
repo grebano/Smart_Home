@@ -3,194 +3,134 @@ package com.maiot.smarthome.Activities;
         import android.app.Activity;
         import android.content.Intent;
         import android.os.Bundle;
+        import android.util.Log;
         import android.view.View;
         import android.widget.Button;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
+        import android.widget.Toast;
 
         import androidx.annotation.Nullable;
         import androidx.appcompat.app.AppCompatActivity;
 
         import com.maiot.smarthome.R;
 
-public class AutomationsActivity extends AppCompatActivity {
-/*
-    // layout delle lampade
-    private LinearLayout ll_Lamp_Switch1 = null;
-    private LinearLayout ll_Lamp_Switch2 = null;
-    private LinearLayout ll_Lamp_Switch3 = null;
+        import Devices.DeviceList;
+        import Devices.SmartDevice;
+        import Services.ShuttersService;
 
-    // bottoni di scelta
-    private Button bttLightsModeManual = null;
-    private Button bttLightsModeAuto = null;
+public class AutomationsActivity extends AppCompatActivity {
+    private final String TAG = "AutomationsActivity";
 
     // bottoni di comando
-    private Button btt_Lamp_Switch1 = null;
-    private Button btt_Lamp_Switch2 = null;
-    private Button btt_Lamp_Switch3 = null;
+    private Button bttDayMode = null;
+    private Button bttNightMode = null;
+    private Button bttHomeGymMode = null;
+    private Button bttVacationMode = null;
 
-    // immagini dello stato delle lampade
-    private ImageView imgLamp1_On = null;
-    private ImageView imgLamp1_Off = null;
-    private ImageView imgLamp2_On = null;
-    private ImageView imgLamp2_Off = null;
-    private ImageView imgLamp3_On = null;
-    private ImageView imgLamp3_Off = null; */
+    private DeviceList deviceList = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.automations);
-        Intent intent = getIntent();
+
+        deviceList = new DeviceList(null);
 
         // inizializzazione delle views e set dei click Listener
-        //initViews();
-    }
-/*
-    private void initViews()
-    {
-        // associazione dei layout
-        ll_Lamp_Switch1 = findViewById(R.id.ll_Lamp_Switch1);
-        ll_Lamp_Switch2 = findViewById(R.id.ll_Lamp_Switch2);
-        ll_Lamp_Switch3 = findViewById(R.id.ll_Lamp_Switch3);
-
-        // associazione immagini
-        imgLamp1_Off = findViewById(R.id.imgLamp1_Off);
-        imgLamp1_On = findViewById(R.id.imgLamp1_On);
-        imgLamp2_Off = findViewById(R.id.imgLamp2_Off);
-        imgLamp2_On = findViewById(R.id.imgLamp2_On);
-        imgLamp3_Off = findViewById(R.id.imgLamp3_Off);
-        imgLamp3_On = findViewById(R.id.imgLamp3_On);
-
-        // visibilità immagini stato
-        imgLamp1_Off.setVisibility(View.VISIBLE);
-        imgLamp2_Off.setVisibility(View.VISIBLE);
-        imgLamp3_Off.setVisibility(View.VISIBLE);
-        imgLamp1_On.setVisibility(View.INVISIBLE);
-        imgLamp2_On.setVisibility(View.INVISIBLE);
-        imgLamp3_On.setVisibility(View.INVISIBLE);
-
-        // settaggio click listeners e view nelle due modalità
-        automaticModeViews();
-        manualModeViews();
-
-        // settaggio click listeners e views delle singole lampade
-        lamp1StatusViews();
-        lamp2StatusViews();
-        lamp3StatusViews();
-
-
-
-    }
-    private void manualModeViews(){
-        // è stata scelta la modalità manuale
-        bttLightsModeManual = findViewById(R.id.bttLightsModeManual);
-        bttLightsModeManual.setOnClickListener(view -> {
-            // visibilità layout
-            ll_Lamp_Switch1.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch2.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch3.setVisibility(View.VISIBLE);
-
-            // visibilità switch
-            btt_Lamp_Switch1.setVisibility(View.VISIBLE);
-            btt_Lamp_Switch1.setClickable(true);
-            btt_Lamp_Switch2.setVisibility(View.VISIBLE);
-            btt_Lamp_Switch2.setClickable(true);
-            btt_Lamp_Switch3.setVisibility(View.VISIBLE);
-            btt_Lamp_Switch3.setClickable(true);
-
-            // possibilità di click della modalità
-            bttLightsModeManual.setClickable(false);
-            bttLightsModeAuto.setClickable(true);
-        });
+        initViews();
     }
 
-    private void automaticModeViews(){
-        // è stata scelta la modalità automatica
-        bttLightsModeAuto = findViewById(R.id.bttLightsModeAuto);
-        bttLightsModeAuto.setOnClickListener(view -> {
-            // visibilità layout
-            ll_Lamp_Switch1.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch2.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch3.setVisibility(View.VISIBLE);
+    private void initViews() {
 
-            // visibilità switch
-            btt_Lamp_Switch1.setVisibility(View.INVISIBLE);
-            btt_Lamp_Switch1.setClickable(false);
-            btt_Lamp_Switch2.setVisibility(View.INVISIBLE);
-            btt_Lamp_Switch2.setClickable(false);
-            btt_Lamp_Switch3.setVisibility(View.INVISIBLE);
-            btt_Lamp_Switch3.setClickable(false);
+        // collegamento degli id e click listeners
+        bttDayMode = findViewById(R.id.bttDayMode);
+        dayMode();
+        bttNightMode = findViewById(R.id.bttNightMode);
+        nightMode();
+        bttHomeGymMode = findViewById(R.id.bttHomeGymMode);
+        homeGymMode();
+        bttVacationMode = findViewById(R.id.bttVacationMode);
+        vacationMode();
 
-            // possibilità di click della modalità
-            bttLightsModeAuto.setClickable(false);
-            bttLightsModeManual.setClickable(true);
-        });
     }
 
-    private void lamp1StatusViews()
-    {
-        // associazione bottone di switch
-        btt_Lamp_Switch1 = findViewById(R.id.btt_Lamp_Switch1);
-        btt_Lamp_Switch1.setOnClickListener(view -> {
+    private void dayMode() {
+        bttDayMode.setOnClickListener(view -> {
+            // visualizzazione a schermo
+            Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE, Toast.LENGTH_SHORT).show();
 
-            // inversione dello stato della lampada 1
-            if(imgLamp1_Off.getVisibility() == View.VISIBLE)
+            // apertura tapparelle e spegnimento luci
+            for(SmartDevice shutter : deviceList.getShutterList())
             {
-                imgLamp1_Off.setVisibility(View.INVISIBLE);
-                imgLamp1_On.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch1.setText("Turn Off");
+                shutter.setStatus(true);
             }
-            else if(imgLamp1_On.getVisibility() == View.VISIBLE)
+            for(SmartDevice light : deviceList.getLightsList())
             {
-                imgLamp1_On.setVisibility(View.INVISIBLE);
-                imgLamp1_Off.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch1.setText("Turn On ");
+                light.setStatus(true);
             }
         });
     }
 
-    private void lamp2StatusViews()
-    {
-        // associazione bottone di switch
-        btt_Lamp_Switch2 = findViewById(R.id.btt_Lamp_Switch2);
-        btt_Lamp_Switch2.setOnClickListener(view -> {
+    private void nightMode() {
+        bttNightMode.setOnClickListener(view -> {
+            // visualizzazione a schermo
+            Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE, Toast.LENGTH_SHORT).show();
 
-            // inversione dello stato della lampada 2
-            if(imgLamp2_Off.getVisibility() == View.VISIBLE)
+            // chiusura tapparelle e spegnimento luci
+            for(SmartDevice shutter : deviceList.getShutterList())
             {
-                imgLamp2_Off.setVisibility(View.INVISIBLE);
-                imgLamp2_On.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch2.setText("Turn Off");
+                shutter.setStatus(false);
             }
-            else if(imgLamp2_On.getVisibility() == View.VISIBLE)
+            for(SmartDevice light : deviceList.getLightsList())
             {
-                imgLamp2_On.setVisibility(View.INVISIBLE);
-                imgLamp2_Off.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch2.setText("Turn On ");
+                light.setStatus(false);
             }
         });
     }
 
-    private void lamp3StatusViews()
-    {
-        // associazione bottone di switch
-        btt_Lamp_Switch3 = findViewById(R.id.btt_Lamp_Switch3);
-        btt_Lamp_Switch3.setOnClickListener(view -> {
+    private void homeGymMode() {
+        bttHomeGymMode.setOnClickListener(view -> {
+            // visualizzazione a schermo
+            Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE, Toast.LENGTH_SHORT).show();
 
-            // inversione dello stato della lampada 3
-            if(imgLamp3_Off.getVisibility() == View.VISIBLE)
+            // chiusura tapparelle e accensione luce sala pesi
+            for(SmartDevice shutter : deviceList.getShutterList())
             {
-                imgLamp3_Off.setVisibility(View.INVISIBLE);
-                imgLamp3_On.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch3.setText("Turn Off");
+                shutter.setStatus(false);
             }
-            else if(imgLamp3_On.getVisibility() == View.VISIBLE)
+            for(int i = 0; i < deviceList.getLightsList().length; i++)
             {
-                imgLamp3_On.setVisibility(View.INVISIBLE);
-                imgLamp3_Off.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch3.setText("Turn On ");
+                // la lampada 3 sarà quella in sala pesi
+                if(i == 2)
+                    deviceList.getLightsList()[i].setStatus(true);
+                else
+                    deviceList.getLightsList()[i].setStatus(false);
+            }
+
+        });
+    }
+
+    private void vacationMode() {
+        bttVacationMode.setOnClickListener(view -> {
+            // visualizzazione a schermo
+            Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE, Toast.LENGTH_SHORT).show();
+
+            // tapparelle che simulano la presenza di persone
+
+            // si controlla che il servizio non stia già girando e lo si lancia
+            if(!ShuttersService.isRunning) {
+                startForegroundService(new Intent(this, ShuttersService.class));
+            }
+            else{
+                Log.i(TAG,"ShuttersService is already running");
+            }
+            for(SmartDevice light : deviceList.getLightsList())
+            {
+                light.setStatus(false);
             }
         });
-    }*/
+    }
 }
 

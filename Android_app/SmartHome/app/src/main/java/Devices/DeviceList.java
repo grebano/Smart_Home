@@ -2,6 +2,8 @@ package Devices;
 
 import Devices.SmartDevice;
 import Interfaces.HttpRequestCompleted;
+import Miscellaneous.Constants;
+import Miscellaneous.IpAddr_MacAddr;
 
 public class DeviceList {
     private SmartDevice shutter1;
@@ -10,7 +12,7 @@ public class DeviceList {
     public DeviceList(HttpRequestCompleted httpRequestCompleted)
     {
         //--------------------Shutters-----------------------------------
-        shutter1 = new SmartDevice("192.168.16.176","", httpRequestCompleted);
+        shutter1 = new SmartDevice(IpAddr_MacAddr.SHUTTER1_IP, IpAddr_MacAddr.SHUTTER1_MAC, httpRequestCompleted);
         shutterList = new SmartDevice[] {shutter1};
 
         //--------------------Lamps--------------------------------------

@@ -53,6 +53,8 @@ public class LightsService extends Service implements WifiScanCompleted {
     public int onStartCommand(Intent intent, int flags, int startId) {
         wifiManager.startScan();
         isRunning = true;
+
+        addNotification();
         return START_STICKY;
 
     }
@@ -75,7 +77,7 @@ public class LightsService extends Service implements WifiScanCompleted {
                 .setContentText("MyShuttersService is running")
                 .setContentTitle("Service is running")
                 .setOngoing(true)
-                .setSmallIcon(R.drawable.ic_launcher_background);
+                .setSmallIcon(R.drawable.ic_launcher_foreground);
 
         startForeground(1002,notification.build());
     }
@@ -83,6 +85,7 @@ public class LightsService extends Service implements WifiScanCompleted {
     // si ricercano i router più vicini al telefono
     @Override
     public void onWifiScanCompleted(ArrayList<String[]> networks) {
+        // TODO implementare una versione con le due soglie di isteresi
         for(int i = 0; i < networks.size(); i++)
         {
             if(Integer.parseInt(networks.get(i)[1]) > -50)

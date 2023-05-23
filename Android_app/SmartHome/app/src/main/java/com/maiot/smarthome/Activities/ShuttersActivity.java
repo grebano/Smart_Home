@@ -247,7 +247,13 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     public void onHttpRequestCompleted(String response)
     {
         // quando la richiesta è completata aggiorno le views
-        setImageStatus();
+        runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        setImageStatus();
+                    }
+                });
     }
 }
 
