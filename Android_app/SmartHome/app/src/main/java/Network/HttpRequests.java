@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import Interfaces.HttpRequestCompleted;
 
@@ -17,15 +18,14 @@ public class HttpRequests {
 
     // TODO se altre classi vogliono i risultati devo aggiungere gli oggetti
     // oggetti dell'interfaccia usata per restituire informazioni (http response)
-    private HttpRequestCompleted httpRequestCompleted1 = null;
-    private HttpRequestCompleted httpRequestCompleted2 = null;
+
+    ArrayList<HttpRequestCompleted> httpRequestList = null;
 
     // costruttore oggetto della classe
-    public HttpRequests(String url, HttpRequestCompleted httpRequestCompleted1, HttpRequestCompleted httpRequestCompleted2)
+    public HttpRequests(String url, ArrayList<HttpRequestCompleted> givenhttpRequestList)
     {
         this.url = url;
-        this.httpRequestCompleted1 = httpRequestCompleted1;
-        this.httpRequestCompleted2 = httpRequestCompleted2;
+        httpRequestList = new ArrayList<HttpRequestCompleted>(givenhttpRequestList);
     }
 
     // wrapper della funzione DoaRequest, che passa l'url corretto
@@ -76,10 +76,11 @@ public class HttpRequests {
                 urlConnection.disconnect();
 
                 // invio della risposta alle classi "iscritte"
-                if(httpRequestCompleted1 != null)
-                    httpRequestCompleted1.onHttpRequestCompleted(strContents);
-                if(httpRequestCompleted2 != null)
-                    httpRequestCompleted2.onHttpRequestCompleted(strContents);
+                for(HttpRequestCompleted requestCompleted : httpRequestList)
+                {
+                    if (requestCompleted != null)
+                        requestCompleted.onHttpRequestCompleted(strContents);
+                }
                 Log.i(TAG,strContents);
             }
         }).start();

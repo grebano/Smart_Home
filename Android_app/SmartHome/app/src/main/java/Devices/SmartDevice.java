@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import Interfaces.HttpRequestCompleted;
 import Network.HttpRequests;
@@ -23,7 +24,10 @@ public class SmartDevice implements HttpRequestCompleted {
     public SmartDevice(String ipAddress, String nearestRouterMac, HttpRequestCompleted httpRequestCompleted)
     {
         this.nearestRouterMac = nearestRouterMac;
-        this.httpRequests = new HttpRequests("http://" + ipAddress, this, httpRequestCompleted);
+        ArrayList<HttpRequestCompleted> completedArrayList = new ArrayList<>();
+        completedArrayList.add(this);
+        completedArrayList.add(httpRequestCompleted);
+        this.httpRequests = new HttpRequests("http://" + ipAddress, completedArrayList);
         httpRequests.Request("/ping");
     }
 

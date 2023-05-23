@@ -1,6 +1,5 @@
 package com.maiot.smarthome.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,19 +7,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import Devices.DeviceList;
+import Interfaces.HttpRequestCompleted;
 
-public class LightsActivity extends AppCompatActivity {
+public class LightsActivity extends AppCompatActivity implements HttpRequestCompleted{
 
     // layout delle lampade
     private LinearLayout ll_Lamp_Switch1 = null;
@@ -44,14 +38,33 @@ public class LightsActivity extends AppCompatActivity {
     private ImageView imgLamp3_On = null;
     private ImageView imgLamp3_Off = null;
 
-    private HttpURLConnection http_Lamp1 = null;
+    // array di immagini da gestire
+    private ImageView[] onImages;
+    private ImageView[] offImages;
+
+    // array di pulsanti da gestire
+    private Button[] buttons;
+
+    private DeviceList deviceList = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lights);
-        Intent intent = getIntent();
+
+        // iscrizione all'evento scansione completata
+        HttpRequestCompleted httpRequestCompleted = this;
+        deviceList = new DeviceList(httpRequestCompleted);
+
+        // inizializzazione delle views e set dei click Listener
+        initViews();
+        onImages = new ImageView[] {imgLamp1_Off, imgLamp2_Off, imgLamp3_Off};
+        offImages = new ImageView[] {imgLamp1_On, imgLamp2_On, imgLamp3_On};
+        buttons = new Button[] {btt_Lamp_Switch1, btt_Lamp_Switch2, btt_Lamp_Switch3};
+
+        // inizializzazione immagini e pulsanti in base allo stato reale
+        setImageStatus();
 
 
 
@@ -204,5 +217,35 @@ public class LightsActivity extends AppCompatActivity {
                 btt_Lamp_Switch3.setText("Turn On ");
             }
         });
+    }
+
+    private void setImageStatus()
+    {
+        // visibilità immagini stato e settaggio testo pulsanti
+        for(int i = 0; i < deviceList.getShutterList().length; i++)
+        {
+            // la tapparella è aperta
+            if(deviceList.getShutterList()[i].getStatus())
+            {
+                onImages[i].setVisibility(View.VISIBLE);
+                offImages[i].setVisibility(View.INVISIBLE);
+                buttons[i].setText("Close");
+            }
+
+            // la tapparella è chiusa
+            else
+            {
+                onImages[i].setVisibility(View.INVISIBLE);
+                offImages[i].setVisibility(View.VISIBLE);
+                buttons[i].setText("Open");
+            }
+        }
+    }
+
+    @Override
+    public void onHttpRequestCompleted(String response)
+    {
+        // quando la richiesta è completata aggiorno le views
+        setImageStatus();
     }
 }

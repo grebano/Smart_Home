@@ -56,7 +56,6 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shutters);
-        Intent intent = getIntent();
 
         // iscrizione all'evento scansione completata
         HttpRequestCompleted httpRequestCompleted = this;
