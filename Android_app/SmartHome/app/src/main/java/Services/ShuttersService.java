@@ -83,7 +83,8 @@ public class ShuttersService extends Service {
             @Override
             public void run() {
                 currentTime = new SimpleDateFormat("HH", Locale.getDefault()).format(new Date());
-                if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME)
+                if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME &&
+                        Integer.parseInt(currentTime) <= Constants.MORNING_BEGINNING_TIME)
                 {
                     Log.i(TAG,"close shutters");
                     deviceList.getShutterList()[0].setStatus(false);

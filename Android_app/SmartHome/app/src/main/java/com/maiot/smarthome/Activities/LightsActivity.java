@@ -2,19 +2,24 @@ package com.maiot.smarthome.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
+import Services.LightsService;
 
 import Devices.DeviceList;
 import Interfaces.HttpRequestCompleted;
+import Services.ShuttersService;
 
 public class LightsActivity extends AppCompatActivity implements HttpRequestCompleted{
+    private final String TAG = "LightsActivity";
 
     // layout delle lampade
     private LinearLayout ll_Lamp_Switch1 = null;
@@ -127,6 +132,14 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
             bttLightsModeAuto.setClickable(true);
+
+            // si controlla che il servizio stia girando, nel caso lo si arresta
+            if(LightsService.isRunning) {
+                stopService(new Intent(this, LightsService.class));
+            }
+            else{
+                Log.i(TAG,"LightsService is not running");
+            }
         });
     }
 
@@ -150,6 +163,17 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             // possibilità di click della modalità
             bttLightsModeAuto.setClickable(false);
             bttLightsModeManual.setClickable(true);
+
+            // visualizzazione a schermo
+            Toast.makeText(LightsActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
+
+            // si controlla che il servizio non stia già girando e lo si lancia
+            if(!LightsService.isRunning) {
+                startForegroundService(new Intent(this, LightsService.class));
+            }
+            else{
+                Log.i(TAG,"ShuttersService is already running");
+            }
         });
     }
 

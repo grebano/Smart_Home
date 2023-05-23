@@ -53,6 +53,7 @@
         </activity>
 
         <service android:name="Services.ShuttersService"></service>
+        <service android:name="Services.LightsService"></service>
 
     </application>
 

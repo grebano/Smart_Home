@@ -5,6 +5,6 @@ public class Constants {
     public static final int SHUTTER_TIMER_DELAY_IN_MILLIS = 0;
     public static final int SHUTTER_TIMER_PERIOD_IN_MILLIS = 120000;
     public static final int NIGHT_BEGINNING_TIME = 22;
-    public static final int MORNING_BEGINNING_TIME = 22;
+    public static final int MORNING_BEGINNING_TIME = 7;
 
 }
