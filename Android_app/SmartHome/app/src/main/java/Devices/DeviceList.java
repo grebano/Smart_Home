@@ -6,6 +6,7 @@ import Interfaces.HttpRequestCompleted;
 public class DeviceList {
     private SmartDevice shutter1;
     private SmartDevice shutterList[];
+    private SmartDevice lightsList[];
     public DeviceList(HttpRequestCompleted httpRequestCompleted)
     {
         //--------------------Shutters-----------------------------------
@@ -13,8 +14,12 @@ public class DeviceList {
         shutterList = new SmartDevice[] {shutter1};
 
         //--------------------Lamps--------------------------------------
+        lightsList = new SmartDevice[] {};
     }
     public SmartDevice[] getShutterList() {
         return shutterList;
+    }
+    public SmartDevice[] getLightsList() {
+        return lightsList;
     }
 }
