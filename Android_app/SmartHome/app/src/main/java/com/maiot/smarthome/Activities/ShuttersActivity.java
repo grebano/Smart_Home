@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,6 +74,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     private void initViews()
     {
+        // TODO mostrare solo i layout di dispositivi esistenti
         // associazione dei layout
         ll_Shutter_Switch1 = findViewById(R.id.ll_Shutter_Switch1);
         ll_Shutter_Switch2 = findViewById(R.id.ll_Shutter_Switch2);
@@ -100,6 +102,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         // è stata scelta la modalità manuale
         bttShuttersModeManual = findViewById(R.id.bttShuttersModeManual);
         bttShuttersModeManual.setOnClickListener(view -> {
+
             // visibilità layout
             ll_Shutter_Switch1.setVisibility(View.VISIBLE);
             ll_Shutter_Switch2.setVisibility(View.VISIBLE);
@@ -117,7 +120,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             bttShuttersModeManual.setClickable(false);
             bttShuttersModeAuto.setClickable(true);
 
-            // aggiornamento stato relay
+            // aggiornamento stato immagini e pulsanti
             setImageStatus();
 
             // si controlla che il servizio stia girando, nel caso lo si arresta
@@ -150,6 +153,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             // possibilità di click della modalità
             bttShuttersModeAuto.setClickable(false);
             bttShuttersModeManual.setClickable(true);
+
+            // visualizzazione a schermo
+            Toast.makeText(ShuttersActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
 
             // si controlla che il servizio non stia già girando e lo si lancia
             if(!ShuttersService.isRunning) {

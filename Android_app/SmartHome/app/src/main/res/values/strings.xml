@@ -6,4 +6,5 @@
     <string name="LABEL_MESSAGE_LIGHTS">Label_Message_lights</string>
     <string name="LABEL_MESSAGE_SHUTTERS">Label_Message_shutters</string>
     <string name="LABEL_MESSAGE_AUTOMATIONS">Label_Message_automations</string>
+    <string name="AUTOMATIC_MODE">Automatic mode activated!</string>
 </resources>

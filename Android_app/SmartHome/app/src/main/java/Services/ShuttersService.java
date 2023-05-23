@@ -45,13 +45,14 @@ public class ShuttersService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-    //on Bind per questo tipo di servizio non ci interessa è un retaggio
+    //on Bind per questo tipo di servizio non ci interessa
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         Log.i(TAG,"Service - OnCreate");
+        // non voglio aggiornamenti dopo la richiesta http
         deviceList = new DeviceList(null);
     }
 
@@ -85,13 +86,13 @@ public class ShuttersService extends Service {
                 if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME)
                 {
                     Log.i(TAG,"close shutters");
-                    deviceList.getShutter1().setStatus(false);
+                    deviceList.getShutterList()[0].setStatus(false);
                     // close shutters
                 }
                 else
                 {
                     Log.i(TAG,"open shutters");
-                    deviceList.getShutter1().setStatus(true);
+                    deviceList.getShutterList()[0].setStatus(true);
                     // open shutters
                 }
             }

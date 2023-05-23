@@ -42,6 +42,11 @@ public class SmartDevice implements HttpRequestCompleted {
         return this.status;
     }
 
+    // get del router più vicino
+    public String getNearestRouterMac() {
+        return nearestRouterMac;
+    }
+
     // Si aggiorna lo stato del dispositivo dopo una richiesta http
     @Override
     public void onHttpRequestCompleted(String response) {

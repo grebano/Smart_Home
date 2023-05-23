@@ -15,6 +15,7 @@ public class HttpRequests {
     private final String TAG = "HttpRequest";
     private String url = "";
 
+    // TODO se altre classi vogliono i risultati devo aggiungere gli oggetti
     // oggetti dell'interfaccia usata per restituire informazioni (http response)
     private HttpRequestCompleted httpRequestCompleted1 = null;
     private HttpRequestCompleted httpRequestCompleted2 = null;
