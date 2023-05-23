@@ -15,12 +15,14 @@ public class HttpRequests {
     private final String TAG = "HttpRequest";
     private String url = "";
 
-    private HttpRequestCompleted httpRequestCompleted = null;
+    private HttpRequestCompleted httpRequestCompleted1 = null;
+    private HttpRequestCompleted httpRequestCompleted2 = null;
 
-    public HttpRequests(String url, HttpRequestCompleted httpRequestCompleted)
+    public HttpRequests(String url, HttpRequestCompleted httpRequestCompleted1, HttpRequestCompleted httpRequestCompleted2)
     {
         this.url = url;
-        this.httpRequestCompleted = httpRequestCompleted;
+        this.httpRequestCompleted1 = httpRequestCompleted1;
+        this.httpRequestCompleted2 = httpRequestCompleted2;
     }
 
     public void Request(String path)
@@ -63,7 +65,10 @@ public class HttpRequests {
                     Log.e(TAG,"Error connecting to device via http");
                 }
                 urlConnection.disconnect();
-                httpRequestCompleted.onHttpRequestCompleted(strContents);
+                if(httpRequestCompleted1 != null)
+                    httpRequestCompleted1.onHttpRequestCompleted(strContents);
+                if(httpRequestCompleted2 != null)
+                    httpRequestCompleted2.onHttpRequestCompleted(strContents);
                 Log.i(TAG,strContents);
             }
         }).start();

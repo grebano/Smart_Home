@@ -13,17 +13,19 @@ import Interfaces.HttpRequestCompleted;
 import Network.HttpRequests;
 
 public class SmartDevice implements HttpRequestCompleted {
+    // ogg interfaccia
+
     private final String TAG = "SmartDevice";
     private boolean status;
     private String ipAddress;
     private String nearestRouterMac;
     private HttpRequests httpRequests = null;
 
-    public SmartDevice(String ipAddress, String nearestRouterMac)
+    public SmartDevice(String ipAddress, String nearestRouterMac, HttpRequestCompleted httpRequestCompleted)
     {
         this.ipAddress = ipAddress;
         this.nearestRouterMac = nearestRouterMac;
-        this.httpRequests = new HttpRequests("http://" + this.ipAddress, this);
+        this.httpRequests = new HttpRequests("http://" + this.ipAddress, this, httpRequestCompleted);
 
     }
 

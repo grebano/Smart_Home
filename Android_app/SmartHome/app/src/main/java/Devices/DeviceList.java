@@ -1,8 +1,16 @@
 package Devices;
 
 import Devices.SmartDevice;
+import Interfaces.HttpRequestCompleted;
 
 public class DeviceList {
-    public static SmartDevice shutter1 = new SmartDevice("192.168.16.176","");
-    public static SmartDevice myList[] = {shutter1};
+    private HttpRequestCompleted httpRequestCompleted = null;
+    public SmartDevice shutter1;
+    public SmartDevice myList[];
+    public DeviceList(HttpRequestCompleted httpRequestCompleted)
+    {
+        this.httpRequestCompleted = httpRequestCompleted;
+        shutter1 = new SmartDevice("192.168.16.176","", this.httpRequestCompleted);
+        myList = new SmartDevice[] {shutter1};
+    }
 }

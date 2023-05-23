@@ -45,6 +45,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private ImageView closedImages[];
     private ImageView openImages[];
     private Button buttons[];
+
+    private  HttpRequestCompleted  httpRequestCompleted = null;
+    private DeviceList deviceList = null;
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,8 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         setContentView(R.layout.shutters);
         Intent intent = getIntent();
 
+        httpRequestCompleted = this;
+        deviceList = new DeviceList(httpRequestCompleted);
 
         // inizializzazione delle views e set dei click Listener
         initViews();
@@ -156,15 +161,13 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         btt_Shutter_Switch1.setOnClickListener(view -> {
 
             // inversione dello stato della tapparella 1
-            if(Devices.DeviceList.shutter1.getStatus() == false)
+            if(deviceList.shutter1.getStatus() == false)
             {
-                Devices.DeviceList.shutter1.setStatus(true);
-                setImageStatus();
+                deviceList.shutter1.setStatus(true);
             }
-            else if(Devices.DeviceList.shutter1.getStatus() == true)
+            else if(deviceList.shutter1.getStatus() == true)
             {
-                Devices.DeviceList.shutter1.setStatus(false);
-                setImageStatus();
+                deviceList.shutter1.setStatus(false);
             }
         });
     }
@@ -208,9 +211,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void setImageStatus()
     {
         // visibilità immagini stato
-        for(int i = 0; i < Devices.DeviceList.myList.length; i++)
+        for(int i = 0; i < deviceList.myList.length; i++)
         {
-            if(DeviceList.myList[i].getStatus() == true)
+            if(deviceList.myList[i].getStatus() == true)
             {
                 openImages[i].setVisibility(View.VISIBLE);
                 closedImages[i].setVisibility(View.INVISIBLE);

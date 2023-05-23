@@ -25,6 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Devices.DeviceList;
+import Interfaces.HttpRequestCompleted;
 import Miscellaneous.Constants;
 
 
@@ -37,7 +38,7 @@ public class ShuttersService extends Service {
     private String currentTime;
     private Timer timer;
 
-    //private MusicPlayer musicPlayer
+    private DeviceList deviceList = null;
 
     @Nullable
     @Override
@@ -51,6 +52,7 @@ public class ShuttersService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.i(TAG,"Service - OnCreate");
+        deviceList = new DeviceList(null);
     }
 
     @Override
@@ -83,13 +85,13 @@ public class ShuttersService extends Service {
                 if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME)
                 {
                     Log.i(TAG,"close shutters");
-                    DeviceList.shutter1.setStatus(false);
+                    deviceList.shutter1.setStatus(false);
                     // close shutters
                 }
                 else
                 {
                     Log.i(TAG,"open shutters");
-                    DeviceList.shutter1.setStatus(true);
+                    deviceList.shutter1.setStatus(true);
                     // open shutters
                 }
             }
