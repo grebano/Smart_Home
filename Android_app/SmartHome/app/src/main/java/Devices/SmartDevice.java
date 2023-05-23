@@ -13,22 +13,21 @@ import Interfaces.HttpRequestCompleted;
 import Network.HttpRequests;
 
 public class SmartDevice implements HttpRequestCompleted {
-    // ogg interfaccia
 
     private final String TAG = "SmartDevice";
     private boolean status;
-    private String ipAddress;
     private String nearestRouterMac;
     private HttpRequests httpRequests = null;
 
+    // costruttore del dispositivo, con associazione alla classe http request
     public SmartDevice(String ipAddress, String nearestRouterMac, HttpRequestCompleted httpRequestCompleted)
     {
-        this.ipAddress = ipAddress;
         this.nearestRouterMac = nearestRouterMac;
-        this.httpRequests = new HttpRequests("http://" + this.ipAddress, this, httpRequestCompleted);
-
+        this.httpRequests = new HttpRequests("http://" + ipAddress, this, httpRequestCompleted);
+        httpRequests.Request("/ping");
     }
 
+    // Settaggio a On/Off del dispositivo tramite http
     public void setStatus(boolean status)
     {
         if(status)
@@ -37,12 +36,13 @@ public class SmartDevice implements HttpRequestCompleted {
             httpRequests.Request("/off");
     }
 
+    // get dello stato del dispositivo
     public boolean getStatus()
     {
-        httpRequests.Request("/ping");
         return this.status;
     }
 
+    // Si aggiorna lo stato del dispositivo dopo una richiesta http
     @Override
     public void onHttpRequestCompleted(String response) {
         if(response != null) {
@@ -57,6 +57,5 @@ public class SmartDevice implements HttpRequestCompleted {
         {
             Log.e(TAG,"Empty http Result");
         }
-
     }
 }

@@ -42,11 +42,13 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private ImageView imgShut3_open = null;
     private ImageView imgShut3_closed = null;
 
-    private ImageView closedImages[];
-    private ImageView openImages[];
-    private Button buttons[];
+    // array di immagini da gestire
+    private ImageView[] closedImages;
+    private ImageView[] openImages;
 
-    private  HttpRequestCompleted  httpRequestCompleted = null;
+    // array di pulsanti da gestire
+    private Button[] buttons;
+
     private DeviceList deviceList = null;
     //
     @Override
@@ -55,7 +57,8 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         setContentView(R.layout.shutters);
         Intent intent = getIntent();
 
-        httpRequestCompleted = this;
+        // iscrizione all'evento scansione completata
+        HttpRequestCompleted httpRequestCompleted = this;
         deviceList = new DeviceList(httpRequestCompleted);
 
         // inizializzazione delle views e set dei click Listener
@@ -63,6 +66,8 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         closedImages = new ImageView[] {imgShut1_closed, imgShut2_closed, imgShut3_closed};
         openImages = new ImageView[] {imgShut1_open, imgShut2_open, imgShut3_open};
         buttons = new Button[] {btt_Shutter_Switch1, btt_Shutter_Switch2, btt_Shutter_Switch3};
+
+        // inizializzazione immagini e pulsanti in base allo stato reale
         setImageStatus();
     }
 
@@ -112,7 +117,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             bttShuttersModeManual.setClickable(false);
             bttShuttersModeAuto.setClickable(true);
 
+            // aggiornamento stato relay
             setImageStatus();
+
             // si controlla che il servizio stia girando, nel caso lo si arresta
             if(ShuttersService.isRunning) {
                 stopService(new Intent(this, ShuttersService.class));
@@ -161,13 +168,13 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         btt_Shutter_Switch1.setOnClickListener(view -> {
 
             // inversione dello stato della tapparella 1
-            if(deviceList.shutter1.getStatus() == false)
+            if(!deviceList.getShutterList()[0].getStatus())
             {
-                deviceList.shutter1.setStatus(true);
+                deviceList.getShutterList()[0].setStatus(true);
             }
-            else if(deviceList.shutter1.getStatus() == true)
+            else if(deviceList.getShutterList()[0].getStatus())
             {
-                deviceList.shutter1.setStatus(false);
+                deviceList.getShutterList()[0].setStatus(false);
             }
         });
     }
@@ -210,15 +217,18 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     private void setImageStatus()
     {
-        // visibilità immagini stato
-        for(int i = 0; i < deviceList.myList.length; i++)
+        // visibilità immagini stato e settaggio testo pulsanti
+        for(int i = 0; i < deviceList.getShutterList().length; i++)
         {
-            if(deviceList.myList[i].getStatus() == true)
+            // la tapparella è aperta
+            if(deviceList.getShutterList()[i].getStatus())
             {
                 openImages[i].setVisibility(View.VISIBLE);
                 closedImages[i].setVisibility(View.INVISIBLE);
                 buttons[i].setText("Close");
             }
+
+            // la tapparella è chiusa
             else
             {
                 openImages[i].setVisibility(View.INVISIBLE);
@@ -229,7 +239,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     }
 
     @Override
-    public void onHttpRequestCompleted(String response) {
+    public void onHttpRequestCompleted(String response)
+    {
+        // quando la richiesta è completata aggiorno le views
         setImageStatus();
     }
 }

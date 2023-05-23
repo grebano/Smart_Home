@@ -85,13 +85,13 @@ public class ShuttersService extends Service {
                 if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME)
                 {
                     Log.i(TAG,"close shutters");
-                    deviceList.shutter1.setStatus(false);
+                    deviceList.getShutter1().setStatus(false);
                     // close shutters
                 }
                 else
                 {
                     Log.i(TAG,"open shutters");
-                    deviceList.shutter1.setStatus(true);
+                    deviceList.getShutter1().setStatus(true);
                     // open shutters
                 }
             }

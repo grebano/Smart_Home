@@ -15,9 +15,11 @@ public class HttpRequests {
     private final String TAG = "HttpRequest";
     private String url = "";
 
+    // oggetti dell'interfaccia usata per restituire informazioni (http response)
     private HttpRequestCompleted httpRequestCompleted1 = null;
     private HttpRequestCompleted httpRequestCompleted2 = null;
 
+    // costruttore oggetto della classe
     public HttpRequests(String url, HttpRequestCompleted httpRequestCompleted1, HttpRequestCompleted httpRequestCompleted2)
     {
         this.url = url;
@@ -25,11 +27,14 @@ public class HttpRequests {
         this.httpRequestCompleted2 = httpRequestCompleted2;
     }
 
+    // wrapper della funzione DoaRequest, che passa l'url corretto
     public void Request(String path)
     {
         DoaRequest(this.url,path);
     }
 
+
+    // funzione che gestisce le richieste http ad uno specifico url e path
     private void DoaRequest(String url, String path)
     {
         new Thread(new Runnable() {
@@ -37,6 +42,7 @@ public class HttpRequests {
             public void run() {
                 String strContents = "";
                 URL myUrl = null;
+                // creazione dell'url completo
                 try {
                     myUrl = new URL(url + path);
                 } catch (MalformedURLException e) {
@@ -47,6 +53,8 @@ public class HttpRequests {
                     urlConnection = (HttpURLConnection) myUrl.openConnection();
                     try {
                         try {
+
+                            // apertura e lettura dallo stream http
                             BufferedInputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
                             byte[] contents = new byte[1024];
@@ -56,15 +64,17 @@ public class HttpRequests {
                             }
                             in.close();
                         } catch (IOException e) {
-                            Log.e(TAG,"Error connecting to device via http");
+                            Log.e(TAG,"Error connecting to device via http - error opening stream");
                         }
                     } finally {
                         urlConnection.disconnect();
                     }
                 } catch (IOException e) {
-                    Log.e(TAG,"Error connecting to device via http");
+                    Log.e(TAG,"Error connecting to device via http - connection failed");
                 }
                 urlConnection.disconnect();
+
+                // invio della risposta alle classi "iscritte"
                 if(httpRequestCompleted1 != null)
                     httpRequestCompleted1.onHttpRequestCompleted(strContents);
                 if(httpRequestCompleted2 != null)
