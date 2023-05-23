@@ -98,7 +98,7 @@ public class ShuttersService extends Service {
             }
         };
         // si schedula un'azione ogni 2 min senza delay iniziale
-        timer.scheduleAtFixedRate(timerTask,Constants.TIMER_DELAY_IN_MILLIS,Constants.TIMER_PERIOD_IN_MILLIS);
+        timer.scheduleAtFixedRate(timerTask,Constants.SHUTTER_TIMER_DELAY_IN_MILLIS,Constants.SHUTTER_TIMER_PERIOD_IN_MILLIS);
     }
 
     private void addNotification(){
