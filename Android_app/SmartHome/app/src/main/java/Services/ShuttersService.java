@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Devices.DeviceList;
 import Miscellaneous.Constants;
 
 
@@ -82,13 +83,13 @@ public class ShuttersService extends Service {
                 if (Integer.parseInt(currentTime)>= Constants.NIGHT_BEGINNING_TIME)
                 {
                     Log.i(TAG,"close shutters");
-                    setShutter("http://192.168.1.6", false);
+                    DeviceList.shutter1.setStatus(false);
                     // close shutters
                 }
                 else
                 {
                     Log.i(TAG,"open shutters");
-                    setShutter("http://192.168.1.6" , true);
+                    DeviceList.shutter1.setStatus(true);
                     // open shutters
                 }
             }
@@ -113,37 +114,4 @@ public class ShuttersService extends Service {
         startForeground(1001,notification.build());
     }
 
-    // apre o chiude le tapparelle inviando la giusta richiesta http
-    private void setShutter(String baseUrl, boolean state){
-        URL url = null;
-        if(state) {
-            try {
-                url = new URL(baseUrl + "/on");
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        else{
-            try {
-                url = new URL(baseUrl + "/off");
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        HttpURLConnection urlConnection = null;
-        try {
-            urlConnection = (HttpURLConnection) url.openConnection();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            try {
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } finally {
-            urlConnection.disconnect();
-        }
-    }
 }

@@ -33,11 +33,11 @@ public class SmartDevice implements HttpRequestCompleted {
             httpRequests.Request("/on");
         else
             httpRequests.Request("/off");
-       httpRequests.Request("/ping");
     }
 
     public boolean getStatus()
     {
+        httpRequests.Request("/ping");
         return this.status;
     }
 
@@ -49,8 +49,6 @@ public class SmartDevice implements HttpRequestCompleted {
             }
             if (response.equals("off")) {
                 this.status = false;
-            } else {
-                Log.i(TAG, "set command performed");
             }
         }
         else
