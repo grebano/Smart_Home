@@ -118,17 +118,25 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
             for(LinearLayout linearLayout : layouts)
             {
-                if(i < deviceList.getLightsList().length) {
-                    linearLayout.setVisibility(View.VISIBLE);
-                    buttons[i].setVisibility(View.VISIBLE);
-                    buttons[i].setClickable(true);
+                if(deviceList.getLightsList() != null)
+                {
+                    if(i < deviceList.getLightsList().length) {
+                        linearLayout.setVisibility(View.VISIBLE);
+                        buttons[i].setVisibility(View.VISIBLE);
+                        buttons[i].setClickable(true);
+                    }
+                    else {
+                        linearLayout.setVisibility(View.INVISIBLE);
+                        buttons[i].setVisibility(View.INVISIBLE);
+                        buttons[i].setClickable(false);
+                    }
+                    i++;
                 }
-                else {
-                    linearLayout.setVisibility(View.INVISIBLE);
-                    buttons[i].setVisibility(View.INVISIBLE);
-                    buttons[i].setClickable(false);
+                else
+                {
+                    Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                    break;
                 }
-                i++;
             }
 
             checkLightsCount();

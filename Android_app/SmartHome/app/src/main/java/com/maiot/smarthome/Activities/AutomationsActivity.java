@@ -65,13 +65,24 @@ public class AutomationsActivity extends AppCompatActivity {
             }
 
             // apertura tapparelle e spegnimento luci
-            for(SmartDevice shutter : deviceList.getShutterList())
-            {
-                shutter.setStatus(true);
+            if(deviceList.getShutterList() != null) {
+                for (SmartDevice shutter : deviceList.getShutterList()) {
+                    shutter.setStatus(true);
+                }
             }
-            for(SmartDevice light : deviceList.getLightsList())
+            else
             {
-                light.setStatus(true);
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            }
+
+            if(deviceList.getLightsList() != null) {
+                for (SmartDevice light : deviceList.getLightsList()) {
+                    light.setStatus(false);
+                }
+            }
+            else
+            {
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
             }
         });
     }
@@ -90,13 +101,24 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             
             // chiusura tapparelle e spegnimento luci
-            for(SmartDevice shutter : deviceList.getShutterList())
-            {
-                shutter.setStatus(false);
+            if(deviceList.getShutterList() != null) {
+                for (SmartDevice shutter : deviceList.getShutterList()) {
+                    shutter.setStatus(false);
+                }
             }
-            for(SmartDevice light : deviceList.getLightsList())
+            else
             {
-                light.setStatus(false);
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            }
+
+            if(deviceList.getLightsList() != null) {
+                for (SmartDevice light : deviceList.getLightsList()) {
+                    light.setStatus(false);
+                }
+            }
+            else
+            {
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
             }
         });
     }
@@ -106,20 +128,29 @@ public class AutomationsActivity extends AppCompatActivity {
             // visualizzazione a schermo
             Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE_ON, Toast.LENGTH_SHORT).show();
 
-            // chiusura tapparelle e accensione luce sala pesi
-            for(SmartDevice shutter : deviceList.getShutterList())
-            {
-                shutter.setStatus(false);
+            if(deviceList.getShutterList() != null) {
+                // chiusura tapparelle e accensione luce sala pesi
+                for (SmartDevice shutter : deviceList.getShutterList()) {
+                    shutter.setStatus(false);
+                }
             }
-            for(int i = 0; i < deviceList.getLightsList().length; i++)
+            else
             {
-                // la lampada 3 sarà quella in sala pesi
-                if(i == 2)
-                    deviceList.getLightsList()[i].setStatus(true);
-                else
-                    deviceList.getLightsList()[i].setStatus(false);
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
             }
-
+            if(deviceList.getLightsList() != null) {
+                for (int i = 0; i < deviceList.getLightsList().length; i++) {
+                    // la lampada 3 sarà quella in sala pesi
+                    if (i == 2)
+                        deviceList.getLightsList()[i].setStatus(true);
+                    else
+                        deviceList.getLightsList()[i].setStatus(false);
+                }
+            }
+            else
+            {
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            }
         });
     }
 
@@ -137,9 +168,14 @@ public class AutomationsActivity extends AppCompatActivity {
             else{
                 Log.i(TAG,"ShuttersService is already running");
             }
-            for(SmartDevice light : deviceList.getLightsList())
+            if(deviceList.getLightsList() != null) {
+                for (SmartDevice light : deviceList.getLightsList()) {
+                    light.setStatus(false);
+                }
+            }
+            else
             {
-                light.setStatus(false);
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
             }
         });
     }
