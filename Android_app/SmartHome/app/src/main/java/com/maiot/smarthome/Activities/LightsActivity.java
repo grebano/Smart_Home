@@ -232,9 +232,14 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             }
         }
         else {
-        for (int i = 0; i < deviceList.getLightsList().length; i++) {
-            // richieste http /ping
-            deviceList.getLightsList()[i].getHttpStatus();
+            if (deviceList.getLightsList() != null) {
+                for (int i = 0; i < deviceList.getLightsList().length; i++) {
+                    // richieste http /ping
+                    deviceList.getLightsList()[i].getHttpStatus();
+                }
+            }
+            else{
+                Log.e(TAG,"No available lamp");
             }
         }
     }
