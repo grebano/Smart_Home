@@ -52,9 +52,14 @@ public class SmartDevice implements HttpRequestCompleted {
     }
 
     // get dello stato del dispositivo
-    public boolean getStatus()
+    public boolean getLocalStatus()
     {
         return this.status;
+    }
+
+    public void getHttpStatus()
+    {
+        httpRequests.Request(Constants.PING_PATH);
     }
 
     // get del router più vicino

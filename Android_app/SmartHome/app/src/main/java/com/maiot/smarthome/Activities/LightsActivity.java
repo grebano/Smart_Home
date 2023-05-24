@@ -69,7 +69,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         buttons = new Button[] {btt_Lamp_Switch1, btt_Lamp_Switch2, btt_Lamp_Switch3};
 
         // inizializzazione immagini e pulsanti in base allo stato reale
-        setImageStatus();
+        setImageStatus(true);
 
 
 
@@ -243,25 +243,33 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
-    private void setImageStatus()
+    private void setImageStatus(boolean withHttpRequest)
     {
-        // visibilità immagini stato e settaggio testo pulsanti
-        for(int i = 0; i < deviceList.getShutterList().length; i++)
-        {
-            // la tapparella è aperta
-            if(deviceList.getShutterList()[i].getStatus())
+        if(!withHttpRequest) {
+            // visibilità immagini stato e settaggio testo pulsanti
+            for(int i = 0; i < deviceList.getShutterList().length; i++)
             {
-                onImages[i].setVisibility(View.VISIBLE);
-                offImages[i].setVisibility(View.INVISIBLE);
-                buttons[i].setText("Close");
-            }
+                // la tapparella è aperta
+                if(deviceList.getShutterList()[i].getLocalStatus())
+                {
+                    onImages[i].setVisibility(View.VISIBLE);
+                    offImages[i].setVisibility(View.INVISIBLE);
+                    buttons[i].setText("Close");
+                }
 
-            // la tapparella è chiusa
-            else
-            {
-                onImages[i].setVisibility(View.INVISIBLE);
-                offImages[i].setVisibility(View.VISIBLE);
-                buttons[i].setText("Open");
+                // la tapparella è chiusa
+                else
+                {
+                    onImages[i].setVisibility(View.INVISIBLE);
+                    offImages[i].setVisibility(View.VISIBLE);
+                    buttons[i].setText("Open");
+                }
+            }
+        }
+        else {
+        for (int i = 0; i < deviceList.getShutterList().length; i++) {
+            // la tapparella è aperta
+            deviceList.getShutterList()[i].getHttpStatus();
             }
         }
     }
@@ -274,7 +282,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 new Runnable() {
                     @Override
                     public void run() {
-                        setImageStatus();
+                        setImageStatus(false);
                     }
                 });
     }

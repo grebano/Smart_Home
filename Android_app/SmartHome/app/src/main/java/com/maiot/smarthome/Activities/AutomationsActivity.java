@@ -61,6 +61,14 @@ public class AutomationsActivity extends AppCompatActivity {
             // visualizzazione a schermo
             Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE, Toast.LENGTH_SHORT).show();
 
+            // si controlla che il servizio stia girando, nel caso lo si arresta
+            if(ShuttersService.isRunning) {
+                stopService(new Intent(this, ShuttersService.class));
+            }
+            else{
+                Log.i(TAG,"ShuttersService is not running");
+            }
+
             // apertura tapparelle e spegnimento luci
             for(SmartDevice shutter : deviceList.getShutterList())
             {
@@ -78,6 +86,14 @@ public class AutomationsActivity extends AppCompatActivity {
             // visualizzazione a schermo
             Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE, Toast.LENGTH_SHORT).show();
 
+            // si controlla che il servizio stia girando, nel caso lo si arresta
+            if(ShuttersService.isRunning) {
+                stopService(new Intent(this, ShuttersService.class));
+            }
+            else{
+                Log.i(TAG,"ShuttersService is not running");
+            }
+            
             // chiusura tapparelle e spegnimento luci
             for(SmartDevice shutter : deviceList.getShutterList())
             {

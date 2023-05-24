@@ -2,7 +2,7 @@ package Miscellaneous;
 
 public class IpAddr_MacAddr {
     //----------------------------------------------------------
-    public static final String SHUTTER1_IP = "192.168.1.6";
+    public static final String SHUTTER1_IP = "192.168.1.9";
     public static final String SHUTTER1_MAC = "";
     //----------------------------------------------------------
     public static final String SHUTTER2_IP = "";

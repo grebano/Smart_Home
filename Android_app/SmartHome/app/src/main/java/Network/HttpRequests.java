@@ -16,16 +16,14 @@ public class HttpRequests {
     private final String TAG = "HttpRequest";
     private String url = "";
 
-    // TODO se altre classi vogliono i risultati devo aggiungere gli oggetti
     // oggetti dell'interfaccia usata per restituire informazioni (http response)
-
     ArrayList<HttpRequestCompleted> httpRequestList = null;
 
     // costruttore oggetto della classe
-    public HttpRequests(String url, ArrayList<HttpRequestCompleted> givenhttpRequestList)
+    public HttpRequests(String url, ArrayList<HttpRequestCompleted> givenHttpRequestList)
     {
         this.url = url;
-        httpRequestList = new ArrayList<HttpRequestCompleted>(givenhttpRequestList);
+        httpRequestList = new ArrayList<>(givenHttpRequestList);
     }
 
     // wrapper della funzione DoaRequest, che passa l'url corretto
