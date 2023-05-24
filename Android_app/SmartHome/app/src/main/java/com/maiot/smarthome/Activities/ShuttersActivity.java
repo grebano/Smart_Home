@@ -213,28 +213,38 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void setImageStatus(boolean withHttpRequest)
     {
         if(!withHttpRequest) {
-            // visibilità immagini stato e settaggio testo pulsanti
-            for (int i = 0; i < deviceList.getShutterList().length; i++) {
-                // la tapparella è aperta
-                if (deviceList.getShutterList()[i].getLocalStatus()) {
-                    openImages[i].setVisibility(View.VISIBLE);
-                    closedImages[i].setVisibility(View.INVISIBLE);
-                    buttons[i].setText("Close");
-                }
+            if (deviceList.getLightsList() != null) {
+                // visibilità immagini stato e settaggio testo pulsanti
+                for (int i = 0; i < deviceList.getShutterList().length; i++) {
+                    // la tapparella è aperta
+                    if (deviceList.getShutterList()[i].getLocalStatus()) {
+                        openImages[i].setVisibility(View.VISIBLE);
+                        closedImages[i].setVisibility(View.INVISIBLE);
+                        buttons[i].setText("Close");
+                    }
 
-                // la tapparella è chiusa
-                else {
-                    openImages[i].setVisibility(View.INVISIBLE);
-                    closedImages[i].setVisibility(View.VISIBLE);
-                    buttons[i].setText("Open");
+                    // la tapparella è chiusa
+                    else {
+                        openImages[i].setVisibility(View.INVISIBLE);
+                        closedImages[i].setVisibility(View.VISIBLE);
+                        buttons[i].setText("Open");
+                    }
                 }
+            }
+            else {
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
             }
         }
         else
         {
-            for (int i = 0; i < deviceList.getShutterList().length; i++) {
-                // richieste http /ping
-                deviceList.getShutterList()[i].getHttpStatus();
+            if (deviceList.getLightsList() != null) {
+                for (int i = 0; i < deviceList.getShutterList().length; i++) {
+                    // richieste http /ping
+                    deviceList.getShutterList()[i].getHttpStatus();
+                }
+            }
+            else{
+                Log.e(TAG,"No available shutter");
             }
         }
     }
@@ -243,18 +253,23 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        if(index < deviceList.getShutterList().length) {
-            // inversione dello stato della tapparella indicizzata
-            if (!deviceList.getShutterList()[index].getLocalStatus()) {
+        if (deviceList.getShutterList() != null) {
+            if (index < deviceList.getShutterList().length) {
+                // inversione dello stato della tapparella indicizzata
+                if (!deviceList.getShutterList()[index].getLocalStatus()) {
 
-                deviceList.getShutterList()[index].setStatus(true);
+                    deviceList.getShutterList()[index].setStatus(true);
+                }
+                else {
+                    deviceList.getShutterList()[index].setStatus(false);
+                }
             }
             else {
-                deviceList.getShutterList()[index].setStatus(false);
+                Log.e(TAG, "Trying to set a non existing device");
             }
         }
         else {
-            Log.e(TAG,"Trying to set a non existing device");
+            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
         }
     }
 

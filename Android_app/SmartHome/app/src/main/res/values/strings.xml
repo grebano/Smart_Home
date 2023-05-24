@@ -15,4 +15,7 @@
     <string name="HOME_GYM_MODE_ON">Home gym mode activated!</string>
     <string name="VACATION_MODE_ON">Vacation mode activated!</string>
 
+    <string name="NULL_OBJECT">Trying to access to a null object</string>
+
+
 </resources>

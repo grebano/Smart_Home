@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
+
 import Services.LightsService;
 
 import Devices.DeviceList;
@@ -130,6 +131,8 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 i++;
             }
 
+            checkLightsCount();
+
             // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
             bttLightsModeAuto.setClickable(true);
@@ -165,12 +168,13 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             // visualizzazione a schermo
             Toast.makeText(LightsActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
 
-            // si controlla che il servizio non stia già girando e lo si lancia
-            if(!LightsService.isRunning) {
-                startForegroundService(new Intent(this, LightsService.class));
-            }
-            else{
-                Log.i(TAG,"LightsService is already running");
+            if(checkLightsCount() > 0) {
+                // si controlla che il servizio non stia già girando e lo si lancia
+                if (!LightsService.isRunning) {
+                    startForegroundService(new Intent(this, LightsService.class));
+                } else {
+                    Log.i(TAG, "LightsService is already running");
+                }
             }
         });
     }
@@ -208,27 +212,32 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
+    // il parametro serve a decidere o meno se fare una richiesta http che
+    // scatenerà la onHttpRequestCompleted richiamando la setImageStatus
+    // avendo però aggiornato lo stato dei vari dispositivi
     private void setImageStatus(boolean withHttpRequest)
     {
         if(!withHttpRequest) {
-            // visibilità immagini stato e settaggio testo pulsanti
-            for(int i = 0; i < deviceList.getLightsList().length; i++)
-            {
-                // la lampada è accesa
-                if(deviceList.getLightsList()[i].getLocalStatus())
-                {
-                    onImages[i].setVisibility(View.VISIBLE);
-                    offImages[i].setVisibility(View.INVISIBLE);
-                    buttons[i].setText("Close");
-                }
+            if (deviceList.getLightsList() != null) {
+                // visibilità immagini stato e settaggio testo pulsanti
+                for (int i = 0; i < deviceList.getLightsList().length; i++) {
+                    // la lampada è accesa
+                    if (deviceList.getLightsList()[i].getLocalStatus()) {
+                        onImages[i].setVisibility(View.VISIBLE);
+                        offImages[i].setVisibility(View.INVISIBLE);
+                        buttons[i].setText("Close");
+                    }
 
-                // la lampada è spenta
-                else
-                {
-                    onImages[i].setVisibility(View.INVISIBLE);
-                    offImages[i].setVisibility(View.VISIBLE);
-                    buttons[i].setText("Open");
+                    // la lampada è spenta
+                    else {
+                        onImages[i].setVisibility(View.INVISIBLE);
+                        offImages[i].setVisibility(View.VISIBLE);
+                        buttons[i].setText("Open");
+                    }
                 }
+            }
+            else {
+                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
             }
         }
         else {
@@ -249,20 +258,37 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        if(index < deviceList.getLightsList().length) {
-            // inversione dello stato della lampada indicizzata
-            if (!deviceList.getLightsList()[index].getLocalStatus()) {
+        if (deviceList.getLightsList() != null) {
+            if (index < deviceList.getLightsList().length) {
+                // inversione dello stato della lampada indicizzata
+                if (!deviceList.getLightsList()[index].getLocalStatus()) {
 
-                deviceList.getLightsList()[index].setStatus(true);
+                    deviceList.getLightsList()[index].setStatus(true);
+                }
+                else {
+                    deviceList.getLightsList()[index].setStatus(false);
+                }
             }
             else {
-                deviceList.getLightsList()[index].setStatus(false);
+                Log.e(TAG, "Trying to set a non existing device");
             }
         }
         else {
-            Log.e(TAG,"Trying to set a non existing device");
+            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
         }
     }
+
+    private int checkLightsCount()
+    {
+        int count = deviceList.getLightsList().length;
+        if(count == 0)
+        {
+            // visualizzazione a schermo
+            Toast.makeText(LightsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+        }
+        return count;
+    }
+
     @Override
     public void onHttpRequestCompleted(String response)
     {
