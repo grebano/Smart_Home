@@ -1,16 +1,11 @@
 package com.maiot.smarthome.Activities;
 
-        import android.app.Activity;
         import android.content.Intent;
         import android.os.Bundle;
         import android.util.Log;
-        import android.view.View;
         import android.widget.Button;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
         import android.widget.Toast;
 
-        import androidx.annotation.Nullable;
         import androidx.appcompat.app.AppCompatActivity;
 
         import com.maiot.smarthome.R;
@@ -59,7 +54,7 @@ public class AutomationsActivity extends AppCompatActivity {
     private void dayMode() {
         bttDayMode.setOnClickListener(view -> {
             // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE_ON, Toast.LENGTH_SHORT).show();
 
             // si controlla che il servizio stia girando, nel caso lo si arresta
             if(ShuttersService.isRunning) {
@@ -84,7 +79,7 @@ public class AutomationsActivity extends AppCompatActivity {
     private void nightMode() {
         bttNightMode.setOnClickListener(view -> {
             // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE_ON, Toast.LENGTH_SHORT).show();
 
             // si controlla che il servizio stia girando, nel caso lo si arresta
             if(ShuttersService.isRunning) {
@@ -109,7 +104,7 @@ public class AutomationsActivity extends AppCompatActivity {
     private void homeGymMode() {
         bttHomeGymMode.setOnClickListener(view -> {
             // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE_ON, Toast.LENGTH_SHORT).show();
 
             // chiusura tapparelle e accensione luce sala pesi
             for(SmartDevice shutter : deviceList.getShutterList())
@@ -131,7 +126,7 @@ public class AutomationsActivity extends AppCompatActivity {
     private void vacationMode() {
         bttVacationMode.setOnClickListener(view -> {
             // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE_ON, Toast.LENGTH_SHORT).show();
 
             // tapparelle che simulano la presenza di persone
 

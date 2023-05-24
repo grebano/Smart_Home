@@ -3,6 +3,7 @@ package com.maiot.smarthome.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,6 +50,8 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     // array di pulsanti da gestire
     private Button[] buttons;
+    // layout delle singole tapparelle
+    private LinearLayout[] layouts;
 
     private DeviceList deviceList = null;
     //
@@ -66,6 +69,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         closedImages = new ImageView[] {imgShut1_closed, imgShut2_closed, imgShut3_closed};
         openImages = new ImageView[] {imgShut1_open, imgShut2_open, imgShut3_open};
         buttons = new Button[] {btt_Shutter_Switch1, btt_Shutter_Switch2, btt_Shutter_Switch3};
+        layouts = new LinearLayout[] {ll_Shutter_Switch1, ll_Shutter_Switch2, ll_Shutter_Switch3};
 
         // inizializzazione immagini e pulsanti in base allo stato reale
         setImageStatus(true);
@@ -103,9 +107,10 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         bttShuttersModeManual.setOnClickListener(view -> {
 
             // visibilità layout
-            ll_Shutter_Switch1.setVisibility(View.VISIBLE);
-            ll_Shutter_Switch2.setVisibility(View.VISIBLE);
-            ll_Shutter_Switch3.setVisibility(View.VISIBLE);
+            for(LinearLayout linearLayout : layouts)
+            {
+                linearLayout.setVisibility(View.VISIBLE);
+            }
 
             // visibilità switch
             btt_Shutter_Switch1.setVisibility(View.VISIBLE);
@@ -136,18 +141,16 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         // è stata scelta la modalità automatica
         bttShuttersModeAuto = findViewById(R.id.bttShuttersModeAuto);
         bttShuttersModeAuto.setOnClickListener(view -> {
-            // visibilità layout
-            ll_Shutter_Switch1.setVisibility(View.INVISIBLE);
-            ll_Shutter_Switch2.setVisibility(View.INVISIBLE);
-            ll_Shutter_Switch3.setVisibility(View.INVISIBLE);
+            // visibilità layout e switch
+            for(LinearLayout linearLayout : layouts)
+            {
+                linearLayout.setVisibility(View.INVISIBLE);
+            }
+            for(Button button : buttons)
+            {
+                button.setClickable(false);
+            }
 
-            // visibilità switch
-            btt_Shutter_Switch1.setVisibility(View.INVISIBLE);
-            btt_Shutter_Switch1.setClickable(false);
-            btt_Shutter_Switch2.setVisibility(View.INVISIBLE);
-            btt_Shutter_Switch2.setClickable(false);
-            btt_Shutter_Switch3.setVisibility(View.INVISIBLE);
-            btt_Shutter_Switch3.setClickable(false);
 
             // possibilità di click della modalità
             bttShuttersModeAuto.setClickable(false);
@@ -190,14 +193,13 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         btt_Shutter_Switch2.setOnClickListener(view -> {
 
             // inversione dello stato della tapparella 2
-            if (imgShut2_closed.getVisibility() == View.VISIBLE) {
-                imgShut2_closed.setVisibility(View.INVISIBLE);
-                imgShut2_open.setVisibility(View.VISIBLE);
-                btt_Shutter_Switch2.setText("Close");
-            } else if (imgShut2_open.getVisibility() == View.VISIBLE) {
-                imgShut2_open.setVisibility(View.INVISIBLE);
-                imgShut2_closed.setVisibility(View.VISIBLE);
-                btt_Shutter_Switch2.setText("Open ");
+            if(!deviceList.getShutterList()[1].getLocalStatus())
+            {
+                deviceList.getShutterList()[1].setStatus(true);
+            }
+            else if(deviceList.getShutterList()[1].getLocalStatus())
+            {
+                deviceList.getShutterList()[1].setStatus(false);
             }
         });
     }
@@ -220,6 +222,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         });
     }
 
+    // il parametro serve a decidere o meno se fare una richiesta http che
+    // scatenerà la onHttpRequestCompleted richiamando la setImageStatus
+    // avendo però aggiornato lo stato dei vari dispositivi
     private void setImageStatus(boolean withHttpRequest)
     {
         if(!withHttpRequest) {

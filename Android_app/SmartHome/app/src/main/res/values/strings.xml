@@ -10,9 +10,9 @@
 
     <string name="AUTOMATIC_MODE">Automatic mode activated!</string>
 
-    <string name="DAY_MODE">Automatic mode activated!</string>
-    <string name="NIGHT_MODE">Night mode activated!</string>
-    <string name="HOME_GYM_MODE">Home gym mode activated!</string>
-    <string name="VACATION_MODE">Vacation mode activated!</string>
+    <string name="DAY_MODE_ON">Day mode activated!</string>
+    <string name="NIGHT_MODE_ON">Night mode activated!</string>
+    <string name="HOME_GYM_MODE_ON">Home gym mode activated!</string>
+    <string name="VACATION_MODE_ON">Vacation mode activated!</string>
 
 </resources>
