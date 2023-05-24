@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import Devices.DeviceList;
 import Interfaces.WifiScanCompleted;
+import Miscellaneous.Constants;
 import Wifi.WifiReceiver;
 
 
@@ -88,7 +89,7 @@ public class LightsService extends Service implements WifiScanCompleted {
         // TODO implementare una versione con le due soglie di isteresi
         for(int i = 0; i < networks.size(); i++)
         {
-            if(Integer.parseInt(networks.get(i)[1]) > -50)
+            if(Integer.parseInt(networks.get(i)[1]) > Constants.WIFI_THRESHOLD)
             {
                 for(int j = 0; j < deviceList.getLightsList().length; j++)
                 {

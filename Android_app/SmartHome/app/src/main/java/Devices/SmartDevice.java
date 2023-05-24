@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import Interfaces.HttpRequestCompleted;
+import Miscellaneous.Constants;
 import Network.HttpRequests;
 
 public class SmartDevice implements HttpRequestCompleted {
@@ -20,24 +21,34 @@ public class SmartDevice implements HttpRequestCompleted {
     private String nearestRouterMac;
     private HttpRequests httpRequests = null;
 
-    // costruttore del dispositivo, con associazione alla classe http request
+    // costruttore del dispositivo, con associazione alla classe http request (in ingresso singolo ogg. interfaccia)
     public SmartDevice(String ipAddress, String nearestRouterMac, HttpRequestCompleted httpRequestCompleted)
     {
         this.nearestRouterMac = nearestRouterMac;
         ArrayList<HttpRequestCompleted> completedArrayList = new ArrayList<>();
         completedArrayList.add(this);
         completedArrayList.add(httpRequestCompleted);
-        this.httpRequests = new HttpRequests("http://" + ipAddress, completedArrayList);
-        httpRequests.Request("/ping");
+        this.httpRequests = new HttpRequests(Constants.HTTP  + ipAddress, completedArrayList);
+        httpRequests.Request(Constants.PING_PATH);
     }
+
+    // costruttore del dispositivo, con associazione alla classe http request (in ingresso lista di ogg. interfaccia)
+    public SmartDevice(String ipAddress, String nearestRouterMac, ArrayList<HttpRequestCompleted> httpRequestsCompleted)
+    {
+        this.nearestRouterMac = nearestRouterMac;
+        httpRequestsCompleted.add(this);
+        this.httpRequests = new HttpRequests(Constants.HTTP + ipAddress, httpRequestsCompleted);
+        httpRequests.Request(Constants.PING_PATH);
+    }
+
 
     // Settaggio a On/Off del dispositivo tramite http
     public void setStatus(boolean status)
     {
         if(status)
-            httpRequests.Request("/on");
+            httpRequests.Request(Constants.ON_PATH);
         else
-            httpRequests.Request("/off");
+            httpRequests.Request(Constants.OFF_PATH);
     }
 
     // get dello stato del dispositivo
@@ -55,10 +66,10 @@ public class SmartDevice implements HttpRequestCompleted {
     @Override
     public void onHttpRequestCompleted(String response) {
         if(response != null) {
-            if (response.equals("on")) {
+            if (response.equals(Constants.ON_RESPONSE)) {
                 this.status = true;
             }
-            if (response.equals("off")) {
+            if (response.equals(Constants.OFF_RESPONSE)) {
                 this.status = false;
             }
         }

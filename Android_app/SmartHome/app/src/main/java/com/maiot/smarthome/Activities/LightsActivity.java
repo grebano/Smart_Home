@@ -270,6 +270,12 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     public void onHttpRequestCompleted(String response)
     {
         // quando la richiesta è completata aggiorno le views
-        setImageStatus();
+        runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        setImageStatus();
+                    }
+                });
     }
 }
