@@ -280,13 +280,20 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
     private int checkLightsCount()
     {
-        int count = deviceList.getLightsList().length;
-        if(count == 0)
-        {
-            // visualizzazione a schermo
-            Toast.makeText(LightsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+        if(deviceList.getLightsList() != null) {
+            int count = deviceList.getLightsList().length;
+            if(count == 0)
+            {
+                // visualizzazione a schermo
+                Toast.makeText(LightsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+            }
+            return count;
         }
-        return count;
+        else
+        {
+            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            return 0;
+        }
     }
 
     @Override

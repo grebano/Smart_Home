@@ -275,13 +275,19 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     private int checkShutterCount()
     {
-        int count = deviceList.getShutterList().length;
-        if(count == 0)
-        {
-            // visualizzazione a schermo
-            Toast.makeText(ShuttersActivity.this, "there are no shutters available", Toast.LENGTH_SHORT).show();
+        if(deviceList.getShutterList() != null) {
+            int count = deviceList.getShutterList().length;
+            if (count == 0) {
+                // visualizzazione a schermo
+                Toast.makeText(ShuttersActivity.this, "there are no shutters available", Toast.LENGTH_SHORT).show();
+            }
+            return count;
         }
-        return count;
+        else
+        {
+            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            return 0;
+        }
     }
 
     @Override
