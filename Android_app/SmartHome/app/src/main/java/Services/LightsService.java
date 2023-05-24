@@ -68,7 +68,7 @@ public class LightsService extends Service implements WifiScanCompleted {
 
 
     private void addNotification(){
-        NotificationChannel channel = null;
+        NotificationChannel channel;
         channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_ID, NotificationManager.IMPORTANCE_LOW);
         getSystemService(NotificationManager.class).createNotificationChannel(channel);
 
@@ -91,18 +91,21 @@ public class LightsService extends Service implements WifiScanCompleted {
         {
             if(Integer.parseInt(networks.get(i)[1]) > Constants.WIFI_THRESHOLD)
             {
-                for(int j = 0; j < deviceList.getLightsList().length; j++)
-                {
-                    // accensione luci nelle prossimità
-                    if(deviceList.getLightsList()[i].getNearestRouterMac() == networks.get(i)[0])
-                    {
-                        deviceList.getLightsList()[i].setStatus(true);
+                if(deviceList.getLightsList() != null) {
+                    for (int j = 0; j < deviceList.getLightsList().length; j++) {
+
+                        // accensione luci nelle prossimità
+                        if (deviceList.getLightsList()[i].getNearestRouterMac() == networks.get(i)[0]) {
+                            deviceList.getLightsList()[i].setStatus(true);
+                        }
+                        // spegnimento delle altre
+                        else {
+                            deviceList.getLightsList()[i].setStatus(false);
+                        }
                     }
-                    // spegnimento delle altre
-                    else
-                    {
-                        deviceList.getLightsList()[i].setStatus(false);
-                    }
+                }
+                else {
+                    Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
                 }
             }
         }
