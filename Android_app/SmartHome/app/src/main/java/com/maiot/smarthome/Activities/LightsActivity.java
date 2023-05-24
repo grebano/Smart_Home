@@ -16,7 +16,6 @@ import Services.LightsService;
 
 import Devices.DeviceList;
 import Interfaces.HttpRequestCompleted;
-import Services.ShuttersService;
 
 public class LightsActivity extends AppCompatActivity implements HttpRequestCompleted{
     private final String TAG = "LightsActivity";
@@ -50,6 +49,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     // array di pulsanti da gestire
     private Button[] buttons;
 
+    // layout delle singole lampade
+    private LinearLayout[] layouts;
+
     private DeviceList deviceList = null;
 
 
@@ -67,6 +69,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         onImages = new ImageView[] {imgLamp1_Off, imgLamp2_Off, imgLamp3_Off};
         offImages = new ImageView[] {imgLamp1_On, imgLamp2_On, imgLamp3_On};
         buttons = new Button[] {btt_Lamp_Switch1, btt_Lamp_Switch2, btt_Lamp_Switch3};
+        layouts = new LinearLayout[] {ll_Lamp_Switch1, ll_Lamp_Switch2, ll_Lamp_Switch3};
 
         // inizializzazione immagini e pulsanti in base allo stato reale
         setImageStatus(true);
@@ -92,14 +95,6 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         imgLamp3_Off = findViewById(R.id.imgLamp3_Off);
         imgLamp3_On = findViewById(R.id.imgLamp3_On);
 
-        // visibilità immagini stato
-        imgLamp1_Off.setVisibility(View.VISIBLE);
-        imgLamp2_Off.setVisibility(View.VISIBLE);
-        imgLamp3_Off.setVisibility(View.VISIBLE);
-        imgLamp1_On.setVisibility(View.INVISIBLE);
-        imgLamp2_On.setVisibility(View.INVISIBLE);
-        imgLamp3_On.setVisibility(View.INVISIBLE);
-
         // settaggio click listeners e view nelle due modalità
         automaticModeViews();
         manualModeViews();
@@ -116,18 +111,24 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         // è stata scelta la modalità manuale
         bttLightsModeManual = findViewById(R.id.bttLightsModeManual);
         bttLightsModeManual.setOnClickListener(view -> {
-            // visibilità layout
-            ll_Lamp_Switch1.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch2.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch3.setVisibility(View.VISIBLE);
 
-            // visibilità switch
-            btt_Lamp_Switch1.setVisibility(View.VISIBLE);
-            btt_Lamp_Switch1.setClickable(true);
-            btt_Lamp_Switch2.setVisibility(View.VISIBLE);
-            btt_Lamp_Switch2.setClickable(true);
-            btt_Lamp_Switch3.setVisibility(View.VISIBLE);
-            btt_Lamp_Switch3.setClickable(true);
+            int i = 0;
+            // visibilità layout e pulsanti in base all'esistenza dei dispositivi
+
+            for(LinearLayout linearLayout : layouts)
+            {
+                if(i < deviceList.getLightsList().length) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                    buttons[i].setVisibility(View.VISIBLE);
+                    buttons[i].setClickable(true);
+                }
+                else {
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    buttons[i].setVisibility(View.INVISIBLE);
+                    buttons[i].setClickable(false);
+                }
+                i++;
+            }
 
             // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
@@ -147,18 +148,15 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         // è stata scelta la modalità automatica
         bttLightsModeAuto = findViewById(R.id.bttLightsModeAuto);
         bttLightsModeAuto.setOnClickListener(view -> {
-            // visibilità layout
-            ll_Lamp_Switch1.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch2.setVisibility(View.VISIBLE);
-            ll_Lamp_Switch3.setVisibility(View.VISIBLE);
-
-            // visibilità switch
-            btt_Lamp_Switch1.setVisibility(View.INVISIBLE);
-            btt_Lamp_Switch1.setClickable(false);
-            btt_Lamp_Switch2.setVisibility(View.INVISIBLE);
-            btt_Lamp_Switch2.setClickable(false);
-            btt_Lamp_Switch3.setVisibility(View.INVISIBLE);
-            btt_Lamp_Switch3.setClickable(false);
+            // visibilità layout e switch
+            for(LinearLayout linearLayout : layouts)
+            {
+                linearLayout.setVisibility(View.INVISIBLE);
+            }
+            for(Button button : buttons)
+            {
+                button.setClickable(false);
+            }
 
             // possibilità di click della modalità
             bttLightsModeAuto.setClickable(false);
@@ -172,7 +170,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 startForegroundService(new Intent(this, LightsService.class));
             }
             else{
-                Log.i(TAG,"ShuttersService is already running");
+                Log.i(TAG,"LightsService is already running");
             }
         });
     }
@@ -184,18 +182,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         btt_Lamp_Switch1.setOnClickListener(view -> {
 
             // inversione dello stato della lampada 1
-            if(imgLamp1_Off.getVisibility() == View.VISIBLE)
-            {
-                imgLamp1_Off.setVisibility(View.INVISIBLE);
-                imgLamp1_On.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch1.setText("Turn Off");
-            }
-            else if(imgLamp1_On.getVisibility() == View.VISIBLE)
-            {
-                imgLamp1_On.setVisibility(View.INVISIBLE);
-                imgLamp1_Off.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch1.setText("Turn On ");
-            }
+            toggleDeviceStatus(1);
         });
     }
 
@@ -206,18 +193,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         btt_Lamp_Switch2.setOnClickListener(view -> {
 
             // inversione dello stato della lampada 2
-            if(imgLamp2_Off.getVisibility() == View.VISIBLE)
-            {
-                imgLamp2_Off.setVisibility(View.INVISIBLE);
-                imgLamp2_On.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch2.setText("Turn Off");
-            }
-            else if(imgLamp2_On.getVisibility() == View.VISIBLE)
-            {
-                imgLamp2_On.setVisibility(View.INVISIBLE);
-                imgLamp2_Off.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch2.setText("Turn On ");
-            }
+            toggleDeviceStatus(2);
         });
     }
 
@@ -228,18 +204,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         btt_Lamp_Switch3.setOnClickListener(view -> {
 
             // inversione dello stato della lampada 3
-            if(imgLamp3_Off.getVisibility() == View.VISIBLE)
-            {
-                imgLamp3_Off.setVisibility(View.INVISIBLE);
-                imgLamp3_On.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch3.setText("Turn Off");
-            }
-            else if(imgLamp3_On.getVisibility() == View.VISIBLE)
-            {
-                imgLamp3_On.setVisibility(View.INVISIBLE);
-                imgLamp3_Off.setVisibility(View.VISIBLE);
-                btt_Lamp_Switch3.setText("Turn On ");
-            }
+            toggleDeviceStatus(3);
         });
     }
 
@@ -247,17 +212,17 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     {
         if(!withHttpRequest) {
             // visibilità immagini stato e settaggio testo pulsanti
-            for(int i = 0; i < deviceList.getShutterList().length; i++)
+            for(int i = 0; i < deviceList.getLightsList().length; i++)
             {
-                // la tapparella è aperta
-                if(deviceList.getShutterList()[i].getLocalStatus())
+                // la lampada è accesa
+                if(deviceList.getLightsList()[i].getLocalStatus())
                 {
                     onImages[i].setVisibility(View.VISIBLE);
                     offImages[i].setVisibility(View.INVISIBLE);
                     buttons[i].setText("Close");
                 }
 
-                // la tapparella è chiusa
+                // la lampada è spenta
                 else
                 {
                     onImages[i].setVisibility(View.INVISIBLE);
@@ -267,13 +232,32 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             }
         }
         else {
-        for (int i = 0; i < deviceList.getShutterList().length; i++) {
-            // la tapparella è aperta
-            deviceList.getShutterList()[i].getHttpStatus();
+        for (int i = 0; i < deviceList.getLightsList().length; i++) {
+            // richieste http /ping
+            deviceList.getLightsList()[i].getHttpStatus();
             }
         }
     }
 
+
+    // si cambia lo stato della singola lampada
+    private void toggleDeviceStatus(int index)
+    {
+        index -= 1;
+        if(index < deviceList.getLightsList().length) {
+            // inversione dello stato della lampada indicizzata
+            if (!deviceList.getLightsList()[index].getLocalStatus()) {
+
+                deviceList.getLightsList()[index].setStatus(true);
+            }
+            else {
+                deviceList.getLightsList()[index].setStatus(false);
+            }
+        }
+        else {
+            Log.e(TAG,"Trying to set a non existing device");
+        }
+    }
     @Override
     public void onHttpRequestCompleted(String response)
     {

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.maiot.smarthome.R;
 
 import Devices.DeviceList;
+import Devices.SmartDevice;
 import Interfaces.HttpRequestCompleted;
 import Services.ShuttersService;
 
@@ -22,7 +23,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     private final String TAG = "ShuttersActivity";
 
-    // layout delle lampade
+    // layout delle tapparelle
     private LinearLayout ll_Shutter_Switch1 = null;
     private LinearLayout ll_Shutter_Switch2 = null;
     private LinearLayout ll_Shutter_Switch3 = null;
@@ -36,7 +37,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private Button btt_Shutter_Switch2 = null;
     private Button btt_Shutter_Switch3 = null;
 
-    // immagini dello stato delle lampade
+    // immagini dello stato delle tapparelle
     private ImageView imgShut1_open = null;
     private ImageView imgShut1_closed = null;
     private ImageView imgShut2_open = null;
@@ -50,6 +51,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     // array di pulsanti da gestire
     private Button[] buttons;
+
     // layout delle singole tapparelle
     private LinearLayout[] layouts;
 
@@ -77,7 +79,6 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     private void initViews()
     {
-        // TODO mostrare solo i layout di dispositivi esistenti
         // associazione dei layout
         ll_Shutter_Switch1 = findViewById(R.id.ll_Shutter_Switch1);
         ll_Shutter_Switch2 = findViewById(R.id.ll_Shutter_Switch2);
@@ -106,19 +107,23 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         bttShuttersModeManual = findViewById(R.id.bttShuttersModeManual);
         bttShuttersModeManual.setOnClickListener(view -> {
 
-            // visibilità layout
+            int i = 0;
+            // visibilità layout e pulsanti in base all'esistenza dei dispositivi
+
             for(LinearLayout linearLayout : layouts)
             {
-                linearLayout.setVisibility(View.VISIBLE);
+                if(i < deviceList.getShutterList().length) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                    buttons[i].setVisibility(View.VISIBLE);
+                    buttons[i].setClickable(true);
+                }
+                else {
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    buttons[i].setVisibility(View.INVISIBLE);
+                    buttons[i].setClickable(false);
+                }
+                i++;
             }
-
-            // visibilità switch
-            btt_Shutter_Switch1.setVisibility(View.VISIBLE);
-            btt_Shutter_Switch1.setClickable(true);
-            btt_Shutter_Switch2.setVisibility(View.VISIBLE);
-            btt_Shutter_Switch2.setClickable(true);
-            btt_Shutter_Switch3.setVisibility(View.VISIBLE);
-            btt_Shutter_Switch3.setClickable(true);
 
             // possibilità di click della modalità
             bttShuttersModeManual.setClickable(false);
@@ -151,7 +156,6 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                 button.setClickable(false);
             }
 
-
             // possibilità di click della modalità
             bttShuttersModeAuto.setClickable(false);
             bttShuttersModeManual.setClickable(true);
@@ -176,14 +180,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         btt_Shutter_Switch1.setOnClickListener(view -> {
 
             // inversione dello stato della tapparella 1
-            if(!deviceList.getShutterList()[0].getLocalStatus())
-            {
-                deviceList.getShutterList()[0].setStatus(true);
-            }
-            else if(deviceList.getShutterList()[0].getLocalStatus())
-            {
-                deviceList.getShutterList()[0].setStatus(false);
-            }
+            toggleDeviceStatus(1);
         });
     }
 
@@ -193,32 +190,17 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         btt_Shutter_Switch2.setOnClickListener(view -> {
 
             // inversione dello stato della tapparella 2
-            if(!deviceList.getShutterList()[1].getLocalStatus())
-            {
-                deviceList.getShutterList()[1].setStatus(true);
-            }
-            else if(deviceList.getShutterList()[1].getLocalStatus())
-            {
-                deviceList.getShutterList()[1].setStatus(false);
-            }
+            toggleDeviceStatus(2);
         });
     }
 
     private void shutter3StatusViews() {
         // associazione bottone di switch
-        btt_Shutter_Switch3 = findViewById(R.id.btt_Shutter_Switch3);
+        btt_Shutter_Switch3 = findViewById(R.id.btt_Shutter_Switch2);
         btt_Shutter_Switch3.setOnClickListener(view -> {
 
             // inversione dello stato della tapparella 3
-            if (imgShut3_closed.getVisibility() == View.VISIBLE) {
-                imgShut3_closed.setVisibility(View.INVISIBLE);
-                imgShut3_open.setVisibility(View.VISIBLE);
-                btt_Shutter_Switch3.setText("Close");
-            } else if (imgShut3_open.getVisibility() == View.VISIBLE) {
-                imgShut3_open.setVisibility(View.INVISIBLE);
-                imgShut3_closed.setVisibility(View.VISIBLE);
-                btt_Shutter_Switch3.setText("Open ");
-            }
+            toggleDeviceStatus(3);
         });
     }
 
@@ -248,9 +230,28 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         else
         {
             for (int i = 0; i < deviceList.getShutterList().length; i++) {
-                // la tapparella è aperta
+                // richieste http /ping
                 deviceList.getShutterList()[i].getHttpStatus();
             }
+        }
+    }
+
+    // si cambia lo stato della singola tapparella
+    private void toggleDeviceStatus(int index)
+    {
+        index -= 1;
+        if(index < deviceList.getShutterList().length) {
+            // inversione dello stato della tapparella indicizzata
+            if (!deviceList.getShutterList()[index].getLocalStatus()) {
+
+                deviceList.getShutterList()[index].setStatus(true);
+            }
+            else {
+                deviceList.getShutterList()[index].setStatus(false);
+            }
+        }
+        else {
+            Log.e(TAG,"Trying to set a non existing device");
         }
     }
 
