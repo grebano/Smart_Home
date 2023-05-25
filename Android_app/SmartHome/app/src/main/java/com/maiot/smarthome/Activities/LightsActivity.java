@@ -139,7 +139,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 }
             }
 
-            checkLightsCount();
+            checkLightsCount(true);
 
             // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
@@ -173,10 +173,11 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             bttLightsModeAuto.setClickable(false);
             bttLightsModeManual.setClickable(true);
 
-            // visualizzazione a schermo
-            Toast.makeText(LightsActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
+            if(checkLightsCount(true) > 0) {
 
-            if(checkLightsCount() > 0) {
+                // visualizzazione a schermo
+                Toast.makeText(LightsActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
+
                 // si controlla che il servizio non stia già girando e lo si lancia
                 if (!LightsService.isRunning) {
                     startForegroundService(new Intent(this, LightsService.class));
@@ -286,14 +287,15 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         }
     }
 
-    private int checkLightsCount()
+    private int checkLightsCount(boolean withToast)
     {
         if(deviceList.getLightsList() != null) {
             int count = deviceList.getLightsList().length;
-            if(count == 0)
-            {
-                // visualizzazione a schermo
-                Toast.makeText(LightsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+            if(withToast) {
+                if (count == 0) {
+                    // visualizzazione a schermo
+                    Toast.makeText(LightsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+                }
             }
             return count;
         }

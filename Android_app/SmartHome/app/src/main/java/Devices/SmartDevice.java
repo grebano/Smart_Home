@@ -62,9 +62,10 @@ public class SmartDevice implements HttpRequestCompleted {
         httpRequests.Request(Constants.PING_PATH);
     }
 
+
     // get del router più vicino
     public String getNearestRouterMac() {
-        return nearestRouterMac;
+        return this.nearestRouterMac;
     }
 
     // Si aggiorna lo stato del dispositivo dopo una richiesta http

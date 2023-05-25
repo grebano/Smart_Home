@@ -131,7 +131,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                 }
             }
 
-            checkShutterCount();
+            checkShutterCount(true);
 
             // possibilità di click della modalità
             bttShuttersModeManual.setClickable(false);
@@ -168,10 +168,11 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             bttShuttersModeAuto.setClickable(false);
             bttShuttersModeManual.setClickable(true);
 
-            // visualizzazione a schermo
-            Toast.makeText(ShuttersActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
+            if(checkShutterCount(true) > 0) {
 
-            if(checkShutterCount() > 0) {
+                // visualizzazione a schermo
+                Toast.makeText(ShuttersActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
+
                 // si controlla che il servizio non stia già girando e lo si lancia
                 if (!ShuttersService.isRunning) {
                     startForegroundService(new Intent(this, ShuttersService.class));
@@ -279,13 +280,15 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         }
     }
 
-    private int checkShutterCount()
+    private int checkShutterCount(boolean withToast)
     {
         if(deviceList.getShutterList() != null) {
             int count = deviceList.getShutterList().length;
-            if (count == 0) {
-                // visualizzazione a schermo
-                Toast.makeText(ShuttersActivity.this, "there are no shutters available", Toast.LENGTH_SHORT).show();
+            if(withToast) {
+                if (count == 0) {
+                    // visualizzazione a schermo
+                    Toast.makeText(ShuttersActivity.this, "there are no shutters available", Toast.LENGTH_SHORT).show();
+                }
             }
             return count;
         }
