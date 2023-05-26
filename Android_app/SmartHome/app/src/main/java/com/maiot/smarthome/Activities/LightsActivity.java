@@ -273,14 +273,10 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 else {
                     deviceList.getLightsList()[index].setStatus(false);
                 }
-            }
-            else {
-                Log.e(TAG, "Trying to set a non existing device");
+                return;
             }
         }
-        else {
-            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-        }
+        Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
     private int checkLightsCount(boolean withToast)
@@ -295,11 +291,8 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             }
             return count;
         }
-        else
-        {
-            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-            return 0;
-        }
+        Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        return 0;
     }
 
     @Override

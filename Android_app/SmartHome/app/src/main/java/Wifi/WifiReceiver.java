@@ -52,15 +52,17 @@ public class WifiReceiver extends BroadcastReceiver {
         };
         Collections.sort(wifiScan, comparator);
 
-        // lista di stringhe che ritorno come output
+        // lista di reti che ritorno come output
         ArrayList<Net> nets = new ArrayList<>();
 
         // aggiungo alla lista il Mac e la potenza dei router
-        for(int i = 0; i < wifiScan.size(); i++){
-            if(Objects.equals(wifiScan.get(i).SSID, Constants.SSID)) {
-                Net net = new Net(wifiScan.get(i).SSID, wifiScan.get(i).BSSID, wifiScan.get(i).level);
-                nets.add(net);
-                Log.i(TAG,net.getBssid() + " - " + net.getLevel());
+        if(wifiScan != null) {
+            for (int i = 0; i < wifiScan.size(); i++) {
+                if (Objects.equals(wifiScan.get(i).SSID, Constants.SSID)) {
+                    Net net = new Net(wifiScan.get(i).SSID, wifiScan.get(i).BSSID, wifiScan.get(i).level);
+                    nets.add(net);
+                    Log.i(TAG, net.getBssid() + " - " + net.getLevel());
+                }
             }
         }
         wifiScanCompleted.onWifiScanCompleted(nets);

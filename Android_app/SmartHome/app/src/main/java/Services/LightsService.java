@@ -15,10 +15,8 @@ import androidx.annotation.Nullable;
 
 import com.maiot.smarthome.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -108,26 +106,25 @@ public class LightsService extends Service implements WifiScanCompleted {
         if(networks != null) {
             for (Net net : networks) {
                 if(net != null) {
-                    for(SmartDevice smartDevice : deviceList.getLightsList()) {
-                        if(smartDevice.getNearestRouterMac() == net.getBssid())
-                        {
-                            if(net.getLevel() > -50 && !smartDevice.getLocalStatus()) {
-                                smartDevice.setStatus(true);
-                            }
-                            else if(net.getLevel() < -60 && smartDevice.getLocalStatus()){
-                                smartDevice.setStatus(false);
+                    if(deviceList.getLightsList() != null) {
+                        for (SmartDevice smartDevice : deviceList.getLightsList()) {
+                            if(smartDevice != null) {
+                                if (Objects.equals(smartDevice.getNearestRouterMac(), net.getBssid())) {
+                                    if (net.getLevel() > -50 && !smartDevice.getLocalStatus()) {
+                                        smartDevice.setStatus(true);
+                                        return;
+                                    } else if (net.getLevel() < -60 && smartDevice.getLocalStatus()) {
+                                        smartDevice.setStatus(false);
+                                        return;
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
             }
         }
-        else {
-            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-        }
+        Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
     private void startCheckingTime() {

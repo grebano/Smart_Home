@@ -1,18 +1,18 @@
 package com.maiot.smarthome.Activities;
 
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.widget.Button;
-        import android.widget.Toast;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.Toast;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import com.maiot.smarthome.R;
+import com.maiot.smarthome.R;
 
-        import Devices.DeviceList;
-        import Devices.SmartDevice;
-        import Services.ShuttersService;
+import Devices.DeviceList;
+import Devices.SmartDevice;
+import Services.ShuttersService;
 
 public class AutomationsActivity extends AppCompatActivity {
     private final String TAG = "AutomationsActivity";

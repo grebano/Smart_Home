@@ -270,14 +270,10 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                 else {
                     deviceList.getShutterList()[index].setStatus(false);
                 }
-            }
-            else {
-                Log.e(TAG, "Trying to set a non existing device");
+                return;
             }
         }
-        else {
-            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-        }
+        Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
     private int checkShutterCount(boolean withToast)
@@ -292,11 +288,8 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             }
             return count;
         }
-        else
-        {
-            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-            return 0;
-        }
+        Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        return 0;
     }
 
     @Override
