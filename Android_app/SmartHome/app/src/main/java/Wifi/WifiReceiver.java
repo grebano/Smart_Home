@@ -9,7 +9,6 @@ import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -50,7 +49,7 @@ public class WifiReceiver extends BroadcastReceiver {
             else
                 return 0;
         };
-        Collections.sort(wifiScan, comparator);
+        wifiScan.sort(comparator);
 
         // lista di reti che ritorno come output
         ArrayList<Net> nets = new ArrayList<>();
@@ -61,7 +60,7 @@ public class WifiReceiver extends BroadcastReceiver {
                 if (Objects.equals(wifiScan.get(i).SSID, Constants.SSID)) {
                     Net net = new Net(wifiScan.get(i).SSID, wifiScan.get(i).BSSID, wifiScan.get(i).level);
                     nets.add(net);
-                    Log.i(TAG, net.getBssid() + " - " + net.getLevel());
+                    Log.i(TAG, "net: " + i + " " + net.getBssid() + " - " + net.getLevel());
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.maiot.smarthome.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -231,6 +232,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                         onImages[i].setVisibility(View.VISIBLE);
                         offImages[i].setVisibility(View.INVISIBLE);
                         buttons[i].setText("Turn Off");
+                        buttons[i].setTextColor(Color.rgb(255,0,0));
                     }
 
                     // la lampada è spenta
@@ -238,6 +240,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                         onImages[i].setVisibility(View.INVISIBLE);
                         offImages[i].setVisibility(View.VISIBLE);
                         buttons[i].setText("Turn On");
+                        buttons[i].setTextColor(Color.rgb(0,255,0));
                     }
                 }
             }

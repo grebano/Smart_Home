@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -16,8 +17,6 @@ import androidx.annotation.Nullable;
 import com.maiot.smarthome.R;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import Devices.DeviceList;
 import Devices.SmartDevice;
@@ -38,7 +37,6 @@ public class LightsService extends Service implements WifiScanCompleted {
 
     private DeviceList deviceList = null;
 
-    private Timer timer;
 
     @Nullable
     @Override
@@ -66,8 +64,7 @@ public class LightsService extends Service implements WifiScanCompleted {
 
         isRunning = true;
 
-        timer = new Timer();
-        startCheckingLevel();
+        wifiManager.startScan();
 
         addNotification();
         return START_STICKY;
@@ -108,6 +105,7 @@ public class LightsService extends Service implements WifiScanCompleted {
                         for (SmartDevice smartDevice : deviceList.getLightsList()) {
                             if(smartDevice != null) {
                                 if (smartDevice.getNearestRouterMac().equals(net.getBssid())) {
+                                    Log.i(TAG,"1 mac device");
                                     if (net.getLevel() > Constants.WIFI_NEAR_THRESHOLD && !smartDevice.getLocalStatus()) {
                                         smartDevice.setStatus(true);
                                     }
@@ -122,20 +120,22 @@ public class LightsService extends Service implements WifiScanCompleted {
                     }
                 }
             }
+            delayedScan();
             return;
         }
+        delayedScan();
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
-    private void startCheckingLevel() {
-        // si setta l'azione che il timer deve schedulare
-        TimerTask timerTask = new TimerTask() {
+    private void delayedScan() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
             @Override
             public void run() {
                 wifiManager.startScan();
             }
-        };
-        // si schedula un'azione ogni 3 senza delay iniziale
-        timer.scheduleAtFixedRate(timerTask,0,Constants.LIGHTS_DELAY_IN_MILLIS);
+
+        }, Constants.LIGHTS_DELAY_IN_MILLIS);
     }
 }
