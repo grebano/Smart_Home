@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import com.maiot.smarthome.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,7 +39,6 @@ public class LightsService extends Service implements WifiScanCompleted {
     private DeviceList deviceList = null;
 
     private Timer timer;
-
 
     @Nullable
     @Override
@@ -69,7 +67,7 @@ public class LightsService extends Service implements WifiScanCompleted {
         isRunning = true;
 
         timer = new Timer();
-        startCheckingTime();
+        startCheckingLevel();
 
         addNotification();
         return START_STICKY;
@@ -109,7 +107,7 @@ public class LightsService extends Service implements WifiScanCompleted {
                     if(deviceList.getLightsList() != null) {
                         for (SmartDevice smartDevice : deviceList.getLightsList()) {
                             if(smartDevice != null) {
-                                if (Objects.equals(smartDevice.getNearestRouterMac(), net.getBssid())) {
+                                if (smartDevice.getNearestRouterMac().equals(net.getBssid())) {
                                     if (net.getLevel() > Constants.WIFI_NEAR_THRESHOLD && !smartDevice.getLocalStatus()) {
                                         smartDevice.setStatus(true);
                                     }
@@ -117,6 +115,8 @@ public class LightsService extends Service implements WifiScanCompleted {
                                         smartDevice.setStatus(false);
                                     }
                                 }
+                                else
+                                    Log.i(TAG,"no mac device");
                             }
                         }
                     }
@@ -127,7 +127,7 @@ public class LightsService extends Service implements WifiScanCompleted {
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
-    private void startCheckingTime() {
+    private void startCheckingLevel() {
         // si setta l'azione che il timer deve schedulare
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -135,7 +135,7 @@ public class LightsService extends Service implements WifiScanCompleted {
                 wifiManager.startScan();
             }
         };
-        // si schedula un'azione ogni 3s senza delay iniziale
-        timer.scheduleAtFixedRate(timerTask,Constants.LIGHTS_TIMER_DELAY_IN_MILLIS,Constants.LIGHTS_TIMER_PERIOD_IN_MILLIS);
+        // si schedula un'azione ogni 3 senza delay iniziale
+        timer.scheduleAtFixedRate(timerTask,0,Constants.LIGHTS_DELAY_IN_MILLIS);
     }
 }

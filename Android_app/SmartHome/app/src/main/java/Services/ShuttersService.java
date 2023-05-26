@@ -12,12 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.maiot.smarthome.R;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -25,7 +19,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Devices.DeviceList;
-import Interfaces.HttpRequestCompleted;
 import Miscellaneous.Constants;
 
 
