@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import Interfaces.WifiScanCompleted;
 import Miscellaneous.Constants;
+import Network.Net;
 
 public class WifiReceiver extends BroadcastReceiver {
 
@@ -25,6 +27,7 @@ public class WifiReceiver extends BroadcastReceiver {
     //oggetto dell'interfaccia che usiamo per restituire la stringa alla main activity
     public WifiReceiver(WifiManager wifiManager, WifiScanCompleted wifiScanCompleted)
     {
+        Log.i(TAG,"wifiReceiver");
         this.wifiManager = wifiManager;
         this.wifiScanCompleted = wifiScanCompleted;
     }
@@ -41,24 +44,25 @@ public class WifiReceiver extends BroadcastReceiver {
             if (a.level > b.level){
                 return -1;
             }
-            else{
+            else if (a.level < b.level){
                 return 1;
             }
+            else
+                return 0;
         };
         Collections.sort(wifiScan, comparator);
 
         // lista di stringhe che ritorno come output
-        ArrayList<String[]> nets = null;
+        ArrayList<Net> nets = new ArrayList<>();
 
         // aggiungo alla lista il Mac e la potenza dei router
         for(int i = 0; i < wifiScan.size(); i++){
-            if(wifiScan.get(i).SSID == Constants.SSID) {
-                String lev = "" + wifiScan.get(i).level;
-                String[] net = new String[]{wifiScan.get(i).BSSID, lev};
+            if(Objects.equals(wifiScan.get(i).SSID, Constants.SSID)) {
+                Net net = new Net(wifiScan.get(i).SSID, wifiScan.get(i).BSSID, wifiScan.get(i).level);
                 nets.add(net);
+                Log.i(TAG,net.getBssid() + " - " + net.getLevel());
             }
         }
-        Log.i(TAG,"res");
         wifiScanCompleted.onWifiScanCompleted(nets);
     }
 }

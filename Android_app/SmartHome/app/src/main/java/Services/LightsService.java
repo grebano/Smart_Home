@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.util.Log;
@@ -14,11 +15,18 @@ import androidx.annotation.Nullable;
 
 import com.maiot.smarthome.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Devices.DeviceList;
+import Devices.SmartDevice;
 import Interfaces.WifiScanCompleted;
 import Miscellaneous.Constants;
+import Network.Net;
 import Wifi.WifiReceiver;
 
 
@@ -33,6 +41,8 @@ public class LightsService extends Service implements WifiScanCompleted {
 
     private DeviceList deviceList = null;
 
+    private Timer timer;
+
 
     @Nullable
     @Override
@@ -43,17 +53,25 @@ public class LightsService extends Service implements WifiScanCompleted {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.i(TAG,"Service - OnCreate");
 
         wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiReceiver = new WifiReceiver(wifiManager, this);
+
+        registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        //quando la scansione è completata viene lanciato l'intento a cui agganciamo il BR
 
         deviceList = new DeviceList(null);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        wifiManager.startScan();
+        Log.i(TAG,"Service - onStartCommand");
+
         isRunning = true;
+
+        timer = new Timer();
+        startCheckingTime();
 
         addNotification();
         return START_STICKY;
@@ -63,6 +81,7 @@ public class LightsService extends Service implements WifiScanCompleted {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(wifiReceiver);
         isRunning = false;
     }
 
@@ -75,7 +94,7 @@ public class LightsService extends Service implements WifiScanCompleted {
         Notification.Builder notification = null;
         notification = new Notification.Builder(
                 this, NOTIFICATION_CHANNEL_ID)
-                .setContentText("MyShuttersService is running")
+                .setContentText("MyLightsService is running")
                 .setContentTitle("Service is running")
                 .setOngoing(true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground);
@@ -85,30 +104,41 @@ public class LightsService extends Service implements WifiScanCompleted {
 
     // si ricercano i router più vicini al telefono
     @Override
-    public void onWifiScanCompleted(ArrayList<String[]> networks) {
-        // TODO implementare una versione con le due soglie di isteresi
-        for(int i = 0; i < networks.size(); i++)
-        {
-            if(Integer.parseInt(networks.get(i)[1]) > Constants.WIFI_THRESHOLD)
-            {
-                if(deviceList.getLightsList() != null) {
-                    for (int j = 0; j < deviceList.getLightsList().length; j++) {
-
-                        // accensione luci nelle prossimità
-                        if (deviceList.getLightsList()[i].getNearestRouterMac() == networks.get(i)[0]) {
-                            deviceList.getLightsList()[i].setStatus(true);
-                        }
-                        // spegnimento delle altre
-                        else {
-                            deviceList.getLightsList()[i].setStatus(false);
+    public void onWifiScanCompleted(ArrayList<Net> networks) {
+        if(networks != null) {
+            for (Net net : networks) {
+                if(net != null) {
+                    for(SmartDevice smartDevice : deviceList.getLightsList()) {
+                        if(smartDevice.getNearestRouterMac() == net.getBssid())
+                        {
+                            if(net.getLevel() > -50 && !smartDevice.getLocalStatus()) {
+                                smartDevice.setStatus(true);
+                            }
+                            else if(net.getLevel() < -60 && smartDevice.getLocalStatus()){
+                                smartDevice.setStatus(false);
+                            }
                         }
                     }
                 }
                 else {
-                    Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
             }
         }
-        wifiManager.startScan();
+        else {
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        }
+    }
+
+    private void startCheckingTime() {
+        // si setta l'azione che il timer deve schedulare
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                wifiManager.startScan();
+            }
+        };
+        // si schedula un'azione ogni 3s senza delay iniziale
+        timer.scheduleAtFixedRate(timerTask,Constants.LIGHTS_TIMER_DELAY_IN_MILLIS,Constants.LIGHTS_TIMER_PERIOD_IN_MILLIS);
     }
 }

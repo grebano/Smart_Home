@@ -127,7 +127,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 }
                 else
                 {
-                    Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                     break;
                 }
             }
@@ -242,7 +242,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 }
             }
             else {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
         }
         else {
@@ -279,7 +279,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             }
         }
         else {
-            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
         }
     }
 
@@ -297,7 +297,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         }
         else
         {
-            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             return 0;
         }
     }

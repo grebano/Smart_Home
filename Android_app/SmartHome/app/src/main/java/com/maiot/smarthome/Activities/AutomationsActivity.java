@@ -72,7 +72,7 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             else
             {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
 
             if(deviceList.getLightsList() != null) {
@@ -82,7 +82,7 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             else
             {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
         });
     }
@@ -108,7 +108,7 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             else
             {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
 
             if(deviceList.getLightsList() != null) {
@@ -118,7 +118,7 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             else
             {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
         });
     }
@@ -136,7 +136,7 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             else
             {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
             if(deviceList.getLightsList() != null) {
                 for (int i = 0; i < deviceList.getLightsList().length; i++) {
@@ -149,7 +149,7 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             else
             {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
         });
     }
@@ -175,7 +175,7 @@ public class AutomationsActivity extends AppCompatActivity {
             }
             else
             {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
         });
     }

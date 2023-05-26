@@ -97,7 +97,7 @@ public class ShuttersService extends Service {
                 }
                 else
                 {
-                    Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
             }
         };

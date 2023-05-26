@@ -126,7 +126,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                 }
                 else
                 {
-                    Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                     break;
                 }
             }
@@ -239,7 +239,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                 }
             }
             else {
-                Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
         }
         else
@@ -276,7 +276,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             }
         }
         else {
-            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
         }
     }
 
@@ -294,7 +294,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         }
         else
         {
-            Log.e(TAG, String.valueOf(R.string.NULL_OBJECT));
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             return 0;
         }
     }
