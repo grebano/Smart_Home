@@ -110,12 +110,11 @@ public class LightsService extends Service implements WifiScanCompleted {
                         for (SmartDevice smartDevice : deviceList.getLightsList()) {
                             if(smartDevice != null) {
                                 if (Objects.equals(smartDevice.getNearestRouterMac(), net.getBssid())) {
-                                    if (net.getLevel() > -50 && !smartDevice.getLocalStatus()) {
+                                    if (net.getLevel() > Constants.WIFI_NEAR_THRESHOLD && !smartDevice.getLocalStatus()) {
                                         smartDevice.setStatus(true);
-                                        return;
-                                    } else if (net.getLevel() < -60 && smartDevice.getLocalStatus()) {
+                                    }
+                                    else if (net.getLevel() < Constants.WIFI_FAR_THRESHOLD && smartDevice.getLocalStatus()) {
                                         smartDevice.setStatus(false);
-                                        return;
                                     }
                                 }
                             }
@@ -123,6 +122,7 @@ public class LightsService extends Service implements WifiScanCompleted {
                     }
                 }
             }
+            return;
         }
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }

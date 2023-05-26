@@ -17,6 +17,7 @@ public class Constants {
     public static final int NIGHT_BEGINNING_TIME = 18;
     public static final int MORNING_BEGINNING_TIME = 7;
     //--------------------------------------------------------
-    public static final int WIFI_THRESHOLD = -50;
+    public static final int WIFI_NEAR_THRESHOLD = -50;
+    public static final int WIFI_FAR_THRESHOLD = -60;
 
 }
