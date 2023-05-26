@@ -2,7 +2,7 @@ package Miscellaneous;
 
 public class IpAddr_MacAddr {
     //----------------------------------------------------------
-    public static final String SHUTTER1_IP = "192.168.1.9";
+    public static final String SHUTTER1_IP = "192.168.1.10";
     public static final String SHUTTER1_MAC = "";
     //----------------------------------------------------------
     public static final String SHUTTER2_IP = "";
@@ -12,8 +12,8 @@ public class IpAddr_MacAddr {
     public static final String SHUTTER3_MAC = "";
     //----------------------------------------------------------
     //----------------------------------------------------------
-    public static final String LAMP1_IP = "";
-    public static final String LAMP1_MAC = "";
+    public static final String LAMP1_IP = "192.168.1.10";
+    public static final String LAMP1_MAC = "bs:b7:09:23:92:2d";
     //----------------------------------------------------------
     public static final String LAMP2_IP = "";
     public static final String LAMP2_MAC = "";

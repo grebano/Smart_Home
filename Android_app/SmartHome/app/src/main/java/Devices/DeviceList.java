@@ -15,11 +15,12 @@ public class DeviceList {
     {
         //--------------------Shutters-----------------------------------
         shutter1 = new SmartDevice(IpAddr_MacAddr.SHUTTER1_IP, IpAddr_MacAddr.SHUTTER1_MAC, httpRequestCompleted);
-        shutterList = new SmartDevice[] {shutter1};
-
+       // shutterList = new SmartDevice[] {shutter1};
+        shutterList = new SmartDevice[] {};
         //--------------------Lamps--------------------------------------
-//        lamp1 = new SmartDevice(IpAddr_MacAddr.LAMP1_IP, IpAddr_MacAddr.LAMP1_MAC, httpRequestCompleted);
-        lightsList = new SmartDevice[] {};
+        lamp1 = new SmartDevice(IpAddr_MacAddr.LAMP1_IP, IpAddr_MacAddr.LAMP1_MAC, httpRequestCompleted);
+      //  lightsList = new SmartDevice[] {};
+        lightsList = new SmartDevice[] {lamp1};
     }
     public SmartDevice[] getShutterList() {
         return shutterList;

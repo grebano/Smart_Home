@@ -67,18 +67,13 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
         // inizializzazione delle views e set dei click Listener
         initViews();
-        onImages = new ImageView[] {imgLamp1_Off, imgLamp2_Off, imgLamp3_Off};
-        offImages = new ImageView[] {imgLamp1_On, imgLamp2_On, imgLamp3_On};
+        offImages = new ImageView[] {imgLamp1_Off, imgLamp2_Off, imgLamp3_Off};
+        onImages = new ImageView[] {imgLamp1_On, imgLamp2_On, imgLamp3_On};
         buttons = new Button[] {btt_Lamp_Switch1, btt_Lamp_Switch2, btt_Lamp_Switch3};
         layouts = new LinearLayout[] {ll_Lamp_Switch1, ll_Lamp_Switch2, ll_Lamp_Switch3};
 
         // inizializzazione immagini e pulsanti in base allo stato reale
         setImageStatus(true);
-
-
-
-        // inizializzazione delle views e set dei click Listener
-        initViews();
     }
 
     private void initViews()
@@ -104,8 +99,6 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         lamp1StatusViews();
         lamp2StatusViews();
         lamp3StatusViews();
-
-
 
     }
     private void manualModeViews(){
@@ -144,6 +137,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
             bttLightsModeAuto.setClickable(true);
+
+            // aggiornamento stato immagini e pulsanti
+            setImageStatus(true);
 
             // si controlla che il servizio stia girando, nel caso lo si arresta
             if(LightsService.isRunning) {
@@ -234,14 +230,14 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                     if (deviceList.getLightsList()[i].getLocalStatus()) {
                         onImages[i].setVisibility(View.VISIBLE);
                         offImages[i].setVisibility(View.INVISIBLE);
-                        buttons[i].setText("Close");
+                        buttons[i].setText("Turn Off");
                     }
 
                     // la lampada è spenta
                     else {
                         onImages[i].setVisibility(View.INVISIBLE);
                         offImages[i].setVisibility(View.VISIBLE);
-                        buttons[i].setText("Open");
+                        buttons[i].setText("Turn On");
                     }
                 }
             }

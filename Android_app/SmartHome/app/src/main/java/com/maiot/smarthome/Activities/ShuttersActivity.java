@@ -220,7 +220,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void setImageStatus(boolean withHttpRequest)
     {
         if(!withHttpRequest) {
-            if (deviceList.getLightsList() != null) {
+            if (deviceList.getShutterList() != null) {
                 // visibilità immagini stato e settaggio testo pulsanti
                 for (int i = 0; i < deviceList.getShutterList().length; i++) {
                     // la tapparella è aperta
@@ -244,7 +244,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         }
         else
         {
-            if (deviceList.getLightsList() != null) {
+            if (deviceList.getShutterList() != null) {
                 for (int i = 0; i < deviceList.getShutterList().length; i++) {
                     // richieste http /ping
                     deviceList.getShutterList()[i].getHttpStatus();
