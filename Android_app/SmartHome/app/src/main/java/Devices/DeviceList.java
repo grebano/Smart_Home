@@ -1,31 +1,67 @@
 package Devices;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+
 import Devices.SmartDevice;
 import Interfaces.HttpRequestCompleted;
 import Miscellaneous.Constants;
 import Miscellaneous.IpAddr_MacAddr;
 
 public class DeviceList {
+    private final String TAG = "DeviceList";
     private SmartDevice shutter1;
-    private SmartDevice shutterList[];
+    private ArrayList<SmartDevice> shutterList;
 
     private SmartDevice lamp1;
-    private SmartDevice lightsList[];
+    private ArrayList<SmartDevice> lightsList;
     public DeviceList(HttpRequestCompleted httpRequestCompleted)
     {
         //--------------------Shutters-----------------------------------
         shutter1 = new SmartDevice(IpAddr_MacAddr.SHUTTER1_IP, IpAddr_MacAddr.SHUTTER1_MAC, httpRequestCompleted);
-       // shutterList = new SmartDevice[] {shutter1};
-        shutterList = new SmartDevice[] {};
+        shutterList = new ArrayList<>();
+        checkOnlineShutters();
         //--------------------Lamps--------------------------------------
         lamp1 = new SmartDevice(IpAddr_MacAddr.LAMP1_IP, IpAddr_MacAddr.LAMP1_MAC, httpRequestCompleted);
-      //  lightsList = new SmartDevice[] {};
-        lightsList = new SmartDevice[] {lamp1};
+        lightsList = new ArrayList<>();
+        lightsList.add(lamp1);
+        checkOnlineLamps();
+
     }
-    public SmartDevice[] getShutterList() {
+    public ArrayList<SmartDevice> getShutterList() {
         return shutterList;
     }
-    public SmartDevice[] getLightsList() {
+    public ArrayList<SmartDevice> getLightsList() {
         return lightsList;
+    }
+
+    private void checkOnlineLamps(){
+        for(SmartDevice smartDevice : lightsList)
+        {
+            smartDevice.getHttpStatus();
+        }
+        for(SmartDevice smartDevice : lightsList)
+        {
+            if(!smartDevice.checkIfOnline())
+            {
+                lightsList.remove(smartDevice);
+                Log.i(TAG,"Lamp removed -> not online");
+            }
+        }
+    }
+    private void checkOnlineShutters(){
+        for(SmartDevice smartDevice : shutterList)
+        {
+            smartDevice.getHttpStatus();
+        }
+        for(SmartDevice smartDevice : shutterList)
+        {
+            if(!smartDevice.checkIfOnline())
+            {
+                shutterList.remove(smartDevice);
+                Log.i(TAG,"Shutter removed -> not online");
+            }
+        }
     }
 }

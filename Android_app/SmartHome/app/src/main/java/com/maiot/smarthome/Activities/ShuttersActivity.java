@@ -114,7 +114,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             for(LinearLayout linearLayout : layouts)
             {
                 if(deviceList.getShutterList() != null) {
-                    if (i < deviceList.getShutterList().length) {
+                    if (i < deviceList.getShutterList().size()) {
                         linearLayout.setVisibility(View.VISIBLE);
                         buttons[i].setVisibility(View.VISIBLE);
                         buttons[i].setClickable(true);
@@ -223,9 +223,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         if(!withHttpRequest) {
             if (deviceList.getShutterList() != null) {
                 // visibilità immagini stato e settaggio testo pulsanti
-                for (int i = 0; i < deviceList.getShutterList().length; i++) {
+                for (int i = 0; i < deviceList.getShutterList().size(); i++) {
                     // la tapparella è aperta
-                    if (deviceList.getShutterList()[i].getLocalStatus()) {
+                    if (deviceList.getShutterList().get(i).getLocalStatus()) {
                         openImages[i].setVisibility(View.VISIBLE);
                         closedImages[i].setVisibility(View.INVISIBLE);
                         buttons[i].setText("Close");
@@ -248,9 +248,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         else
         {
             if (deviceList.getShutterList() != null) {
-                for (int i = 0; i < deviceList.getShutterList().length; i++) {
+                for (int i = 0; i < deviceList.getShutterList().size(); i++) {
                     // richieste http /ping
-                    deviceList.getShutterList()[i].getHttpStatus();
+                    deviceList.getShutterList().get(i).getHttpStatus();
                 }
             }
             else{
@@ -264,14 +264,14 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     {
         index -= 1;
         if (deviceList.getShutterList() != null) {
-            if (index < deviceList.getShutterList().length) {
+            if (index < deviceList.getShutterList().size()) {
                 // inversione dello stato della tapparella indicizzata
-                if (!deviceList.getShutterList()[index].getLocalStatus()) {
+                if (!deviceList.getShutterList().get(index).getLocalStatus()) {
 
-                    deviceList.getShutterList()[index].setStatus(true);
+                    deviceList.getShutterList().get(index).setStatus(true);
                 }
                 else {
-                    deviceList.getShutterList()[index].setStatus(false);
+                    deviceList.getShutterList().get(index).setStatus(false);
                 }
                 return;
             }
@@ -282,7 +282,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private int checkShutterCount(boolean withToast)
     {
         if(deviceList.getShutterList() != null) {
-            int count = deviceList.getShutterList().length;
+            int count = deviceList.getShutterList().size();
             if(withToast) {
                 if (count == 0) {
                     // visualizzazione a schermo

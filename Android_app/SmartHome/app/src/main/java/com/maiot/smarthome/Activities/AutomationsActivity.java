@@ -139,12 +139,12 @@ public class AutomationsActivity extends AppCompatActivity {
                 Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
             if(deviceList.getLightsList() != null) {
-                for (int i = 0; i < deviceList.getLightsList().length; i++) {
+                for (int i = 0; i < deviceList.getLightsList().size(); i++) {
                     // la lampada 3 sarà quella in sala pesi
                     if (i == 2)
-                        deviceList.getLightsList()[i].setStatus(true);
+                        deviceList.getLightsList().get(i).setStatus(true);
                     else
-                        deviceList.getLightsList()[i].setStatus(false);
+                        deviceList.getLightsList().get(i).setStatus(false);
                 }
             }
             else

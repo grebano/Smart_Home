@@ -18,6 +18,7 @@ public class SmartDevice implements HttpRequestCompleted {
 
     private final String TAG = "SmartDevice";
     private boolean status;
+    private boolean isOnline;
     private String nearestRouterMac;
     private HttpRequests httpRequests = null;
 
@@ -71,17 +72,23 @@ public class SmartDevice implements HttpRequestCompleted {
     // Si aggiorna lo stato del dispositivo dopo una richiesta http
     @Override
     public void onHttpRequestCompleted(String response) {
-        if(response != null) {
+        if(response != null && !response.equals("")) {
+            this.isOnline = true;
             if (response.equals(Constants.ON_RESPONSE)) {
                 this.status = true;
+                return;
             }
             if (response.equals(Constants.OFF_RESPONSE)) {
                 this.status = false;
+                return;
             }
         }
-        else
-        {
-            Log.e(TAG,"Empty http Result");
-        }
+        this.isOnline = false;
+        Log.e(TAG,"Empty http Result");
+    }
+
+    public boolean checkIfOnline()
+    {
+        return this.isOnline;
     }
 }

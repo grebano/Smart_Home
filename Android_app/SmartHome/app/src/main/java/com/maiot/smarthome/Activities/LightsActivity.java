@@ -114,7 +114,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             {
                 if(deviceList.getLightsList() != null)
                 {
-                    if(i < deviceList.getLightsList().length) {
+                    if(i < deviceList.getLightsList().size()) {
                         linearLayout.setVisibility(View.VISIBLE);
                         buttons[i].setVisibility(View.VISIBLE);
                         buttons[i].setClickable(true);
@@ -226,9 +226,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         if(!withHttpRequest) {
             if (deviceList.getLightsList() != null) {
                 // visibilità immagini stato e settaggio testo pulsanti
-                for (int i = 0; i < deviceList.getLightsList().length; i++) {
+                for (int i = 0; i < deviceList.getLightsList().size(); i++) {
                     // la lampada è accesa
-                    if (deviceList.getLightsList()[i].getLocalStatus()) {
+                    if (deviceList.getLightsList().get(i).getLocalStatus()) {
                         onImages[i].setVisibility(View.VISIBLE);
                         offImages[i].setVisibility(View.INVISIBLE);
                         buttons[i].setText("Turn Off");
@@ -250,9 +250,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         }
         else {
             if (deviceList.getLightsList() != null) {
-                for (int i = 0; i < deviceList.getLightsList().length; i++) {
+                for (int i = 0; i < deviceList.getLightsList().size(); i++) {
                     // richieste http /ping
-                    deviceList.getLightsList()[i].getHttpStatus();
+                    deviceList.getLightsList().get(i).getHttpStatus();
                 }
             }
             else{
@@ -267,14 +267,14 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     {
         index -= 1;
         if (deviceList.getLightsList() != null) {
-            if (index < deviceList.getLightsList().length) {
+            if (index < deviceList.getLightsList().size()) {
                 // inversione dello stato della lampada indicizzata
-                if (!deviceList.getLightsList()[index].getLocalStatus()) {
+                if (!deviceList.getLightsList().get(index).getLocalStatus()) {
 
-                    deviceList.getLightsList()[index].setStatus(true);
+                    deviceList.getLightsList().get(index).setStatus(true);
                 }
                 else {
-                    deviceList.getLightsList()[index].setStatus(false);
+                    deviceList.getLightsList().get(index).setStatus(false);
                 }
                 return;
             }
@@ -285,7 +285,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private int checkLightsCount(boolean withToast)
     {
         if(deviceList.getLightsList() != null) {
-            int count = deviceList.getLightsList().length;
+            int count = deviceList.getLightsList().size();
             if(withToast) {
                 if (count == 0) {
                     // visualizzazione a schermo
