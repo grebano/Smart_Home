@@ -12,6 +12,7 @@ import com.maiot.smarthome.R;
 
 import Devices.DeviceList;
 import Devices.SmartDevice;
+import Miscellaneous.Constants;
 import Services.ShuttersService;
 
 public class AutomationsActivity extends AppCompatActivity {
@@ -58,129 +59,120 @@ public class AutomationsActivity extends AppCompatActivity {
 
     private void dayMode() {
         bttDayMode.setOnClickListener(view -> {
-            // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE_ON, Toast.LENGTH_SHORT).show();
+            if(thereAreAvailableDevices(true)) {
+                // visualizzazione a schermo
+                Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE_ON, Toast.LENGTH_SHORT).show();
 
-            // si controlla che il servizio stia girando, nel caso lo si arresta
-            if(ShuttersService.isRunning) {
-                stopService(new Intent(this, ShuttersService.class));
-            }
-            else{
-                Log.i(TAG,"ShuttersService is not running");
-            }
-
-            // apertura tapparelle e spegnimento luci
-            if(deviceList.getShutterList() != null) {
-                for (SmartDevice shutter : deviceList.getShutterList()) {
-                    shutter.setStatus(true);
+                // si controlla che il servizio stia girando, nel caso lo si arresta
+                if (ShuttersService.isRunning) {
+                    stopService(new Intent(this, ShuttersService.class));
+                } else {
+                    Log.i(TAG, "ShuttersService is not running");
                 }
-            }
-            else
-            {
-                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-            }
 
-            if(deviceList.getLightsList() != null) {
-                for (SmartDevice light : deviceList.getLightsList()) {
-                    light.setStatus(false);
+                // apertura tapparelle e spegnimento luci
+                if (deviceList.getShutterList() != null) {
+                    for (SmartDevice shutter : deviceList.getShutterList()) {
+                        shutter.setStatus(true);
+                    }
+                } else {
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
-            }
-            else
-            {
-                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+
+                if (deviceList.getLightsList() != null) {
+                    for (SmartDevice light : deviceList.getLightsList()) {
+                        light.setStatus(false);
+                    }
+                } else {
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+                }
             }
         });
     }
 
     private void nightMode() {
         bttNightMode.setOnClickListener(view -> {
-            // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE_ON, Toast.LENGTH_SHORT).show();
+            if(thereAreAvailableDevices(true)) {
+                // visualizzazione a schermo
+                Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE_ON, Toast.LENGTH_SHORT).show();
 
-            // si controlla che il servizio stia girando, nel caso lo si arresta
-            if(ShuttersService.isRunning) {
-                stopService(new Intent(this, ShuttersService.class));
-            }
-            else{
-                Log.i(TAG,"ShuttersService is not running");
-            }
-            
-            // chiusura tapparelle e spegnimento luci
-            if(deviceList.getShutterList() != null) {
-                for (SmartDevice shutter : deviceList.getShutterList()) {
-                    shutter.setStatus(false);
+                // si controlla che il servizio stia girando, nel caso lo si arresta
+                if (ShuttersService.isRunning) {
+                    stopService(new Intent(this, ShuttersService.class));
+                } else {
+                    Log.i(TAG, "ShuttersService is not running");
                 }
-            }
-            else
-            {
-                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-            }
 
-            if(deviceList.getLightsList() != null) {
-                for (SmartDevice light : deviceList.getLightsList()) {
-                    light.setStatus(false);
+                // chiusura tapparelle e spegnimento luci
+                if (deviceList.getShutterList() != null) {
+                    for (SmartDevice shutter : deviceList.getShutterList()) {
+                        shutter.setStatus(false);
+                    }
+                } else {
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
-            }
-            else
-            {
-                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+
+                if (deviceList.getLightsList() != null) {
+                    for (SmartDevice light : deviceList.getLightsList()) {
+                        light.setStatus(false);
+                    }
+                } else {
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+                }
             }
         });
     }
 
     private void homeGymMode() {
         bttHomeGymMode.setOnClickListener(view -> {
-            // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE_ON, Toast.LENGTH_SHORT).show();
+            if(thereAreAvailableDevices(true)) {
+                // visualizzazione a schermo
+                Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE_ON, Toast.LENGTH_SHORT).show();
 
-            if(deviceList.getShutterList() != null) {
-                // chiusura tapparelle e accensione luce sala pesi
-                for (SmartDevice shutter : deviceList.getShutterList()) {
-                    shutter.setStatus(false);
+                if (deviceList.getShutterList() != null) {
+                    // chiusura tapparelle e accensione luce sala pesi
+                    for (SmartDevice shutter : deviceList.getShutterList()) {
+                        shutter.setStatus(false);
+                    }
+                } else {
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
-            }
-            else
-            {
-                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-            }
-            if(deviceList.getLightsList() != null) {
-                for (int i = 0; i < deviceList.getLightsList().size(); i++) {
-                    // la lampada 3 sarà quella in sala pesi
-                    if (i == 2)
-                        deviceList.getLightsList().get(i).setStatus(true);
-                    else
-                        deviceList.getLightsList().get(i).setStatus(false);
+                if (deviceList.getLightsList() != null) {
+                    for (int i = 0; i < deviceList.getLightsList().size(); i++) {
+                        // la lampada 3 sarà quella in sala pesi
+                        if (i == 2)
+                            deviceList.getLightsList().get(i).setStatus(true);
+                        else
+                            deviceList.getLightsList().get(i).setStatus(false);
+                    }
+                } else {
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
-            }
-            else
-            {
-                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
         });
     }
 
     private void vacationMode() {
         bttVacationMode.setOnClickListener(view -> {
-            // visualizzazione a schermo
-            Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE_ON, Toast.LENGTH_SHORT).show();
+            if(thereAreAvailableDevices(true)) {
+                // visualizzazione a schermo
+                Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE_ON, Toast.LENGTH_SHORT).show();
 
-            // tapparelle che simulano la presenza di persone
+                // tapparelle che simulano la presenza di persone
 
-            // si controlla che il servizio non stia già girando e lo si lancia
-            if(!ShuttersService.isRunning) {
-                startForegroundService(new Intent(this, ShuttersService.class));
-            }
-            else{
-                Log.i(TAG,"ShuttersService is already running");
-            }
-            if(deviceList.getLightsList() != null) {
-                for (SmartDevice light : deviceList.getLightsList()) {
-                    light.setStatus(false);
+                // si controlla che il servizio non stia già girando e lo si lancia
+                if (!ShuttersService.isRunning) {
+                    startForegroundService(new Intent(this, ShuttersService.class));
+                } else {
+                    Log.i(TAG, "ShuttersService is already running");
                 }
-            }
-            else
-            {
-                Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+                if (deviceList.getLightsList() != null) {
+                    for (SmartDevice light : deviceList.getLightsList()) {
+                        light.setStatus(false);
+                    }
+                } else {
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+                }
             }
         });
     }
@@ -189,6 +181,32 @@ public class AutomationsActivity extends AppCompatActivity {
         bttAutomationsBack.setOnClickListener(view -> {
             finish();
         });
+    }
+
+    private boolean thereAreAvailableDevices(boolean withToast)
+    {
+        boolean lamps = false;
+        boolean shutters = false;
+        if(deviceList.getLightsList() != null) {
+            if (deviceList.getLightsList().size() > 0)
+                lamps = true;
+        }
+        if(deviceList.getShutterList() != null) {
+            if (deviceList.getShutterList().size() > 0)
+                shutters = true;
+        }
+        if(withToast) {
+            if((!lamps) && (!shutters)) {
+               Toast.makeText(AutomationsActivity.this, "there are no devices available", Toast.LENGTH_SHORT).show();
+            }
+            else if(!lamps) {
+                Toast.makeText(AutomationsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(AutomationsActivity.this, "there are no shutters available", Toast.LENGTH_SHORT).show();
+            }
+        }
+        return (lamps || shutters);
     }
 }
 
