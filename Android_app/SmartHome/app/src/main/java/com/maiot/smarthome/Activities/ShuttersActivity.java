@@ -292,7 +292,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             if(withToast) {
                 if (count == 0) {
                     // visualizzazione a schermo
-                    Toast.makeText(ShuttersActivity.this, "there are no shutters available", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShuttersActivity.this, "there are no available shutters", Toast.LENGTH_SHORT).show();
                 }
             }
             return count;

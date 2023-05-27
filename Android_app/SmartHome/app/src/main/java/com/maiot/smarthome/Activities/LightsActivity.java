@@ -295,7 +295,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             if(withToast) {
                 if (count == 0) {
                     // visualizzazione a schermo
-                    Toast.makeText(LightsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LightsActivity.this, "there are no available lamps", Toast.LENGTH_SHORT).show();
                 }
             }
             return count;

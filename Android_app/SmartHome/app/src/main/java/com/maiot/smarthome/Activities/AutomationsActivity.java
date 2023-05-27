@@ -197,13 +197,13 @@ public class AutomationsActivity extends AppCompatActivity {
         }
         if(withToast) {
             if((!lamps) && (!shutters)) {
-               Toast.makeText(AutomationsActivity.this, "there are no devices available", Toast.LENGTH_SHORT).show();
+               Toast.makeText(AutomationsActivity.this, "there are no available devices", Toast.LENGTH_SHORT).show();
             }
             else if(!lamps) {
-                Toast.makeText(AutomationsActivity.this, "there are no lamps available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AutomationsActivity.this, "there are no available lamps", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(AutomationsActivity.this, "there are no shutters available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AutomationsActivity.this, "there are no available shutters", Toast.LENGTH_SHORT).show();
             }
         }
         return (lamps || shutters);
