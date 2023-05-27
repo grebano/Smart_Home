@@ -254,4 +254,17 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/bttLightsBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textSize="15dp"
+        android:textColor="@color/textColor"
+        android:fontFamily="monospace"
+        android:clickable="true"
+        android:backgroundTint="@color/ButtonBackground"
+        android:layout_marginTop="185dp"
+        android:layout_marginLeft="100dp"/>
+
 </LinearLayout>

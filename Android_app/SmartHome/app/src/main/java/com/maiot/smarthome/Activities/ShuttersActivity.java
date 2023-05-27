@@ -38,6 +38,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private Button btt_Shutter_Switch2 = null;
     private Button btt_Shutter_Switch3 = null;
 
+    // bottone per tornare all main activity
+    private Button bttShuttersBack = null;
+
     // immagini dello stato delle tapparelle
     private ImageView imgShut1_open = null;
     private ImageView imgShut1_closed = null;
@@ -101,6 +104,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         shutter1StatusViews();
         shutter2StatusViews();
         shutter3StatusViews();
+
+        // settaggio click listener pulsante "indietro"
+        goBackButton();
 
     }
     private void manualModeViews(){
@@ -293,6 +299,13 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         }
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
         return 0;
+    }
+
+    private void goBackButton(){
+        bttShuttersBack = findViewById(R.id.bttShuttersBack);
+        bttShuttersBack.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     @Override

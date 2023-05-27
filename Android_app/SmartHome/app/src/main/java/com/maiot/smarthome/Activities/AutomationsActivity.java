@@ -23,6 +23,9 @@ public class AutomationsActivity extends AppCompatActivity {
     private Button bttHomeGymMode = null;
     private Button bttVacationMode = null;
 
+    // bottone per tornare alla main activity
+    private Button bttAutomationsBack = null;
+
     private DeviceList deviceList = null;
 
 
@@ -48,6 +51,8 @@ public class AutomationsActivity extends AppCompatActivity {
         homeGymMode();
         bttVacationMode = findViewById(R.id.bttVacationMode);
         vacationMode();
+        bttAutomationsBack = findViewById((R.id.bttAutomationsBack));
+        goBackButton();
 
     }
 
@@ -177,6 +182,12 @@ public class AutomationsActivity extends AppCompatActivity {
             {
                 Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
             }
+        });
+    }
+
+    private void goBackButton(){
+        bttAutomationsBack.setOnClickListener(view -> {
+            finish();
         });
     }
 }

@@ -36,6 +36,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private Button btt_Lamp_Switch2 = null;
     private Button btt_Lamp_Switch3 = null;
 
+    // bottone per tornare alla main activity
+    private Button bttLightsBack = null;
+
     // immagini dello stato delle lampade
     private ImageView imgLamp1_On = null;
     private ImageView imgLamp1_Off = null;
@@ -100,6 +103,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         lamp1StatusViews();
         lamp2StatusViews();
         lamp3StatusViews();
+
+        // settaggio click listeners pulsante "indietro"
+        goBackButton();
 
     }
     private void manualModeViews(){
@@ -296,6 +302,13 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         }
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
         return 0;
+    }
+
+    private void goBackButton(){
+        bttLightsBack = findViewById(R.id.bttLightsBack);
+        bttLightsBack.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     @Override
