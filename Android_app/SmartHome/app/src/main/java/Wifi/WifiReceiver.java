@@ -60,7 +60,7 @@ public class WifiReceiver extends BroadcastReceiver {
                 if (Objects.equals(wifiScan.get(i).SSID, Constants.SSID)) {
                     Net net = new Net(wifiScan.get(i).SSID, wifiScan.get(i).BSSID, wifiScan.get(i).level);
                     nets.add(net);
-                    Log.i(TAG, "net: " + i + " " + net.getBssid() + " - " + net.getLevel());
+                    Log.i(TAG, "net: " + i + " " + net.getBssid() + " -> " + net.getLevel());
                 }
             }
         }

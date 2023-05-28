@@ -1,5 +1,6 @@
 package Devices;
 
+import android.os.Handler;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -37,31 +38,48 @@ public class DeviceList {
     }
 
     private void checkOnlineLamps(){
-        for(SmartDevice smartDevice : lightsList)
-        {
-            smartDevice.getHttpStatus();
-        }
-        for(SmartDevice smartDevice : lightsList)
-        {
-            if(!smartDevice.checkIfOnline())
-            {
-                lightsList.remove(smartDevice);
-                Log.i(TAG,"Lamp removed -> not online");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                for(SmartDevice smartDevice : lightsList)
+                {
+                    smartDevice.getHttpStatus();
+                }
+                for(SmartDevice smartDevice : lightsList)
+                {
+                    if(!smartDevice.checkIfOnline())
+                    {
+                        lightsList.remove(smartDevice);
+                        Log.i(TAG,"Lamp removed -> not online");
+                    }
+                }
             }
-        }
+        }, Constants.DEVICE_ONLINE_DELAY);
     }
+
+
     private void checkOnlineShutters(){
-        for(SmartDevice smartDevice : shutterList)
-        {
-            smartDevice.getHttpStatus();
-        }
-        for(SmartDevice smartDevice : shutterList)
-        {
-            if(!smartDevice.checkIfOnline())
-            {
-                shutterList.remove(smartDevice);
-                Log.i(TAG,"Shutter removed -> not online");
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                for(SmartDevice smartDevice : shutterList)
+                {
+                    smartDevice.getHttpStatus();
+                }
+                for(SmartDevice smartDevice : shutterList)
+                {
+                    if(!smartDevice.checkIfOnline())
+                    {
+                        shutterList.remove(smartDevice);
+                        Log.i(TAG,"Shutter removed -> not online");
+                    }
+                }
             }
-        }
+        }, Constants.DEVICE_ONLINE_DELAY);
     }
 }

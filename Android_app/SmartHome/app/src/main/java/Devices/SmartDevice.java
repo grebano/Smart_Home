@@ -18,7 +18,7 @@ public class SmartDevice implements HttpRequestCompleted {
 
     private final String TAG = "SmartDevice";
     private boolean status;
-    private boolean isOnline;
+    private boolean isOnline = false;
     private String nearestRouterMac;
     private HttpRequests httpRequests = null;
 
