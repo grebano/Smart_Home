@@ -9,6 +9,7 @@
     android:layout_gravity="center_horizontal"
     android:background="@color/Background">
 
+    <!--Titolo -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
         android:layout_marginTop="40dp"
         />
 
+    <!-- Layout Luci -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +29,7 @@
         android:layout_marginTop="70dp"
         android:gravity="center">
 
+        <!-- Immagine lampada -->
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -34,6 +37,7 @@
             android:layout_marginRight="20dp"
             />
 
+        <!-- Bottone per gestire le luci -->
         <Button
             android:id="@+id/bttLights"
             android:layout_width="wrap_content"
@@ -46,6 +50,7 @@
             />
     </LinearLayout>
 
+    <!-- Layout Tapparelle -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +58,7 @@
         android:layout_marginTop="40dp"
         android:gravity="center">
 
+        <!-- Immagine tapparelle -->
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -60,6 +66,7 @@
             android:layout_marginRight="20dp"
             />
 
+        <!-- Bottone per gestire le tapparelle -->
         <Button
             android:id="@+id/bttShutters"
             android:layout_width="wrap_content"
@@ -72,6 +79,7 @@
             />
     </LinearLayout>
 
+    <!-- Layout Automazioni -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,6 +87,7 @@
         android:layout_marginTop="40dp"
         android:gravity="center">
 
+        <!-- Immagine automazioni -->
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -86,6 +95,7 @@
             android:layout_marginRight="20dp"
             />
 
+        <!-- Bottone per gestire le automazioni -->
         <Button
             android:id="@+id/bttAutomations"
             android:layout_width="wrap_content"

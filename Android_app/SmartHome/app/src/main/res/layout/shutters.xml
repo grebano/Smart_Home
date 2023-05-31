@@ -9,6 +9,7 @@
     android:layout_gravity="center_horizontal"
     android:background="@color/Background">
 
+    <!--Titolo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +37,7 @@
     </LinearLayout>
 
 
-
+    <!-- testo per la scelta della modalità -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +48,7 @@
         android:layout_marginTop="30dp"
         />
 
-    <!-- Mode options layout -->
+    <!-- Layout per i bottoni -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
         android:gravity="center"
         android:visibility="visible">
 
+        <!-- Bottone per la modalità automatica -->
         <Button
             android:id="@+id/bttShuttersModeAuto"
             android:layout_width="wrap_content"
@@ -67,6 +69,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Bottone per la modalità manuale -->
         <Button
             android:id="@+id/bttShuttersModeManual"
             android:layout_width="wrap_content"
@@ -80,6 +83,7 @@
             />
     </LinearLayout>
 
+    <!-- testo per la descrizione delle modalità -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,6 +94,7 @@
         android:layout_marginTop="15dp"
         />
 
+    <!-- testo per la descrizione delle modalità -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,7 +105,7 @@
         android:layout_marginTop="10dp"
         />
 
-    <!-- Shutter 1 layout -->
+    <!-- Layout tapparella 1 -->
     <LinearLayout
         android:id="@+id/ll_Shutter_Switch1"
         android:layout_width="match_parent"
@@ -110,6 +115,7 @@
         android:gravity="center"
         android:visibility="invisible">
 
+        <!-- testo tapparella 1 -->
         <TextView
             android:id="@+id/tv_Shutter_Switch1"
             android:layout_width="wrap_content"
@@ -121,6 +127,7 @@
             android:layout_marginRight="10dp"
             />
 
+        <!-- Bottone per aprire e chiudere la tapparella 1 -->
         <Button
             android:id="@+id/btt_Shutter_Switch1"
             android:layout_width="wrap_content"
@@ -131,6 +138,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Immagine per la tapparella 1 chiusa-->
         <ImageView
             android:id="@+id/imgShut1_closed"
             android:layout_width="40dp"
@@ -140,6 +148,7 @@
             android:visibility="invisible"
             />
 
+        <!-- Immagine per la tapparella 1 aperta-->
         <ImageView
             android:id="@+id/imgShut1_open"
             android:layout_width="40dp"
@@ -152,7 +161,7 @@
 
     </LinearLayout>
 
-    <!-- Shutter 2 layout -->
+    <!-- Layout tapparella 2 -->
     <LinearLayout
         android:id="@+id/ll_Shutter_Switch2"
         android:layout_width="match_parent"
@@ -162,6 +171,7 @@
         android:gravity="center"
         android:visibility="invisible">
 
+        <!-- testo tapparella 2 -->
         <TextView
             android:id="@+id/tv_Shutter_Switch2"
             android:layout_width="wrap_content"
@@ -173,6 +183,7 @@
             android:layout_marginRight="10dp"
             />
 
+        <!-- Bottone per aprire e chiudere la tapparella 2 -->
         <Button
             android:id="@+id/btt_Shutter_Switch2"
             android:layout_width="wrap_content"
@@ -183,6 +194,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Immagine per la tapparella 2 chiusa-->
         <ImageView
             android:id="@+id/imgShut2_closed"
             android:layout_width="40dp"
@@ -192,6 +204,7 @@
             android:visibility="invisible"
             />
 
+        <!-- Immagine per la tapparella 2 aperta-->
         <ImageView
             android:id="@+id/imgShut2_open"
             android:layout_width="40dp"
@@ -203,7 +216,7 @@
 
     </LinearLayout>
 
-    <!-- Shutter 3 layout -->
+    <!-- Layout tapparella 3 -->
     <LinearLayout
         android:id="@+id/ll_Shutter_Switch3"
         android:layout_width="match_parent"
@@ -213,6 +226,7 @@
         android:gravity="center"
         android:visibility="invisible">
 
+        <!-- testo tapparella 3 -->
         <TextView
             android:id="@+id/tv_Shutter_Switch3"
             android:layout_width="wrap_content"
@@ -224,6 +238,7 @@
             android:layout_marginRight="10dp"
             />
 
+        <!-- Bottone per aprire e chiudere la tapparella 3 -->
         <Button
             android:id="@+id/btt_Shutter_Switch3"
             android:layout_width="wrap_content"
@@ -234,6 +249,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Immagine per la tapparella 3 chiusa-->
         <ImageView
             android:id="@+id/imgShut3_closed"
             android:layout_width="40dp"
@@ -243,6 +259,7 @@
             android:visibility="invisible"
             />
 
+        <!-- Immagine per la tapparella 3 aperta-->
         <ImageView
             android:id="@+id/imgShut3_open"
             android:layout_width="40dp"
@@ -254,6 +271,7 @@
 
     </LinearLayout>
 
+    <!-- bottone per tornare indietro -->
     <Button
         android:id="@+id/bttShuttersBack"
         android:layout_width="wrap_content"

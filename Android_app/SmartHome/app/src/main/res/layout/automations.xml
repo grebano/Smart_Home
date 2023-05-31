@@ -9,6 +9,7 @@
     android:layout_gravity="center_horizontal"
     android:background="@color/Background">
 
+    <!--Titolo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +36,7 @@
 
     </LinearLayout>
 
-    <!-- Day Mode layout -->
+    <!-- Layout modalità giorno -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
         android:gravity="center"
         android:visibility="visible">
 
+        <!-- Bottone per la modalità giorno -->
         <Button
             android:id="@+id/bttDayMode"
             android:layout_width="wrap_content"
@@ -55,6 +57,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Immagine modalità giorno -->
         <ImageView
             android:id="@+id/imgDayMode"
             android:layout_width="40dp"
@@ -66,7 +69,7 @@
 
     </LinearLayout>
 
-    <!-- Night Mode layout -->
+    <!-- Layout modalità notte -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,6 +78,7 @@
         android:gravity="center"
         android:visibility="visible">
 
+        <!-- Bottone per la modalità notte -->
         <Button
             android:id="@+id/bttNightMode"
             android:layout_width="wrap_content"
@@ -86,6 +90,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Immagine modalità notte -->
         <ImageView
             android:id="@+id/imgNightMode"
             android:layout_width="40dp"
@@ -97,7 +102,7 @@
 
     </LinearLayout>
 
-    <!-- HomeGym Mode layout -->
+    <!-- Layout modalità home Gym -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,6 +111,7 @@
         android:gravity="center"
         android:visibility="visible">
 
+        <!-- Bottone per la modalità home Gym -->
         <Button
             android:id="@+id/bttHomeGymMode"
             android:layout_width="wrap_content"
@@ -117,6 +123,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Immagine modalità home Gym -->
         <ImageView
             android:id="@+id/imgHomeGymMode"
             android:layout_width="40dp"
@@ -128,7 +135,7 @@
 
     </LinearLayout>
 
-    <!-- Vacation Mode layout -->
+    <!-- Layout modalità vacanza -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -137,6 +144,7 @@
         android:gravity="center"
         android:visibility="visible">
 
+        <!-- Bottone per la modalità vacanza -->
         <Button
             android:id="@+id/bttVacationMode"
             android:layout_width="wrap_content"
@@ -148,6 +156,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Immagine modalità vacanza -->
         <ImageView
             android:id="@+id/imgVacationMode"
             android:layout_width="40dp"
@@ -159,6 +168,7 @@
 
     </LinearLayout>
 
+    <!-- Bottone per tornare indietro -->
     <Button
         android:id="@+id/bttAutomationsBack"
         android:layout_width="wrap_content"

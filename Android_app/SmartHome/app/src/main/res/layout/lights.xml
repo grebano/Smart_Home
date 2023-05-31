@@ -9,6 +9,7 @@
     android:layout_gravity="center_horizontal"
     android:background="@color/Background">
 
+    <!--Titolo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,8 +36,7 @@
 
     </LinearLayout>
 
-
-
+    <!-- Testo per la scelta della modalità -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         android:layout_marginTop="30dp"
         />
 
-    <!-- Mode options layout -->
+    <!-- Layout per i bottoni -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,6 +56,7 @@
         android:gravity="center"
         android:visibility="visible">
 
+        <!-- Bottone per la modalità automatica -->
         <Button
             android:id="@+id/bttLightsModeAuto"
             android:layout_width="wrap_content"
@@ -67,6 +68,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- Bottone per la modalità manuale -->
         <Button
             android:id="@+id/bttLightsModeManual"
             android:layout_width="wrap_content"
@@ -80,6 +82,7 @@
             />
     </LinearLayout>
 
+    <!-- Testo per la descrizione delle modalità -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,6 +93,7 @@
         android:layout_marginTop="15dp"
         />
 
+    <!-- Testo per la descrizione delle modalità -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,7 +104,7 @@
         android:layout_marginTop="10dp"
         />
 
-    <!-- Lamp 1 layout -->
+    <!-- Layout lampada 1 -->
     <LinearLayout
         android:id="@+id/ll_Lamp_Switch1"
         android:layout_width="match_parent"
@@ -110,6 +114,7 @@
         android:gravity="center"
         android:visibility="invisible">
 
+        <!-- Testo per la lampada 1 -->
         <TextView
             android:id="@+id/tv_Lamp_Switch1"
             android:layout_width="wrap_content"
@@ -121,6 +126,7 @@
             android:layout_marginRight="20dp"
             />
 
+        <!-- Bottone per accendere e spegnere la lampada 1 -->
         <Button
             android:id="@+id/btt_Lamp_Switch1"
             android:layout_width="wrap_content"
@@ -131,6 +137,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- immagine lampada 1 spenta -->
         <ImageView
             android:id="@+id/imgLamp1_Off"
             android:layout_width="40dp"
@@ -140,6 +147,7 @@
             android:visibility="invisible"
             />
 
+        <!-- immagine lampada 1 accesa -->
         <ImageView
             android:id="@+id/imgLamp1_On"
             android:layout_width="40dp"
@@ -149,10 +157,10 @@
             android:visibility="invisible"
             />
 
-
     </LinearLayout>
 
-    <!-- Lamp 2 layout -->
+
+    <!-- Layout lampada 2 -->
     <LinearLayout
         android:id="@+id/ll_Lamp_Switch2"
         android:layout_width="match_parent"
@@ -162,6 +170,7 @@
         android:gravity="center"
         android:visibility="invisible">
 
+        <!-- Testo per la lampada 2 -->
         <TextView
             android:id="@+id/tv_Lamp_Switch2"
             android:layout_width="wrap_content"
@@ -173,6 +182,7 @@
             android:layout_marginRight="20dp"
             />
 
+        <!-- Bottone per accendere e spegnere la lampada 2 -->
         <Button
             android:id="@+id/btt_Lamp_Switch2"
             android:layout_width="wrap_content"
@@ -183,6 +193,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- immagine lampada 2 spenta -->
         <ImageView
             android:id="@+id/imgLamp2_Off"
             android:layout_width="40dp"
@@ -192,6 +203,7 @@
             android:visibility="invisible"
             />
 
+        <!-- immagine lampada 2 accesa -->
         <ImageView
             android:id="@+id/imgLamp2_On"
             android:layout_width="40dp"
@@ -203,7 +215,7 @@
 
     </LinearLayout>
 
-    <!-- Lamp 3 layout -->
+    <!-- Layout lampada 3 -->
     <LinearLayout
         android:id="@+id/ll_Lamp_Switch3"
         android:layout_width="match_parent"
@@ -213,6 +225,7 @@
         android:gravity="center"
         android:visibility="invisible">
 
+        <!-- Testo per la lampada 3 -->
         <TextView
             android:id="@+id/tv_Lamp_Switch3"
             android:layout_width="wrap_content"
@@ -224,6 +237,7 @@
             android:layout_marginRight="20dp"
             />
 
+        <!-- Bottone per accendere e spegnere la lampada 3 -->
         <Button
             android:id="@+id/btt_Lamp_Switch3"
             android:layout_width="wrap_content"
@@ -234,6 +248,7 @@
             android:fontFamily="monospace"
             />
 
+        <!-- immagine lampada 3 spenta -->
         <ImageView
             android:id="@+id/imgLamp3_Off"
             android:layout_width="40dp"
@@ -243,6 +258,7 @@
             android:visibility="invisible"
             />
 
+        <!-- immagine lampada 3 accesa -->
         <ImageView
             android:id="@+id/imgLamp3_On"
             android:layout_width="40dp"
@@ -254,6 +270,7 @@
 
     </LinearLayout>
 
+    <!-- bottone per tornare indietro -->
     <Button
         android:id="@+id/bttLightsBack"
         android:layout_width="wrap_content"
