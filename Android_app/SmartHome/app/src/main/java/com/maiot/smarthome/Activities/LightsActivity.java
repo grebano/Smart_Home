@@ -19,6 +19,10 @@ import Services.LightsService;
 import Devices.DeviceList;
 import Interfaces.HttpRequestCompleted;
 
+
+/**
+ * Classe che rappresenta l'activity che gestisce le luci
+ */
 public class LightsActivity extends AppCompatActivity implements HttpRequestCompleted{
     private final String TAG = "LightsActivity";
 
@@ -60,6 +64,10 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private DeviceList deviceList = null;
 
 
+    /**
+     * metodo che viene chiamato quando l'activity viene creata
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +88,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         setImageStatus(true);
     }
 
+    /**
+     * inizializzazione delle views e set dei click Listener
+     */
     private void initViews()
     {
         // associazione dei layout
@@ -106,8 +117,11 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
         // settaggio click listeners pulsante "indietro"
         goBackButton();
-
     }
+
+    /**
+     * Metodo che setta il click listener del pulsante "manual"
+     */
     private void manualModeViews(){
         // è stata scelta la modalità manuale
         bttLightsModeManual = findViewById(R.id.bttLightsModeManual);
@@ -138,7 +152,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                     break;
                 }
             }
-
+            // si controlla che ci siano lampade
             checkLightsCount(true);
 
             // possibilità di click della modalità
@@ -158,6 +172,10 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
+
+    /**
+     * Metodo che setta il click listener del pulsante "automatic"
+     */
     private void automaticModeViews(){
         // è stata scelta la modalità automatica
         bttLightsModeAuto = findViewById(R.id.bttLightsModeAuto);
@@ -191,6 +209,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante della lampada 1
+     */
     private void lamp1StatusViews()
     {
         // associazione bottone di switch
@@ -202,6 +223,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante della lampada 2
+     */
     private void lamp2StatusViews()
     {
         // associazione bottone di switch
@@ -213,6 +237,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante della lampada 3
+     */
     private void lamp3StatusViews()
     {
         // associazione bottone di switch
@@ -224,6 +251,11 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
+
+    /**
+     * Metodo che gessce la rapperesentazione grafica dello stato dei dispositivi
+     * @param withHttpRequest
+     */
     // il parametro serve a decidere o meno se fare una richiesta http che
     // scatenerà la onHttpRequestCompleted richiamando la setImageStatus
     // avendo però aggiornato lo stato dei vari dispositivi
@@ -268,7 +300,10 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     }
 
 
-    // si cambia lo stato della singola lampada
+    /**
+     * metodo che inverte lo stato della lampada indicizzata
+     * @param index
+     */
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
@@ -288,6 +323,11 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
+    /**
+     * Metodo che controlla il numero di lampade disponibili
+     * @param withToast
+     * @return count
+     */
     private int checkLightsCount(boolean withToast)
     {
         if(deviceList.getLightsList() != null) {
@@ -304,6 +344,9 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         return 0;
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante "back"
+     */
     private void goBackButton(){
         bttLightsBack = findViewById(R.id.bttLightsBack);
         bttLightsBack.setOnClickListener(view -> {
@@ -311,6 +354,10 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         });
     }
 
+    /**
+     * metodo da implementare per la gestione della risposta http
+     * @param response
+     */
     @Override
     public void onHttpRequestCompleted(String response)
     {

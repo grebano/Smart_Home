@@ -20,6 +20,9 @@ import Devices.SmartDevice;
 import Interfaces.HttpRequestCompleted;
 import Services.ShuttersService;
 
+/**
+ * Classe che rappresenta l'activity che gestisce le tapparelle
+ */
 public class ShuttersActivity extends AppCompatActivity implements HttpRequestCompleted{
 
     private final String TAG = "ShuttersActivity";
@@ -60,7 +63,12 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private LinearLayout[] layouts;
 
     private DeviceList deviceList = null;
-    //
+
+
+    /**
+     * Metodo che viene chiamato quando l'activity viene creata
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +89,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         setImageStatus(true);
     }
 
+    /**
+     * inizializzazione delle views e set dei click Listener
+     */
     private void initViews()
     {
         // associazione dei layout
@@ -109,14 +120,18 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         goBackButton();
 
     }
+
+    /**
+     * Metodo che setta il click listener del pulsante "manual"
+     */
     private void manualModeViews(){
         // è stata scelta la modalità manuale
         bttShuttersModeManual = findViewById(R.id.bttShuttersModeManual);
         bttShuttersModeManual.setOnClickListener(view -> {
 
             int i = 0;
-            // visibilità layout e pulsanti in base all'esistenza dei dispositivi
 
+            // visibilità layout e pulsanti in base all'esistenza dei dispositivi
             for(LinearLayout linearLayout : layouts)
             {
                 if(deviceList.getShutterList() != null) {
@@ -157,6 +172,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         });
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante "automatic"
+     */
     private void automaticModeViews(){
         // è stata scelta la modalità automatica
         bttShuttersModeAuto = findViewById(R.id.bttShuttersModeAuto);
@@ -190,6 +208,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         });
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante della tapparella 1
+     */
     private void shutter1StatusViews()
     {
         // associazione bottone di switch
@@ -201,6 +222,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         });
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante della tapparella 2
+     */
     private void shutter2StatusViews() {
         // associazione bottone di switch
         btt_Shutter_Switch2 = findViewById(R.id.btt_Shutter_Switch2);
@@ -211,6 +235,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         });
     }
 
+    /**
+     * Metodo che setta il click listener del pulsante della tapparella 3
+     */
     private void shutter3StatusViews() {
         // associazione bottone di switch
         btt_Shutter_Switch3 = findViewById(R.id.btt_Shutter_Switch2);
@@ -221,6 +248,11 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         });
     }
 
+
+    /**
+     * Metodo che gessce la rapperesentazione grafica dello stato dei dispositivi
+     * @param withHttpRequest
+     */
     // il parametro serve a decidere o meno se fare una richiesta http che
     // scatenerà la onHttpRequestCompleted richiamando la setImageStatus
     // avendo però aggiornato lo stato dei vari dispositivi
@@ -265,7 +297,10 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         }
     }
 
-    // si cambia lo stato della singola tapparella
+    /**
+     * Metodo che inverte lo stato della tapparella indicizzata
+     * @param index
+     */
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
@@ -285,6 +320,11 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
+    /**
+     * Metodo che controlla se ci sono tapparelle disponibili
+     * @param withToast
+     * @return count
+     */
     private int checkShutterCount(boolean withToast)
     {
         if(deviceList.getShutterList() != null) {
@@ -301,6 +341,10 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         return 0;
     }
 
+
+    /**
+     * Metodo che setta il click listener del pulsante "indietro"
+     */
     private void goBackButton(){
         bttShuttersBack = findViewById(R.id.bttShuttersBack);
         bttShuttersBack.setOnClickListener(view -> {
@@ -308,6 +352,9 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         });
     }
 
+    /**
+     * Metodo da implementare per la gestione della risposta http
+     */
     @Override
     public void onHttpRequestCompleted(String response)
     {

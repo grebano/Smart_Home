@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Classe che rappresenta l'activity principale dell'applicazione
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Button bttLights = null;
@@ -31,11 +34,18 @@ public class MainActivity extends AppCompatActivity {
 
     private final int ACTIVITY_REQUEST_CODE = 1;
 
+    /**
+     * Metodo che viene chiamato quando l'activity viene creata
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // impostazione della activity
         setContentView(R.layout.activity_main);
 
+        // inizializzazione dei bottoni
         bttLights = findViewById(R.id.bttLights);
         button_start_lights_activity();
 
@@ -62,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * funzione che gestisce il passaggio alla activity delle luci
+     */
     private void button_start_lights_activity() {
         bttLights.setOnClickListener(view -> {
             Intent intent = new Intent(getString(R.string.LAUNCH_LIGHTS_ACTIVITY));
@@ -72,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * funzione che gestisce il passaggio alla activity delle tapparelle
+     */
     private void button_start_shutters_activity() {
         bttShutters.setOnClickListener(view -> {
             Intent intent = new Intent(getString(R.string.LAUNCH_SHUTTERS_ACTIVITY));
@@ -82,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * funzione che gestisce il passaggio alla activity delle automazioni
+     */
     private void button_start_automations_activity() {
         bttAutomations.setOnClickListener(view -> {
             Intent intent = new Intent(getString(R.string.LAUNCH_AUTOMATIONS_ACTIVITY));
@@ -94,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
     //-------------------------------PERMESSI-POSIZIONE------------------------------------------------------------
 
+    /**
+     * funzioni che gestiscono i permessi per la posizione
+     */
     private void getLocationPermission()
     {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

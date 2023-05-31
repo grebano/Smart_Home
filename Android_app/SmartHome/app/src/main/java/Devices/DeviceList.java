@@ -10,6 +10,9 @@ import Interfaces.HttpRequestCompleted;
 import Miscellaneous.Constants;
 import Miscellaneous.IpAddr_MacAddr;
 
+/**
+ * Classe che contiene la lista dei dispositivi
+ */
 public class DeviceList {
     private final String TAG = "DeviceList";
     private SmartDevice shutter1;
@@ -17,6 +20,11 @@ public class DeviceList {
 
     private SmartDevice lamp1;
     private ArrayList<SmartDevice> lightsList;
+
+    /**
+     * Costruttore della classe DeviceList
+     * @param httpRequestCompleted
+     */
     public DeviceList(HttpRequestCompleted httpRequestCompleted)
     {
         //--------------------Shutters-----------------------------------
@@ -30,13 +38,26 @@ public class DeviceList {
         checkOnlineLamps();
 
     }
+
+    /**
+     * funzione che restituisce la lista delle tapparelle
+     * @return ArrayList<SmartDevice>
+     */
     public ArrayList<SmartDevice> getShutterList() {
         return shutterList;
     }
+    /**
+     * funzione che restituisce la lista delle lampade
+     * @return ArrayList<SmartDevice>
+     */
     public ArrayList<SmartDevice> getLightsList() {
         return lightsList;
     }
 
+
+    /**
+     * funzione che controlla se le lampade sono online
+     */
     private void checkOnlineLamps(){
 
         Handler handler = new Handler();
@@ -60,7 +81,9 @@ public class DeviceList {
         }, Constants.DEVICE_ONLINE_DELAY);
     }
 
-
+    /**
+     * funzione che controlla se le tapparelle sono online
+     */
     private void checkOnlineShutters(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

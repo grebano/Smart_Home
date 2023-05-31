@@ -1,5 +1,8 @@
 package Miscellaneous;
 
+/**
+ * Classe che contiene gli indirizzi ip e mac dei dispositivi
+ */
 public class IpAddr_MacAddr {
     //----------------------------------------------------------
     public static final String SHUTTER1_IP = "192.168.1.10";

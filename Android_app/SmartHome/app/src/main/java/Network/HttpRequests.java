@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 import Interfaces.HttpRequestCompleted;
 
+/**
+ * Classe che gestisce le richieste http
+ */
+
 public class HttpRequests {
     private final String TAG = "HttpRequest";
     private String url = "";
@@ -19,21 +23,32 @@ public class HttpRequests {
     // oggetti dell'interfaccia usata per restituire informazioni (http response)
     ArrayList<HttpRequestCompleted> httpRequestList = null;
 
-    // costruttore oggetto della classe
+    /**
+     * Costruttore della classe, con associazione alla classe http request (in ingresso ogg. interfaccia)
+     * @param url
+     * @param givenHttpRequestList
+     */
     public HttpRequests(String url, ArrayList<HttpRequestCompleted> givenHttpRequestList)
     {
         this.url = url;
         httpRequestList = new ArrayList<>(givenHttpRequestList);
     }
 
-    // wrapper della funzione DoaRequest, che passa l'url corretto
+    /**
+     * wrapper per la richiesta http
+     * @param path
+     */
     public void Request(String path)
     {
         DoaRequest(this.url,path);
     }
 
 
-    // funzione che gestisce le richieste http ad uno specifico url e path
+    /**
+     * Metodo che effettua la richiesta http
+     * @param url
+     * @param path
+     */
     private void DoaRequest(String url, String path)
     {
         new Thread(new Runnable() {

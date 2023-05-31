@@ -15,6 +15,10 @@ import Devices.SmartDevice;
 import Miscellaneous.Constants;
 import Services.ShuttersService;
 
+
+/**
+ * Classe che rappresenta l'activity che gestisce le automazioni
+ */
 public class AutomationsActivity extends AppCompatActivity {
     private final String TAG = "AutomationsActivity";
 
@@ -30,6 +34,10 @@ public class AutomationsActivity extends AppCompatActivity {
     private DeviceList deviceList = null;
 
 
+    /**
+     * Metodo che viene chiamato quando l'activity viene creata
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,9 @@ public class AutomationsActivity extends AppCompatActivity {
         initViews();
     }
 
+    /**
+     * inizializzazione delle views e set dei click Listener
+     */
     private void initViews() {
 
         // collegamento degli id e click listeners
@@ -57,6 +68,9 @@ public class AutomationsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo che gestisce il click sul bottone per la "day mode"
+     */
     private void dayMode() {
         bttDayMode.setOnClickListener(view -> {
             if(thereAreAvailableDevices(true)) {
@@ -90,28 +104,24 @@ public class AutomationsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo che gestisce il click sul bottone per la "night mode"
+     */
     private void nightMode() {
         bttNightMode.setOnClickListener(view -> {
             if(thereAreAvailableDevices(true)) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE_ON, Toast.LENGTH_SHORT).show();
 
-                // si controlla che il servizio stia girando, nel caso lo si arresta
+                // si controlla che il servizio stia girando, in caso contrario lo si avvia
                 if (ShuttersService.isRunning) {
-                    stopService(new Intent(this, ShuttersService.class));
+                    Log.i(TAG, "ShuttersService is already running");
                 } else {
+                    startForegroundService(new Intent(this, ShuttersService.class));
                     Log.i(TAG, "ShuttersService is not running");
                 }
 
-                // chiusura tapparelle e spegnimento luci
-                if (deviceList.getShutterList() != null) {
-                    for (SmartDevice shutter : deviceList.getShutterList()) {
-                        shutter.setStatus(false);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
-
+                // spegnimento luci
                 if (deviceList.getLightsList() != null) {
                     for (SmartDevice light : deviceList.getLightsList()) {
                         light.setStatus(false);
@@ -123,6 +133,9 @@ public class AutomationsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo che gestice il click sul bottone per la "home gym mode"
+     */
     private void homeGymMode() {
         bttHomeGymMode.setOnClickListener(view -> {
             if(thereAreAvailableDevices(true)) {
@@ -152,19 +165,22 @@ public class AutomationsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo che gestisce il click sul bottone per la "vacation mode"
+     */
     private void vacationMode() {
         bttVacationMode.setOnClickListener(view -> {
             if(thereAreAvailableDevices(true)) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE_ON, Toast.LENGTH_SHORT).show();
 
-                // tapparelle che simulano la presenza di persone
-
-                // si controlla che il servizio non stia già girando e lo si lancia
-                if (!ShuttersService.isRunning) {
-                    startForegroundService(new Intent(this, ShuttersService.class));
+                // chiusura tapparelle e spegnimento luci
+                if (deviceList.getShutterList() != null) {
+                    for (SmartDevice light : deviceList.getShutterList()) {
+                        light.setStatus(false);
+                    }
                 } else {
-                    Log.i(TAG, "ShuttersService is already running");
+                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
                 if (deviceList.getLightsList() != null) {
                     for (SmartDevice light : deviceList.getLightsList()) {
@@ -177,12 +193,21 @@ public class AutomationsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo che gestisce il click sul bottone per tornare alla schermata precedente
+     */
     private void goBackButton(){
         bttAutomationsBack.setOnClickListener(view -> {
             finish();
         });
     }
 
+
+    /**
+     * Metodo che controlla se ci sono dispositivi disponibili per le automazioni
+     * @param withToast true se si vuole visualizzare un toast in caso non ci siano dispositivi disponibili
+     * @return true se ci sono dispositivi disponibili, false altrimenti
+     */
     private boolean thereAreAvailableDevices(boolean withToast)
     {
         boolean lamps = false;

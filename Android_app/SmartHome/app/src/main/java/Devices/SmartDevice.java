@@ -14,6 +14,10 @@ import Interfaces.HttpRequestCompleted;
 import Miscellaneous.Constants;
 import Network.HttpRequests;
 
+/**
+ * Classe che rappresenta un dispositivo smart
+ */
+
 public class SmartDevice implements HttpRequestCompleted {
 
     private final String TAG = "SmartDevice";
@@ -22,7 +26,12 @@ public class SmartDevice implements HttpRequestCompleted {
     private String nearestRouterMac;
     private HttpRequests httpRequests = null;
 
-    // costruttore del dispositivo, con associazione alla classe http request (in ingresso singolo ogg. interfaccia)
+    /**
+     * Costruttore del dispositivo, con associazione alla classe http request (in ingresso ogg. interfaccia)
+     * @param ipAddress
+     * @param nearestRouterMac
+     * @param httpRequestCompleted
+     */
     public SmartDevice(String ipAddress, String nearestRouterMac, HttpRequestCompleted httpRequestCompleted)
     {
         this.nearestRouterMac = nearestRouterMac;
@@ -33,7 +42,13 @@ public class SmartDevice implements HttpRequestCompleted {
         httpRequests.Request(Constants.PING_PATH);
     }
 
-    // costruttore del dispositivo, con associazione alla classe http request (in ingresso lista di ogg. interfaccia)
+
+    /**
+     * Costruttore del dispositivo, con associazione alla classe http request (in ingresso ogg. interfaccia)
+     * @param ipAddress
+     * @param nearestRouterMac
+     * @param httpRequestsCompleted
+     */
     public SmartDevice(String ipAddress, String nearestRouterMac, ArrayList<HttpRequestCompleted> httpRequestsCompleted)
     {
         this.nearestRouterMac = nearestRouterMac;
@@ -43,7 +58,10 @@ public class SmartDevice implements HttpRequestCompleted {
     }
 
 
-    // Settaggio a On/Off del dispositivo tramite http
+    /**
+     * funzione che setterà lo stato del dispositivo
+     * @param status
+     */
     public void setStatus(boolean status)
     {
         if(status)
@@ -52,24 +70,37 @@ public class SmartDevice implements HttpRequestCompleted {
             httpRequests.Request(Constants.OFF_PATH);
     }
 
-    // get dello stato del dispositivo
+    /**
+     * funzione che restituisce lo stato del dispositivo
+     * @return boolean
+     */
     public boolean getLocalStatus()
     {
         return this.status;
     }
 
+    /**
+     * funzione che esegue una richiesta http per ottenere lo stato del dispositivo
+     * @return boolean
+     */
     public void getHttpStatus()
     {
         httpRequests.Request(Constants.PING_PATH);
     }
 
 
-    // get del router più vicino
+    /**
+     * funzione che restituisce l'indirizzo mac del router più vicino
+     * @return boolean
+     */
     public String getNearestRouterMac() {
         return this.nearestRouterMac;
     }
 
-    // Si aggiorna lo stato del dispositivo dopo una richiesta http
+    /**
+     * funzione da implementare per la gestione della risposta http
+     * @param response
+     */
     @Override
     public void onHttpRequestCompleted(String response) {
         if(response != null && !response.equals("")) {
