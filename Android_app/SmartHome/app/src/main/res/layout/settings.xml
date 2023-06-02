@@ -36,191 +36,36 @@
 
     </LinearLayout>
 
-    <!-- textview per l'orario delle tapparelle -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set the time limits for the shutters"
-        android:textSize="15dp"
-        android:fontFamily="serif-monospace"
-        android:textStyle="bold"
-        android:textColor="@color/Settings_Title"
-        android:layout_marginTop="40dp"
-        android:visibility="visible"
-        />
 
-    <!-- layout per l'orario delle tapparelle -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:visibility="visible">
-
-        <!-- textview per l'orario di apertura -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Open :"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:textColor="@color/Settings_Title"
-            android:visibility="visible"
-            />
-
-        <!-- edittext per l'orario di apertura -->
-        <EditText
-            android:id="@+id/opening_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="hh:mm"
-            android:inputType="time"
-            android:textColor="@color/Settings_Title"
-            android:textColorHint="@color/Settings_Title"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:visibility="visible"
-            />
-
-        <!-- textview per l'orario di chiusura -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Close :"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:textColor="@color/Settings_Title"
-            android:layout_marginLeft="40dp"
-            android:visibility="visible"
-            />
-
-        <!-- edittext per l'orario di chiusura -->
-        <EditText
-            android:id="@+id/closing_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="hh:mm"
-            android:inputType="time"
-            android:textColor="@color/Settings_Title"
-            android:textColorHint="@color/Settings_Title"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:visibility="visible"
-            />
-    </LinearLayout>
-
-    <!-- textview per le soglie wifi -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set the wifi thresholds"
-        android:textSize="15dp"
-        android:fontFamily="serif-monospace"
-        android:textStyle="bold"
-        android:textColor="@color/Settings_Title"
-        android:layout_marginTop="40dp"
-        android:visibility="visible"
-        />
-
-    <!-- layout per le soglie wifi -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:visibility="visible">
-
-        <!-- textview per la soglia di apertura -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="High :"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:textColor="@color/Settings_Title"
-            android:visibility="visible"
-            />
-
-        <!-- edittext per la soglia di apertura -->
-        <EditText
-            android:id="@+id/high_Level_threshold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="dBm"
-            android:inputType="text"
-            android:textColor="@color/Settings_Title"
-            android:textColorHint="@color/Settings_Title"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:visibility="visible"
-            />
-
-        <!-- textview per la soglia di chiusura -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Low :"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:textColor="@color/Settings_Title"
-            android:layout_marginLeft="40dp"
-            android:visibility="visible"
-            />
-
-        <!-- edittext per la soglia di chiusura -->
-        <EditText
-            android:id="@+id/low_Level_threshold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="dBm"
-            android:inputType="text"
-            android:textColor="@color/Settings_Title"
-            android:textColorHint="@color/Settings_Title"
-            android:textSize="15dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="bold"
-            android:visibility="visible"
-            />
-    </LinearLayout>
-
-    <!-- textview per ip e mac tapparelle -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set the ip and mac of the shutters"
-        android:textSize="15dp"
-        android:fontFamily="serif-monospace"
-        android:textStyle="bold"
-        android:textColor="@color/Settings_Title"
-        android:layout_marginTop="40dp"
-        android:visibility="visible"
-        />
-
-    <!-- scrollview per ip e mac tapparelle -->
+    <!-- scroll view per la pagina -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
         android:visibility="visible">
 
-        <!-- layout per ip e mac tapparelle -->
+        <!-- layout per la pagina -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
             android:visibility="visible">
 
-            <!-- layout per l'ip della prima tapparella -->
+            <!-- textview per l'orario delle tapparelle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set the time limits for the shutters"
+                android:textSize="15dp"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textColor="@color/Settings_Title"
+                android:layout_marginTop="40dp"
+                android:visibility="visible"
+                />
+
+            <!-- layout per l'orario delle tapparelle -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -229,11 +74,11 @@
                 android:gravity="center"
                 android:visibility="visible">
 
-                <!-- textview per l'ip della prima tapparella -->
+                <!-- textview per l'orario di apertura -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="IP 1 :"
+                    android:text="Open :"
                     android:textSize="15dp"
                     android:fontFamily="serif-monospace"
                     android:textStyle="bold"
@@ -241,13 +86,13 @@
                     android:visibility="visible"
                     />
 
-                <!-- edittext per l'ip della prima tapparella -->
+                <!-- edittext per l'orario di apertura -->
                 <EditText
-                    android:id="@+id/ip_shutter_1"
+                    android:id="@+id/opening_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="xxx.xxx.xxx.xxx"
-                    android:inputType="text"
+                    android:hint="hh:mm"
+                    android:inputType="time"
                     android:textColor="@color/Settings_Title"
                     android:textColorHint="@color/Settings_Title"
                     android:textSize="15dp"
@@ -256,9 +101,49 @@
                     android:visibility="visible"
                     />
 
+                <!-- textview per l'orario di chiusura -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Close :"
+                    android:textSize="15dp"
+                    android:fontFamily="serif-monospace"
+                    android:textStyle="bold"
+                    android:textColor="@color/Settings_Title"
+                    android:layout_marginLeft="40dp"
+                    android:visibility="visible"
+                    />
+
+                <!-- edittext per l'orario di chiusura -->
+                <EditText
+                    android:id="@+id/closing_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="hh:mm"
+                    android:inputType="time"
+                    android:textColor="@color/Settings_Title"
+                    android:textColorHint="@color/Settings_Title"
+                    android:textSize="15dp"
+                    android:fontFamily="serif-monospace"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    />
             </LinearLayout>
 
-            <!-- layout per il mac della prima tapparella -->
+            <!-- textview per le soglie wifi -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set the wifi thresholds"
+                android:textSize="15dp"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textColor="@color/Settings_Title"
+                android:layout_marginTop="40dp"
+                android:visibility="visible"
+                />
+
+            <!-- layout per le soglie wifi -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -267,11 +152,11 @@
                 android:gravity="center"
                 android:visibility="visible">
 
-                <!-- textview per il mac della prima tapparella -->
+                <!-- textview per la soglia di apertura -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="MAC 1 :"
+                    android:text="High :"
                     android:textSize="15dp"
                     android:fontFamily="serif-monospace"
                     android:textStyle="bold"
@@ -279,12 +164,40 @@
                     android:visibility="visible"
                     />
 
-                <!-- edittext per il mac della prima tapparella -->
+                <!-- edittext per la soglia di apertura -->
                 <EditText
-                    android:id="@+id/mac_shutter_1"
+                    android:id="@+id/high_Level_threshold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="xx:xx:xx:xx:xx:xx"
+                    android:hint="dBm"
+                    android:inputType="text"
+                    android:textColor="@color/Settings_Title"
+                    android:textColorHint="@color/Settings_Title"
+                    android:textSize="15dp"
+                    android:fontFamily="serif-monospace"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    />
+
+                <!-- textview per la soglia di chiusura -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Low :"
+                    android:textSize="15dp"
+                    android:fontFamily="serif-monospace"
+                    android:textStyle="bold"
+                    android:textColor="@color/Settings_Title"
+                    android:layout_marginLeft="40dp"
+                    android:visibility="visible"
+                    />
+
+                <!-- edittext per la soglia di chiusura -->
+                <EditText
+                    android:id="@+id/low_Level_threshold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="dBm"
                     android:inputType="text"
                     android:textColor="@color/Settings_Title"
                     android:textColorHint="@color/Settings_Title"
@@ -295,406 +208,503 @@
                     />
             </LinearLayout>
 
-            <!-- layout per l'ip della seconda tapparella -->
+            <!-- textview per ip e mac tapparelle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set the ip and mac of the shutters"
+                android:textSize="15dp"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textColor="@color/Settings_Title"
+                android:layout_marginTop="40dp"
+                android:visibility="visible"
+                />
+
+            <!-- layout per ip e mac tapparelle -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp"
+                android:orientation="vertical"
                 android:gravity="center"
                 android:visibility="visible">
 
-                <!-- textview per l'ip della seconda tapparella -->
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- layout per l'ip della prima tapparella -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="IP 2 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
 
-                <!-- edittext per l'ip della seconda tapparella -->
-                <EditText
-                    android:id="@+id/ip_shutter_2"
-                    android:layout_width="wrap_content"
+                    <!-- textview per l'ip della prima tapparella -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IP 1 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per l'ip della prima tapparella -->
+                    <EditText
+                        android:id="@+id/ip_shutter_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xxx.xxx.xxx.xxx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+
+                </LinearLayout>
+
+                <!-- layout per il mac della prima tapparella -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="xxx.xxx.xxx.xxx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per il mac della prima tapparella -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MAC 1 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per il mac della prima tapparella -->
+                    <EditText
+                        android:id="@+id/mac_shutter_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xx:xx:xx:xx:xx:xx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per l'ip della seconda tapparella -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per l'ip della seconda tapparella -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IP 2 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per l'ip della seconda tapparella -->
+                    <EditText
+                        android:id="@+id/ip_shutter_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xxx.xxx.xxx.xxx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per il mac della seconda tapparella -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per il mac della seconda tapparella -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MAC 2 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per il mac della seconda tapparella -->
+                    <EditText
+                        android:id="@+id/mac_shutter_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xx:xx:xx:xx:xx:xx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per l'ip della terza tapparella -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per l'ip della terza tapparella -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IP 3 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per l'ip della terza tapparella -->
+                    <EditText
+                        android:id="@+id/ip_shutter_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xxx.xxx.xxx.xxx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per il mac della terza tapparella -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per il mac della terza tapparella -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MAC 3 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per il mac della terza tapparella -->
+                    <EditText
+                        android:id="@+id/mac_shutter_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xx:xx:xx:xx:xx:xx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- layout per il mac della seconda tapparella -->
+            <!-- textview per ip e mac lampade -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set the ip and mac of the lamps"
+                android:textSize="15dp"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textColor="@color/Settings_Title"
+                android:layout_marginTop="40dp"
+                android:visibility="visible"
+                />
+
+            <!-- layout per ip e mac delle lampade -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
                 android:visibility="visible">
 
-                <!-- textview per il mac della seconda tapparella -->
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- layout per l'ip della prima lampada -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MAC 2 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
 
-                <!-- edittext per il mac della seconda tapparella -->
-                <EditText
-                    android:id="@+id/mac_shutter_2"
-                    android:layout_width="wrap_content"
+                    <!-- textview per l'ip della prima lampada -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IP 1 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per l'ip della prima lampada -->
+                    <EditText
+                        android:id="@+id/ip_lamp_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xxx.xxx.xxx.xxx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per il mac della prima lampada -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="xx:xx:xx:xx:xx:xx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per il mac della prima lampada -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MAC 1 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per il mac della prima lampada -->
+                    <EditText
+                        android:id="@+id/mac_lamp_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xx:xx:xx:xx:xx:xx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per l'ip della seconda lampada -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per l'ip della seconda lampada -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IP 2 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per l'ip della seconda lampada -->
+                    <EditText
+                        android:id="@+id/ip_lamp_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xxx.xxx.xxx.xxx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per il mac della seconda lampada -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per il mac della seconda lampada -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MAC 2 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per il mac della seconda lampada -->
+                    <EditText
+                        android:id="@+id/mac_lamp_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xx:xx:xx:xx:xx:xx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per l'ip della terza lampada -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per l'ip della terza lampada -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IP 3 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per l'ip della terza lampada -->
+                    <EditText
+                        android:id="@+id/ip_lamp_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xxx.xxx.xxx.xxx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+
+                <!-- layout per il mac della terza lampada -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <!-- textview per il mac della terza lampada -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MAC 3 :"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:textColor="@color/Settings_Title"
+                        android:visibility="visible"
+                        />
+
+                    <!-- edittext per il mac della terza lampada -->
+                    <EditText
+                        android:id="@+id/mac_lamp_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="xx:xx:xx:xx:xx:xx"
+                        android:inputType="text"
+                        android:textColor="@color/Settings_Title"
+                        android:textColorHint="@color/Settings_Title"
+                        android:textSize="15dp"
+                        android:fontFamily="serif-monospace"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- layout per l'ip della terza tapparella -->
+            <!-- layout di padding di 50dp -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:visibility="visible">
+                android:visibility="visible" />
 
-                <!-- textview per l'ip della terza tapparella -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IP 3 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
 
-                <!-- edittext per l'ip della terza tapparella -->
-                <EditText
-                    android:id="@+id/ip_shutter_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xxx.xxx.xxx.xxx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
-
-            <!-- layout per il mac della terza tapparella -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:visibility="visible">
-
-                <!-- textview per il mac della terza tapparella -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MAC 3 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
-
-                <!-- edittext per il mac della terza tapparella -->
-                <EditText
-                    android:id="@+id/mac_shutter_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xx:xx:xx:xx:xx:xx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- textview per ip e mac lampade -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set the ip and mac of the lamps"
-        android:textSize="15dp"
-        android:fontFamily="serif-monospace"
-        android:textStyle="bold"
-        android:textColor="@color/Settings_Title"
-        android:layout_marginTop="40dp"
-        android:visibility="visible"
-        />
-
-    <!-- scrollview per ip e mac delle lampade -->
-    <ScrollView
-        android:id="@+id/scrollview_lamp"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@+id/scrollview_shutter"
-        android:layout_marginTop="10dp"
-        android:visibility="visible">
-
-        <!-- layout per ip e mac delle lampade -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <!-- layout per l'ip della prima lampada -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:visibility="visible">
-
-                <!-- textview per l'ip della prima lampada -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IP 1 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
-
-                <!-- edittext per l'ip della prima lampada -->
-                <EditText
-                    android:id="@+id/ip_lamp_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xxx.xxx.xxx.xxx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
-
-            <!-- layout per il mac della prima lampada -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:visibility="visible">
-
-                <!-- textview per il mac della prima lampada -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MAC 1 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
-
-                <!-- edittext per il mac della prima lampada -->
-                <EditText
-                    android:id="@+id/mac_lamp_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xx:xx:xx:xx:xx:xx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
-
-            <!-- layout per l'ip della seconda lampada -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:visibility="visible">
-
-                <!-- textview per l'ip della seconda lampada -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IP 2 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
-
-                <!-- edittext per l'ip della seconda lampada -->
-                <EditText
-                    android:id="@+id/ip_lamp_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xxx.xxx.xxx.xxx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
-
-            <!-- layout per il mac della seconda lampada -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:visibility="visible">
-
-                <!-- textview per il mac della seconda lampada -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MAC 2 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
-
-                <!-- edittext per il mac della seconda lampada -->
-                <EditText
-                    android:id="@+id/mac_lamp_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xx:xx:xx:xx:xx:xx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
-
-            <!-- layout per l'ip della terza lampada -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:visibility="visible">
-
-                <!-- textview per l'ip della terza lampada -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IP 3 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
-
-                <!-- edittext per l'ip della terza lampada -->
-                <EditText
-                    android:id="@+id/ip_lamp_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xxx.xxx.xxx.xxx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
-
-            <!-- layout per il mac della terza lampada -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:visibility="visible">
-
-                <!-- textview per il mac della terza lampada -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MAC 3 :"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/Settings_Title"
-                    android:visibility="visible"
-                    />
-
-                <!-- edittext per il mac della terza lampada -->
-                <EditText
-                    android:id="@+id/mac_lamp_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="xx:xx:xx:xx:xx:xx"
-                    android:inputType="text"
-                    android:textColor="@color/Settings_Title"
-                    android:textColorHint="@color/Settings_Title"
-                    android:textSize="15dp"
-                    android:fontFamily="serif-monospace"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -704,7 +714,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:visibility="visible">
 
         <!-- bottone per salvare le impostazioni -->
