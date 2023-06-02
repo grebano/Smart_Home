@@ -15,6 +15,7 @@ import com.maiot.smarthome.MainActivity;
 import com.maiot.smarthome.R;
 
 import Miscellaneous.Constants;
+import Miscellaneous.IpAddr_MacAddr;
 
 /**
  * Classe che rappresenta l'activity che gestisce le impostazioni
@@ -109,9 +110,26 @@ public class SettingsActivity extends AppCompatActivity {
         bttSaveSettings.setOnClickListener(view -> {
             openingTimeEditText();
             closingTimeEditText();
+
             highLevelThresholdEditText();
             lowLevelThresholdEditText();
-                });
+
+            ipShutter1EditText();
+            ipShutter2EditText();
+            ipShutter3EditText();
+
+            macShutter1EditText();
+            macShutter2EditText();
+            macShutter3EditText();
+
+            ipLamp1EditText();
+            ipLamp2EditText();
+            ipLamp3EditText();
+
+            macLamp1EditText();
+            macLamp2EditText();
+            macLamp3EditText();
+        });
     }
 
 
@@ -189,6 +207,151 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
+     * funzione che gestisce la edittext per l'indirizzo ip della tapparella 1
+     */
+    private void ipShutter1EditText() {
+        // controllo che il campo non sia vuoto
+        if (ip_shutter_1.getText().toString().equals("")) {
+            Log.i(TAG, "ipShutter1EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.SHUTTER1_IP = ip_shutter_1.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo ip della tapparella 2
+     */
+    private void ipShutter2EditText() {
+        // controllo che il campo non sia vuoto
+        if (ip_shutter_2.getText().toString().equals("")) {
+            Log.i(TAG, "ipShutter2EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.SHUTTER2_IP = ip_shutter_2.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo ip della tapparella 3
+     */
+    private void ipShutter3EditText() {
+        // controllo che il campo non sia vuoto
+        if (ip_shutter_3.getText().toString().equals("")) {
+            Log.i(TAG, "ipShutter3EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.SHUTTER3_IP = ip_shutter_3.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo mac della tapparella 1
+     */
+    private void macShutter1EditText() {
+        // controllo che il campo non sia vuoto
+        if (mac_shutter_1.getText().toString().equals("")) {
+            Log.i(TAG, "macShutter1EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.SHUTTER1_MAC = mac_shutter_1.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo mac della tapparella 2
+     */
+    private void macShutter2EditText() {
+        // controllo che il campo non sia vuoto
+        if (mac_shutter_2.getText().toString().equals("")) {
+            Log.i(TAG, "macShutter2EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.SHUTTER2_MAC = mac_shutter_2.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo mac della tapparella 3
+     */
+    private void macShutter3EditText() {
+        // controllo che il campo non sia vuoto
+        if (mac_shutter_3.getText().toString().equals("")) {
+            Log.i(TAG, "macShutter3EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.SHUTTER3_MAC = mac_shutter_3.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo ip della lampadina 1
+     */
+    private void ipLamp1EditText() {
+        // controllo che il campo non sia vuoto
+        if (ip_lamp_1.getText().toString().equals("")) {
+            Log.i(TAG, "ipLamp1EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.LAMP1_IP = ip_lamp_1.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo ip della lampadina 2
+     */
+    private void ipLamp2EditText() {
+        // controllo che il campo non sia vuoto
+        if (ip_lamp_2.getText().toString().equals("")) {
+            Log.i(TAG, "ipLamp2EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.LAMP2_IP = ip_lamp_2.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo ip della lampadina 3
+     */
+    private void ipLamp3EditText() {
+        // controllo che il campo non sia vuoto
+        if (ip_lamp_3.getText().toString().equals("")) {
+            Log.i(TAG, "ipLamp3EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.LAMP3_IP = ip_lamp_3.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo mac della lampadina 1
+     */
+    private void macLamp1EditText() {
+        // controllo che il campo non sia vuoto
+        if (mac_lamp_1.getText().toString().equals("")) {
+            Log.i(TAG, "macLamp1EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.LAMP1_MAC = mac_lamp_1.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo mac della lampadina 2
+     */
+    private void macLamp2EditText() {
+        // controllo che il campo non sia vuoto
+        if (mac_lamp_2.getText().toString().equals("")) {
+            Log.i(TAG, "macLamp2EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.LAMP2_MAC = mac_lamp_2.getText().toString();
+    }
+
+    /**
+     * funzione che gestisce la edittext per l'indirizzo mac della lampadina 3
+     */
+    private void macLamp3EditText() {
+        // controllo che il campo non sia vuoto
+        if (mac_lamp_3.getText().toString().equals("")) {
+            Log.i(TAG, "macLamp3EditText: campo vuoto");
+            return;
+        }
+        IpAddr_MacAddr.LAMP3_MAC = mac_lamp_3.getText().toString();
+    }
+
+
+    /**
      * filtro per la edittext dell'indirizzo ip
      */
     private void ipEditTextFilter() {
@@ -229,6 +392,7 @@ public class SettingsActivity extends AppCompatActivity {
     /**
      * filtro per la edittext dell'indirizzo mac
      */
+    // TODO: 10/05/2017 da controllare
     private void macEditTextFilter() {
         InputFilter[] filters = new InputFilter[1];
         filters[0] = new InputFilter() {
