@@ -40,9 +40,6 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText ip_shutter_1 = null;
     private EditText ip_shutter_2 = null;
     private EditText ip_shutter_3 = null;
-    private EditText mac_shutter_1 = null;
-    private EditText mac_shutter_2 = null;
-    private EditText mac_shutter_3 = null;
 
     // indirizzi ip e mac delle luci
     private EditText ip_lamp_1 = null;
@@ -89,12 +86,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         ip_shutter_3 = findViewById(R.id.ip_shutter_3);
 
-        mac_shutter_1 = findViewById(R.id.mac_shutter_1);
-
-        mac_shutter_2 = findViewById(R.id.mac_shutter_2);
-
-        mac_shutter_3 = findViewById(R.id.mac_shutter_3);
-
         ip_lamp_1 = findViewById(R.id.ip_lamp_1);
 
         ip_lamp_2 = findViewById(R.id.ip_lamp_2);
@@ -122,15 +113,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
         if (IpAddr_MacAddr.SHUTTER3_IP != null && !IpAddr_MacAddr.SHUTTER3_IP.equals("")) {
             ip_shutter_3.setHint(IpAddr_MacAddr.SHUTTER3_IP);
-        }
-        if (IpAddr_MacAddr.SHUTTER1_MAC != null && !IpAddr_MacAddr.SHUTTER1_MAC.equals("")) {
-            mac_shutter_1.setHint(IpAddr_MacAddr.SHUTTER1_MAC);
-        }
-        if (IpAddr_MacAddr.SHUTTER2_MAC != null && !IpAddr_MacAddr.SHUTTER2_MAC.equals("")) {
-            mac_shutter_2.setHint(IpAddr_MacAddr.SHUTTER2_MAC);
-        }
-        if (IpAddr_MacAddr.SHUTTER3_MAC != null && !IpAddr_MacAddr.SHUTTER3_MAC.equals("")) {
-            mac_shutter_3.setHint(IpAddr_MacAddr.SHUTTER3_MAC);
         }
         if (IpAddr_MacAddr.LAMP1_IP != null && !IpAddr_MacAddr.LAMP1_IP.equals("")) {
             ip_lamp_1.setHint(IpAddr_MacAddr.LAMP1_IP);
@@ -179,10 +161,6 @@ public class SettingsActivity extends AppCompatActivity {
             ipShutter1EditText();
             ipShutter2EditText();
             ipShutter3EditText();
-
-            macShutter1EditText();
-            macShutter2EditText();
-            macShutter3EditText();
 
             ipLamp1EditText();
             ipLamp2EditText();
@@ -302,42 +280,6 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.SHUTTER3_IP = ip_shutter_3.getText().toString();
-    }
-
-    /**
-     * funzione che gestisce la edittext per l'indirizzo mac della tapparella 1
-     */
-    private void macShutter1EditText() {
-        // controllo che il campo non sia vuoto
-        if (mac_shutter_1.getText().toString().equals("")) {
-            Log.i(TAG, "macShutter1EditText: campo vuoto");
-            return;
-        }
-        IpAddr_MacAddr.SHUTTER1_MAC = mac_shutter_1.getText().toString();
-    }
-
-    /**
-     * funzione che gestisce la edittext per l'indirizzo mac della tapparella 2
-     */
-    private void macShutter2EditText() {
-        // controllo che il campo non sia vuoto
-        if (mac_shutter_2.getText().toString().equals("")) {
-            Log.i(TAG, "macShutter2EditText: campo vuoto");
-            return;
-        }
-        IpAddr_MacAddr.SHUTTER2_MAC = mac_shutter_2.getText().toString();
-    }
-
-    /**
-     * funzione che gestisce la edittext per l'indirizzo mac della tapparella 3
-     */
-    private void macShutter3EditText() {
-        // controllo che il campo non sia vuoto
-        if (mac_shutter_3.getText().toString().equals("")) {
-            Log.i(TAG, "macShutter3EditText: campo vuoto");
-            return;
-        }
-        IpAddr_MacAddr.SHUTTER3_MAC = mac_shutter_3.getText().toString();
     }
 
     /**
@@ -483,9 +425,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
 
         };
-        mac_shutter_1.setFilters(filters);
-        mac_shutter_2.setFilters(filters);
-        mac_shutter_3.setFilters(filters);
         mac_lamp_1.setFilters(filters);
         mac_lamp_2.setFilters(filters);
         mac_lamp_3.setFilters(filters);
