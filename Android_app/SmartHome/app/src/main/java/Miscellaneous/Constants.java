@@ -32,7 +32,7 @@ public class Constants {
     /**
      * costanti per il wifi
      */
-    public static final int WIFI_NEAR_THRESHOLD = -70;
-    public static final int WIFI_FAR_THRESHOLD = -80;
+    public static int WIFI_NEAR_THRESHOLD = -70;
+    public static int WIFI_FAR_THRESHOLD = -80;
 
 }
