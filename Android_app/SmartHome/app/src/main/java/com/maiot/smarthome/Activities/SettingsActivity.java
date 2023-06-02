@@ -256,6 +256,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.SHUTTER1_IP = ip_shutter_1.getText().toString();
+        Log.i(TAG, "ipShutter1EditText: " + IpAddr_MacAddr.SHUTTER1_IP);
     }
 
     /**
@@ -268,6 +269,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.SHUTTER2_IP = ip_shutter_2.getText().toString();
+        Log.i(TAG, "ipShutter2EditText: " + IpAddr_MacAddr.SHUTTER2_IP);
     }
 
     /**
@@ -280,6 +282,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.SHUTTER3_IP = ip_shutter_3.getText().toString();
+        Log.i(TAG, "ipShutter3EditText: " + IpAddr_MacAddr.SHUTTER3_IP);
     }
 
     /**
@@ -292,6 +295,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.LAMP1_IP = ip_lamp_1.getText().toString();
+        Log.i(TAG, "ipLamp1EditText: " + IpAddr_MacAddr.LAMP1_IP);
     }
 
     /**
@@ -304,6 +308,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.LAMP2_IP = ip_lamp_2.getText().toString();
+        Log.i(TAG, "ipLamp2EditText: " + IpAddr_MacAddr.LAMP2_IP);
     }
 
     /**
@@ -316,6 +321,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.LAMP3_IP = ip_lamp_3.getText().toString();
+        Log.i(TAG, "ipLamp3EditText: " + IpAddr_MacAddr.LAMP3_IP);
     }
 
     /**
@@ -328,6 +334,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.LAMP1_MAC = mac_lamp_1.getText().toString();
+        Log.i(TAG, "macLamp1EditText: " + IpAddr_MacAddr.LAMP1_MAC);
     }
 
     /**
@@ -340,6 +347,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.LAMP2_MAC = mac_lamp_2.getText().toString();
+        Log.i(TAG, "macLamp2EditText: " + IpAddr_MacAddr.LAMP2_MAC);
     }
 
     /**
@@ -352,6 +360,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         IpAddr_MacAddr.LAMP3_MAC = mac_lamp_3.getText().toString();
+        Log.i(TAG, "macLamp3EditText: " + IpAddr_MacAddr.LAMP3_MAC);
     }
 
 
@@ -429,4 +438,5 @@ public class SettingsActivity extends AppCompatActivity {
         mac_lamp_2.setFilters(filters);
         mac_lamp_3.setFilters(filters);
     }
+
 }
