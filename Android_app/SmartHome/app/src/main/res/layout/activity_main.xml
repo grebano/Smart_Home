@@ -108,4 +108,33 @@
             />
     </LinearLayout>
 
+    <!-- Layout impostazioni -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="90dp"
+        android:gravity="center">
+
+        <!-- Immagine impostazioni -->
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/setting"
+            android:layout_marginRight="20dp"
+            />
+
+        <!-- Bottone per gestire le impostazioni -->
+        <Button
+            android:id="@+id/bttSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Settings"
+            android:textSize="15dp"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+    </LinearLayout>
+
 </LinearLayout>

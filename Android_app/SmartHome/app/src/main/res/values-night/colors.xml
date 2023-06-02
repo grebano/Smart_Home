@@ -7,5 +7,6 @@
     <color name="Lights_Title">#FF9800</color>
     <color name="Shutters_Title">#8855CC</color>
     <color name="Automations_Title">#03A9F4</color>
+    <color name="Settings_Title">#9C9C9C</color>
     <color name="ButtonBackground">#1BBAB2B2</color>
 </resources>

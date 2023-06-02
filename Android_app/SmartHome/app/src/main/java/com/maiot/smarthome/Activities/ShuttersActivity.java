@@ -18,6 +18,7 @@ import com.maiot.smarthome.R;
 import Devices.DeviceList;
 import Devices.SmartDevice;
 import Interfaces.HttpRequestCompleted;
+import Miscellaneous.Constants;
 import Services.ShuttersService;
 
 /**
