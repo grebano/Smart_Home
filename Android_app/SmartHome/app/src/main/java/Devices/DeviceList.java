@@ -61,14 +61,14 @@ public class DeviceList {
     private void checkOnlineLamps(){
 
         Handler handler = new Handler();
+        for(SmartDevice smartDevice : lightsList)
+        {
+            smartDevice.getHttpStatus();
+        }
         handler.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                for(SmartDevice smartDevice : lightsList)
-                {
-                    smartDevice.getHttpStatus();
-                }
                 for(SmartDevice smartDevice : lightsList)
                 {
                     if(!smartDevice.checkIfOnline())
@@ -85,15 +85,16 @@ public class DeviceList {
      * funzione che controlla se le tapparelle sono online
      */
     private void checkOnlineShutters(){
+
         Handler handler = new Handler();
+        for(SmartDevice smartDevice : shutterList)
+        {
+            smartDevice.getHttpStatus();
+        }
         handler.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                for(SmartDevice smartDevice : shutterList)
-                {
-                    smartDevice.getHttpStatus();
-                }
                 for(SmartDevice smartDevice : shutterList)
                 {
                     if(!smartDevice.checkIfOnline())

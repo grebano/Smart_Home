@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -169,6 +170,9 @@ public class SettingsActivity extends AppCompatActivity {
             macLamp1EditText();
             macLamp2EditText();
             macLamp3EditText();
+
+            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+            finish();
         });
     }
 

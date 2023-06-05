@@ -330,7 +330,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
      */
     private int checkLightsCount(boolean withToast)
     {
-        if(deviceList.getLightsList() != null  && deviceList.getLightsList().size() > 0) {
+        if(deviceList.getLightsList() != null) {
             int count = deviceList.getLightsList().size();
             if(withToast) {
                 if (count == 0) {

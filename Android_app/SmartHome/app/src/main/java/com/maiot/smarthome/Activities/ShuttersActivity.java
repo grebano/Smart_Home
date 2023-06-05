@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
@@ -85,6 +86,17 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         openImages = new ImageView[] {imgShut1_open, imgShut2_open, imgShut3_open};
         buttons = new Button[] {btt_Shutter_Switch1, btt_Shutter_Switch2, btt_Shutter_Switch3};
         layouts = new LinearLayout[] {ll_Shutter_Switch1, ll_Shutter_Switch2, ll_Shutter_Switch3};
+
+        // inizializzazione immagini e pulsanti in base allo stato reale
+        setImageStatus(true);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        // iscrizione all'evento scansione completata
+        HttpRequestCompleted httpRequestCompleted = this;
+        deviceList = new DeviceList(httpRequestCompleted);
 
         // inizializzazione immagini e pulsanti in base allo stato reale
         setImageStatus(true);
@@ -328,7 +340,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
      */
     private int checkShutterCount(boolean withToast)
     {
-        if(deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
+        if(deviceList.getShutterList() != null) {
             int count = deviceList.getShutterList().size();
             if(withToast) {
                 if (count == 0) {
