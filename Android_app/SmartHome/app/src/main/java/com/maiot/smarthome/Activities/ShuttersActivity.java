@@ -260,7 +260,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void setImageStatus(boolean withHttpRequest)
     {
         if(!withHttpRequest) {
-            if (deviceList.getShutterList() != null) {
+            if (deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
                 // visibilità immagini stato e settaggio testo pulsanti
                 for (int i = 0; i < deviceList.getShutterList().size(); i++) {
                     // la tapparella è aperta
@@ -286,7 +286,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         }
         else
         {
-            if (deviceList.getShutterList() != null) {
+            if (deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
                 for (int i = 0; i < deviceList.getShutterList().size(); i++) {
                     // richieste http /ping
                     deviceList.getShutterList().get(i).getHttpStatus();
@@ -305,7 +305,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        if (deviceList.getShutterList() != null) {
+        if (deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
             if (index < deviceList.getShutterList().size()) {
                 // inversione dello stato della tapparella indicizzata
                 if (!deviceList.getShutterList().get(index).getLocalStatus()) {
@@ -328,7 +328,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
      */
     private int checkShutterCount(boolean withToast)
     {
-        if(deviceList.getShutterList() != null) {
+        if(deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
             int count = deviceList.getShutterList().size();
             if(withToast) {
                 if (count == 0) {

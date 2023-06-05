@@ -133,7 +133,7 @@ public class LightsService extends Service implements WifiScanCompleted {
             for (Net net : networks) {
                 if(net != null) {
                     // controllo se la rete è presente nella lista dei dispositivi
-                    if(deviceList.getLightsList() != null) {
+                    if(deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
                         for (SmartDevice smartDevice : deviceList.getLightsList()) {
                             if(smartDevice != null) {
                                 if (smartDevice.getNearestRouterMac().equals(net.getBssid())) {

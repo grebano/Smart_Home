@@ -106,7 +106,7 @@ public class ShuttersService extends Service {
             @Override
             public void run() {
                 currentTime = new SimpleDateFormat("HH", Locale.getDefault()).format(new Date());
-                if(deviceList.getShutterList() != null) {
+                if(deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
                     // se l'ora corrente è compresa nell'intervallo specificato
                     if (Integer.parseInt(currentTime) >= Constants.NIGHT_BEGINNING_TIME ||
                             Integer.parseInt(currentTime) <= Constants.MORNING_BEGINNING_TIME) {

@@ -262,7 +262,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private void setImageStatus(boolean withHttpRequest)
     {
         if(!withHttpRequest) {
-            if (deviceList.getLightsList() != null) {
+            if (deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
                 // visibilità immagini stato e settaggio testo pulsanti
                 for (int i = 0; i < deviceList.getLightsList().size(); i++) {
                     // la lampada è accesa
@@ -287,7 +287,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             }
         }
         else {
-            if (deviceList.getLightsList() != null) {
+            if (deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
                 for (int i = 0; i < deviceList.getLightsList().size(); i++) {
                     // richieste http /ping
                     deviceList.getLightsList().get(i).getHttpStatus();
@@ -307,7 +307,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        if (deviceList.getLightsList() != null) {
+        if (deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
             if (index < deviceList.getLightsList().size()) {
                 // inversione dello stato della lampada indicizzata
                 if (!deviceList.getLightsList().get(index).getLocalStatus()) {
@@ -330,7 +330,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
      */
     private int checkLightsCount(boolean withToast)
     {
-        if(deviceList.getLightsList() != null) {
+        if(deviceList.getLightsList() != null  && deviceList.getLightsList().size() > 0) {
             int count = deviceList.getLightsList().size();
             if(withToast) {
                 if (count == 0) {
