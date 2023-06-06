@@ -1,7 +1,13 @@
 package Devices;
 
+import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.maiot.smarthome.Activities.LightsActivity;
+import com.maiot.smarthome.Activities.ShuttersActivity;
+import com.maiot.smarthome.R;
 
 import java.util.ArrayList;
 
@@ -105,5 +111,46 @@ public class DeviceList {
                 }
             }
         }, Constants.DEVICE_ONLINE_DELAY);
+    }
+
+    /**
+     * Metodo che controlla il numero di lampade disponibili
+     * @param context
+     * @param withToast
+     * @return count
+     */
+    public int checkLightsCount(Context context, boolean withToast)
+    {
+        if(lightsList != null) {
+            int count = lightsList.size();
+            if(withToast) {
+                if (count == 0) {
+                    // visualizzazione a schermo
+                    Toast.makeText(context, "there are no available lamps", Toast.LENGTH_SHORT).show();
+                }
+            }
+            return count;
+        }
+        return 0;
+    }
+
+    /**
+     * Metodo che controlla se ci sono tapparelle disponibili
+     * @param withToast
+     * @return count
+     */
+    public int checkShutterCount(Context context, boolean withToast)
+    {
+        if(shutterList != null) {
+            int count = shutterList.size();
+            if(withToast) {
+                if (count == 0) {
+                    // visualizzazione a schermo
+                    Toast.makeText(context, "there are no available shutters", Toast.LENGTH_SHORT).show();
+                }
+            }
+            return count;
+        }
+        return 0;
     }
 }

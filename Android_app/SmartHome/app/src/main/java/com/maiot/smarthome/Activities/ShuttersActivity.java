@@ -166,7 +166,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                 }
             }
 
-            checkShutterCount(true);
+            deviceList.checkShutterCount(this,true);
 
             // possibilità di click della modalità
             bttShuttersModeManual.setClickable(false);
@@ -206,7 +206,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             bttShuttersModeAuto.setClickable(false);
             bttShuttersModeManual.setClickable(true);
 
-            if(checkShutterCount(true) > 0) {
+            if(deviceList.checkShutterCount(this,true) > 0) {
 
                 // visualizzazione a schermo
                 Toast.makeText(ShuttersActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
@@ -331,27 +331,6 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             }
         }
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-    }
-
-    /**
-     * Metodo che controlla se ci sono tapparelle disponibili
-     * @param withToast
-     * @return count
-     */
-    private int checkShutterCount(boolean withToast)
-    {
-        if(deviceList.getShutterList() != null) {
-            int count = deviceList.getShutterList().size();
-            if(withToast) {
-                if (count == 0) {
-                    // visualizzazione a schermo
-                    Toast.makeText(ShuttersActivity.this, "there are no available shutters", Toast.LENGTH_SHORT).show();
-                }
-            }
-            return count;
-        }
-        Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-        return 0;
     }
 
 

@@ -153,7 +153,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 }
             }
             // si controlla che ci siano lampade
-            checkLightsCount(true);
+            deviceList.checkLightsCount(this, true);
 
             // possibilità di click della modalità
             bttLightsModeManual.setClickable(false);
@@ -194,7 +194,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             bttLightsModeAuto.setClickable(false);
             bttLightsModeManual.setClickable(true);
 
-            if(checkLightsCount(true) > 0) {
+            if(deviceList.checkLightsCount(this,true) > 0) {
 
                 // visualizzazione a schermo
                 Toast.makeText(LightsActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
@@ -323,26 +323,6 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
 
-    /**
-     * Metodo che controlla il numero di lampade disponibili
-     * @param withToast
-     * @return count
-     */
-    private int checkLightsCount(boolean withToast)
-    {
-        if(deviceList.getLightsList() != null) {
-            int count = deviceList.getLightsList().size();
-            if(withToast) {
-                if (count == 0) {
-                    // visualizzazione a schermo
-                    Toast.makeText(LightsActivity.this, "there are no available lamps", Toast.LENGTH_SHORT).show();
-                }
-            }
-            return count;
-        }
-        Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-        return 0;
-    }
 
     /**
      * Metodo che setta il click listener del pulsante "back"
