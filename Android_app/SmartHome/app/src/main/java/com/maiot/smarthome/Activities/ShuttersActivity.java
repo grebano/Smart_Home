@@ -4,22 +4,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.maiot.smarthome.R;
 
 import Devices.DeviceList;
-import Devices.SmartDevice;
 import Interfaces.HttpRequestCompleted;
-import Miscellaneous.Constants;
 import Services.ShuttersService;
 
 /**
@@ -69,7 +65,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     /**
      * Metodo che viene chiamato quando l'activity viene creata
-     * @param savedInstanceState
+     * @param savedInstanceState stato dell'istanza
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,7 +260,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     /**
      * Metodo che gessce la rapperesentazione grafica dello stato dei dispositivi
-     * @param withHttpRequest
+     * @param withHttpRequest  booleano che indica se fare o meno una richiesta http
      */
     // il parametro serve a decidere o meno se fare una richiesta http che
     // scatenerà la onHttpRequestCompleted richiamando la setImageStatus
@@ -280,7 +276,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                     if (deviceList.getShutterList().get(i).getLocalStatus()) {
                         openImages[i].setVisibility(View.VISIBLE);
                         closedImages[i].setVisibility(View.INVISIBLE);
-                        buttons[i].setText("Close");
+                        buttons[i].setText(R.string.close);
                         buttons[i].setTextColor(Color.rgb(255,0,0));
                     }
 
@@ -288,7 +284,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                     else {
                         openImages[i].setVisibility(View.INVISIBLE);
                         closedImages[i].setVisibility(View.VISIBLE);
-                        buttons[i].setText("Open");
+                        buttons[i].setText(R.string.open);
                         buttons[i].setTextColor(Color.rgb(0,255,0));
                     }
                 }
@@ -313,7 +309,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
 
     /**
      * Metodo che inverte lo stato della tapparella indicizzata
-     * @param index
+     * @param index indice della tapparella
      */
     private void toggleDeviceStatus(int index)
     {
@@ -338,9 +334,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
      */
     private void goBackButton(){
         bttShuttersBack = findViewById(R.id.bttShuttersBack);
-        bttShuttersBack.setOnClickListener(view -> {
-            finish();
-        });
+        bttShuttersBack.setOnClickListener(view -> finish());
     }
 
     /**
@@ -350,13 +344,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     public void onHttpRequestCompleted(String response)
     {
         // quando la richiesta è completata aggiorno le views
-        runOnUiThread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        setImageStatus(false);
-                    }
-                });
+        runOnUiThread(() -> setImageStatus(false));
     }
 }
 

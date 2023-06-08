@@ -18,6 +18,10 @@
     <string name="VACATION_MODE_ON">Vacation mode activated!</string>
 
     <string name="NULL_OBJECT">Trying to access to a null object</string>
+    <string name="turn_off">Turn Off</string>
+    <string name="turn_on">Turn On</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
 
 
 </resources>

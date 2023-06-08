@@ -111,7 +111,7 @@ public class LightsService extends Service implements WifiScanCompleted {
         channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_ID, NotificationManager.IMPORTANCE_LOW);
         getSystemService(NotificationManager.class).createNotificationChannel(channel);
 
-        Notification.Builder notification = null;
+        Notification.Builder notification;
         notification = new Notification.Builder(
                 this, NOTIFICATION_CHANNEL_ID)
                 .setContentText("MyLightsService is running")
@@ -124,7 +124,7 @@ public class LightsService extends Service implements WifiScanCompleted {
 
     /**
      * funzione che viene chiamata quando la scansione del wifi è completata
-     * @param networks
+     * @param networks lista delle reti wifi
      */
     @Override
     public void onWifiScanCompleted(ArrayList<Net> networks) {
@@ -166,13 +166,6 @@ public class LightsService extends Service implements WifiScanCompleted {
      */
     private void delayedScan() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                wifiManager.startScan();
-            }
-
-        }, Constants.LIGHTS_DELAY_IN_MILLIS);
+        handler.postDelayed(() -> wifiManager.startScan(), Constants.LIGHTS_DELAY_IN_MILLIS);
     }
 }

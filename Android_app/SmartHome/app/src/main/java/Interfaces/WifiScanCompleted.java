@@ -7,5 +7,5 @@ import Network.Net;
  * Interfaccia che rappresenta la callback per una scansione wifi
  */
 public interface WifiScanCompleted {
-    public void onWifiScanCompleted (ArrayList<Net> networks);
+    void onWifiScanCompleted (ArrayList<Net> networks);
 }

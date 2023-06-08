@@ -2,17 +2,14 @@ package com.maiot.smarthome.Activities;
 
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.text.Spanned;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.maiot.smarthome.MainActivity;
 import com.maiot.smarthome.R;
 
 import Miscellaneous.Constants;
@@ -142,9 +139,7 @@ public class SettingsActivity extends AppCompatActivity {
      */
     private void goBackButton(){
         bttSettingsBack = findViewById(R.id.bttSettingsBack);
-        bttSettingsBack.setOnClickListener(view -> {
-            finish();
-        });
+        bttSettingsBack.setOnClickListener(view -> finish());
     }
 
     /**
@@ -373,30 +368,25 @@ public class SettingsActivity extends AppCompatActivity {
      */
     private void ipEditTextFilter() {
         InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       android.text.Spanned dest, int dstart, int dend) {
-                if (end > start) {
-                    String destTxt = dest.toString();
-                    String resultingTxt = destTxt.substring(0, dstart)
-                            + source.subSequence(start, end)
-                            + destTxt.substring(dend);
-                    if (!resultingTxt
-                            .matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
-                        return "";
-                    } else {
-                        String[] splits = resultingTxt.split("\\.");
-                        for (int i = 0; i < splits.length; i++) {
-                            if (Integer.valueOf(splits[i]) > 255) {
-                                return "";
-                            }
+        filters[0] = (source, start, end, dest, dstart, dend) -> {
+            if (end > start) {
+                String destTxt = dest.toString();
+                String resultingTxt = destTxt.substring(0, dstart)
+                        + source.subSequence(start, end)
+                        + destTxt.substring(dend);
+                if (!resultingTxt
+                        .matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
+                    return "";
+                } else {
+                    String[] splits = resultingTxt.split("\\.");
+                    for (String split : splits) {
+                        if (Integer.parseInt(split) > 255) {
+                            return "";
                         }
                     }
                 }
-                return null;
             }
-
+            return null;
         };
         ip_shutter_1.setFilters(filters);
         ip_shutter_2.setFilters(filters);
@@ -412,31 +402,26 @@ public class SettingsActivity extends AppCompatActivity {
     // TODO: 10/05/2017 da controllare
     private void macEditTextFilter() {
         InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       android.text.Spanned dest, int dstart, int dend) {
-                if (end > start) {
-                    String destTxt = dest.toString();
-                    String resultingTxt = destTxt.substring(0, dstart)
-                            + source.subSequence(start, end)
-                            + destTxt.substring(dend);
-                    if (!resultingTxt
-                            .matches("^[\\dA-F]{2}(?:[\\-][\\dA-F]{2}){5}$")) {
-                        return "";
-                    }
-                    else {
-                        String[] splits = resultingTxt.split(":");
-                        for (int i = 0; i < splits.length; i++) {
-                            if (splits[i].length() != 2) {
-                                return "";
-                            }
+        filters[0] = (source, start, end, dest, dstart, dend) -> {
+            if (end > start) {
+                String destTxt = dest.toString();
+                String resultingTxt = destTxt.substring(0, dstart)
+                        + source.subSequence(start, end)
+                        + destTxt.substring(dend);
+                if (!resultingTxt
+                        .matches("^[\\dA-F]{2}(?:[\\-][\\dA-F]{2}){5}$")) {
+                    return "";
+                }
+                else {
+                    String[] splits = resultingTxt.split(":");
+                    for (String split : splits) {
+                        if (split.length() != 2) {
+                            return "";
                         }
                     }
                 }
-                return null;
             }
-
+            return null;
         };
         mac_lamp_1.setFilters(filters);
         mac_lamp_2.setFilters(filters);

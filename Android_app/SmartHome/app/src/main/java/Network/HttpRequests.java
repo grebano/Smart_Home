@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,15 +17,15 @@ import Interfaces.HttpRequestCompleted;
 
 public class HttpRequests {
     private final String TAG = "HttpRequest";
-    private String url = "";
+    private final String url;
 
     // oggetti dell'interfaccia usata per restituire informazioni (http response)
-    ArrayList<HttpRequestCompleted> httpRequestList = null;
+    ArrayList<HttpRequestCompleted> httpRequestList;
 
     /**
      * Costruttore della classe, con associazione alla classe http request (in ingresso ogg. interfaccia)
-     * @param url
-     * @param givenHttpRequestList
+     * @param url indirizzo ip del dispositivo
+     * @param givenHttpRequestList interfaccia per la gestione della risposta http
      */
     public HttpRequests(String url, ArrayList<HttpRequestCompleted> givenHttpRequestList)
     {
@@ -36,7 +35,7 @@ public class HttpRequests {
 
     /**
      * wrapper per la richiesta http
-     * @param path
+     * @param path path della richiesta
      */
     public void Request(String path)
     {
@@ -46,56 +45,64 @@ public class HttpRequests {
 
     /**
      * Metodo che effettua la richiesta http
-     * @param url
-     * @param path
+     * @param url url base
+     * @param path path della richiesta
      */
     private void DoaRequest(String url, String path)
     {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String strContents = "";
-                URL myUrl = null;
-                // creazione dell'url completo
-                try {
-                    myUrl = new URL(url + path);
-                } catch (MalformedURLException e) {
-                    Log.e(TAG,"Error connecting to device via http - bad url");
-                }
-                HttpURLConnection urlConnection = null;
-                try {
-                    urlConnection = (HttpURLConnection) myUrl.openConnection();
-                    try {
-                        try {
-
-                            // apertura e lettura dallo stream http
-                            BufferedInputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-                            byte[] contents = new byte[1024];
-                            int bytesRead = 0;
-                            while((bytesRead = in.read(contents)) != -1) {
-                                strContents += new String(contents, 0, bytesRead);
-                            }
-                            in.close();
-                        } catch (IOException e) {
-                            Log.e(TAG,"Error connecting to device via http - error opening stream");
-                        }
-                    } finally {
-                        urlConnection.disconnect();
-                    }
-                } catch (IOException e) {
-                    Log.e(TAG,"Error connecting to device via http - connection failed");
-                }
-                urlConnection.disconnect();
-
-                // invio della risposta alle classi "iscritte"
-                for(HttpRequestCompleted requestCompleted : httpRequestList)
-                {
-                    if (requestCompleted != null)
-                        requestCompleted.onHttpRequestCompleted(strContents);
-                }
-                Log.i(TAG,strContents);
+        new Thread(() -> {
+            StringBuilder strContents = new StringBuilder();
+            URL myUrl = null;
+            // creazione dell'url completo
+            try {
+                myUrl = new URL(url + path);
+            } catch (MalformedURLException e) {
+                Log.e(TAG,"Error connecting to device via http - bad url");
             }
+            HttpURLConnection urlConnection = null;
+            try {
+                if (myUrl != null) {
+                    urlConnection = (HttpURLConnection) myUrl.openConnection();
+                }
+                try {
+                    try {
+
+                        // apertura e lettura dallo stream http
+                        BufferedInputStream in = null;
+                        if (urlConnection != null) {
+                            in = new BufferedInputStream(urlConnection.getInputStream());
+                        }
+
+                        byte[] contents = new byte[1024];
+                        int bytesRead;
+                        if (in != null) {
+                            while((bytesRead = in.read(contents)) != -1) {
+                                strContents.append(new String(contents, 0, bytesRead));
+                            }
+                        }
+                        if (in != null) {
+                            in.close();
+                        }
+                    } catch (IOException e) {
+                        Log.e(TAG,"Error connecting to device via http - error opening stream");
+                    }
+                } finally {
+                    assert urlConnection != null;
+                    urlConnection.disconnect();
+                }
+            } catch (IOException e) {
+                Log.e(TAG,"Error connecting to device via http - connection failed");
+            }
+            assert urlConnection != null;
+            urlConnection.disconnect();
+
+            // invio della risposta alle classi "iscritte"
+            for(HttpRequestCompleted requestCompleted : httpRequestList)
+            {
+                if (requestCompleted != null)
+                    requestCompleted.onHttpRequestCompleted(strContents.toString());
+            }
+            Log.i(TAG, strContents.toString());
         }).start();
 
     }

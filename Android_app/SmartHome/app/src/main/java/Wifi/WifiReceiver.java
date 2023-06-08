@@ -23,16 +23,16 @@ import Network.Net;
 public class WifiReceiver extends BroadcastReceiver {
 
     private final String TAG = "WifiReceiver";
-    private WifiManager wifiManager = null;
+    private final WifiManager wifiManager;
 
     // callback per la scansione delle reti wifi
-    private WifiScanCompleted wifiScanCompleted = null;
+    private final WifiScanCompleted wifiScanCompleted;
 
 
     /**
      * Costruttore della classe
-     * @param wifiManager
-     * @param wifiScanCompleted
+     * @param wifiManager oggetto che permette di gestire il wifi
+     * @param wifiScanCompleted callback per la scansione delle reti wifi
      */
     public WifiReceiver(WifiManager wifiManager, WifiScanCompleted wifiScanCompleted)
     {
@@ -43,8 +43,8 @@ public class WifiReceiver extends BroadcastReceiver {
 
     /**
      * Metodo che viene chiamato quando il receiver riceve un intent
-     * @param context
-     * @param intent
+     * @param context contesto dell'applicazione
+     * @param intent intent ricevuto
      */
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -54,29 +54,18 @@ public class WifiReceiver extends BroadcastReceiver {
         List<ScanResult> wifiScan = wifiManager.getScanResults();
 
         // riordino le reti in base alla potenza del segnale
-        Comparator<ScanResult> comparator =  (ScanResult a, ScanResult b) -> {
-            if (a.level > b.level){
-                return -1;
-            }
-            else if (a.level < b.level){
-                return 1;
-            }
-            else
-                return 0;
-        };
+        Comparator<ScanResult> comparator =  (ScanResult a, ScanResult b) -> Integer.compare(b.level, a.level);
         wifiScan.sort(comparator);
 
         // lista di reti che ritorno come output
         ArrayList<Net> nets = new ArrayList<>();
 
         // aggiungo alla lista il Mac e la potenza dei router
-        if(wifiScan != null) {
-            for (int i = 0; i < wifiScan.size(); i++) {
-                if (Objects.equals(wifiScan.get(i).SSID, Constants.SSID)) {
-                    Net net = new Net(wifiScan.get(i).SSID, wifiScan.get(i).BSSID, wifiScan.get(i).level);
-                    nets.add(net);
-                    Log.i(TAG, "net: " + i + " " + net.getBssid() + " -> " + net.getLevel());
-                }
+        for (int i = 0; i < wifiScan.size(); i++) {
+            if (Objects.equals(wifiScan.get(i).SSID, Constants.SSID)) {
+                Net net = new Net(wifiScan.get(i).SSID, wifiScan.get(i).BSSID, wifiScan.get(i).level);
+                nets.add(net);
+                Log.i(TAG, "net: " + i + " " + net.getBssid() + " -> " + net.getLevel());
             }
         }
         wifiScanCompleted.onWifiScanCompleted(nets);

@@ -2,12 +2,6 @@ package Devices;
 
 import android.util.Log;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import Interfaces.HttpRequestCompleted;
@@ -23,14 +17,14 @@ public class SmartDevice implements HttpRequestCompleted {
     private final String TAG = "SmartDevice";
     private boolean status;
     private boolean isOnline = false;
-    private String nearestRouterMac;
-    private HttpRequests httpRequests = null;
+    private final String nearestRouterMac;
+    private final HttpRequests httpRequests;
 
     /**
      * Costruttore del dispositivo, con associazione alla classe http request (in ingresso ogg. interfaccia)
-     * @param ipAddress
-     * @param nearestRouterMac
-     * @param httpRequestCompleted
+     * @param ipAddress indirizzo ip del dispositivo
+     * @param nearestRouterMac indirizzo mac del router più vicino
+     * @param httpRequestCompleted interfaccia per la gestione della risposta http
      */
     public SmartDevice(String ipAddress, String nearestRouterMac, HttpRequestCompleted httpRequestCompleted)
     {
@@ -45,9 +39,9 @@ public class SmartDevice implements HttpRequestCompleted {
 
     /**
      * Costruttore del dispositivo, con associazione alla classe http request (in ingresso ogg. interfaccia)
-     * @param ipAddress
-     * @param nearestRouterMac
-     * @param httpRequestsCompleted
+     * @param ipAddress indirizzo ip del dispositivo
+     * @param nearestRouterMac indirizzo mac del router più vicino
+     * @param httpRequestsCompleted interfaccia per la gestione della risposta http
      */
     public SmartDevice(String ipAddress, String nearestRouterMac, ArrayList<HttpRequestCompleted> httpRequestsCompleted)
     {
@@ -60,7 +54,7 @@ public class SmartDevice implements HttpRequestCompleted {
 
     /**
      * funzione che setterà lo stato del dispositivo
-     * @param status
+     * @param status boolean che rappresenta lo stato del dispositivo
      */
     public void setStatus(boolean status)
     {
@@ -81,7 +75,6 @@ public class SmartDevice implements HttpRequestCompleted {
 
     /**
      * funzione che esegue una richiesta http per ottenere lo stato del dispositivo
-     * @return boolean
      */
     public void getHttpStatus()
     {
@@ -99,7 +92,7 @@ public class SmartDevice implements HttpRequestCompleted {
 
     /**
      * funzione da implementare per la gestione della risposta http
-     * @param response
+     * @param response risposta http
      */
     @Override
     public void onHttpRequestCompleted(String response) {

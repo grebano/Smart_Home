@@ -28,7 +28,6 @@ import Miscellaneous.Constants;
 public class ShuttersService extends Service {
 
     private final String TAG = "MyShuttersService";
-    private final String NOTIFICATION_CHANNEL_ID = "MyShuttersService_ID";
     public static boolean isRunning = false;
 
     private String currentTime;
@@ -57,9 +56,9 @@ public class ShuttersService extends Service {
 
     /**
      * Metodo che viene chiamato quando il servizio viene avviato
-     * @param intent
-     * @param flags
-     * @param startId
+     * @param intent intent
+     * @param flags flags
+     * @param startId startId
      * @return START_STICKY
      */
     @Override
@@ -133,11 +132,12 @@ public class ShuttersService extends Service {
      * Metodo che crea una notifica per notificare che il servizio è in esecuzione
      */
     private void addNotification(){
-        NotificationChannel channel = null;
+        NotificationChannel channel;
+        String NOTIFICATION_CHANNEL_ID = "MyShuttersService_ID";
         channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_ID, NotificationManager.IMPORTANCE_LOW);
         getSystemService(NotificationManager.class).createNotificationChannel(channel);
 
-        Notification.Builder notification = null;
+        Notification.Builder notification;
         notification = new Notification.Builder(
                 this, NOTIFICATION_CHANNEL_ID)
                 .setContentText("MyShuttersService is running")

@@ -5,13 +5,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.maiot.smarthome.Activities.LightsActivity;
-import com.maiot.smarthome.Activities.ShuttersActivity;
-import com.maiot.smarthome.R;
-
 import java.util.ArrayList;
 
-import Devices.SmartDevice;
 import Interfaces.HttpRequestCompleted;
 import Miscellaneous.Constants;
 import Miscellaneous.IpAddr_MacAddr;
@@ -21,24 +16,22 @@ import Miscellaneous.IpAddr_MacAddr;
  */
 public class DeviceList {
     private final String TAG = "DeviceList";
-    private SmartDevice shutter1;
-    private ArrayList<SmartDevice> shutterList;
+    private final ArrayList<SmartDevice> shutterList;
 
-    private SmartDevice lamp1;
-    private ArrayList<SmartDevice> lightsList;
+    private final ArrayList<SmartDevice> lightsList;
 
     /**
      * Costruttore della classe DeviceList
-     * @param httpRequestCompleted
+     * @param httpRequestCompleted interfaccia per la gestione della risposta http
      */
     public DeviceList(HttpRequestCompleted httpRequestCompleted)
     {
         //--------------------Shutters-----------------------------------
-        shutter1 = new SmartDevice(IpAddr_MacAddr.SHUTTER1_IP, IpAddr_MacAddr.SHUTTER1_MAC, httpRequestCompleted);
+        SmartDevice shutter1 = new SmartDevice(IpAddr_MacAddr.SHUTTER1_IP, IpAddr_MacAddr.SHUTTER1_MAC, httpRequestCompleted);
         shutterList = new ArrayList<>();
         checkOnlineShutters();
         //--------------------Lamps--------------------------------------
-        lamp1 = new SmartDevice(IpAddr_MacAddr.LAMP1_IP, IpAddr_MacAddr.LAMP1_MAC, httpRequestCompleted);
+        SmartDevice lamp1 = new SmartDevice(IpAddr_MacAddr.LAMP1_IP, IpAddr_MacAddr.LAMP1_MAC, httpRequestCompleted);
         lightsList = new ArrayList<>();
         lightsList.add(lamp1);
         checkOnlineLamps();
@@ -71,17 +64,13 @@ public class DeviceList {
         {
             smartDevice.getHttpStatus();
         }
-        handler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                for(SmartDevice smartDevice : lightsList)
+        handler.postDelayed(() -> {
+            for(SmartDevice smartDevice : lightsList)
+            {
+                if(!smartDevice.checkIfOnline())
                 {
-                    if(!smartDevice.checkIfOnline())
-                    {
-                        lightsList.remove(smartDevice);
-                        Log.i(TAG,"Lamp removed -> not online");
-                    }
+                    lightsList.remove(smartDevice);
+                    Log.i(TAG,"Lamp removed -> not online");
                 }
             }
         }, Constants.DEVICE_ONLINE_DELAY);
@@ -97,17 +86,13 @@ public class DeviceList {
         {
             smartDevice.getHttpStatus();
         }
-        handler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                for(SmartDevice smartDevice : shutterList)
+        handler.postDelayed(() -> {
+            for(SmartDevice smartDevice : shutterList)
+            {
+                if(!smartDevice.checkIfOnline())
                 {
-                    if(!smartDevice.checkIfOnline())
-                    {
-                        shutterList.remove(smartDevice);
-                        Log.i(TAG,"Shutter removed -> not online");
-                    }
+                    shutterList.remove(smartDevice);
+                    Log.i(TAG,"Shutter removed -> not online");
                 }
             }
         }, Constants.DEVICE_ONLINE_DELAY);
@@ -115,8 +100,8 @@ public class DeviceList {
 
     /**
      * Metodo che controlla il numero di lampade disponibili
-     * @param context
-     * @param withToast
+     * @param context contesto
+     * @param withToast booleano che indica se visualizzare o meno il toast
      * @return count
      */
     public int checkLightsCount(Context context, boolean withToast)
@@ -136,7 +121,7 @@ public class DeviceList {
 
     /**
      * Metodo che controlla se ci sono tapparelle disponibili
-     * @param withToast
+     * @param withToast booleano che indica se visualizzare o meno il toast
      * @return count
      */
     public int checkShutterCount(Context context, boolean withToast)

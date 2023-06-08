@@ -66,7 +66,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
     /**
      * metodo che viene chiamato quando l'activity viene creata
-     * @param savedInstanceState
+     * @param savedInstanceState stato dell'istanza
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,7 +254,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
     /**
      * Metodo che gessce la rapperesentazione grafica dello stato dei dispositivi
-     * @param withHttpRequest
+     * @param withHttpRequest booleano che indica se fare o meno una richiesta http
      */
     // il parametro serve a decidere o meno se fare una richiesta http che
     // scatenerà la onHttpRequestCompleted richiamando la setImageStatus
@@ -270,7 +270,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                     if (deviceList.getLightsList().get(i).getLocalStatus()) {
                         onImages[i].setVisibility(View.VISIBLE);
                         offImages[i].setVisibility(View.INVISIBLE);
-                        buttons[i].setText("Turn Off");
+                        buttons[i].setText(R.string.turn_off);
                         buttons[i].setTextColor(Color.rgb(255,0,0));
                     }
 
@@ -278,7 +278,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                     else {
                         onImages[i].setVisibility(View.INVISIBLE);
                         offImages[i].setVisibility(View.VISIBLE);
-                        buttons[i].setText("Turn On");
+                        buttons[i].setText(R.string.turn_on);
                         buttons[i].setTextColor(Color.rgb(0,255,0));
                     }
                 }
@@ -303,7 +303,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
     /**
      * metodo che inverte lo stato della lampada indicizzata
-     * @param index
+     * @param index indice della lampada
      */
     private void toggleDeviceStatus(int index)
     {
@@ -328,25 +328,17 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
      */
     private void goBackButton(){
         bttLightsBack = findViewById(R.id.bttLightsBack);
-        bttLightsBack.setOnClickListener(view -> {
-            finish();
-        });
+        bttLightsBack.setOnClickListener(view -> finish());
     }
 
     /**
      * metodo da implementare per la gestione della risposta http
-     * @param response
+     * @param response risposta http
      */
     @Override
     public void onHttpRequestCompleted(String response)
     {
         // quando la richiesta è completata aggiorno le views
-        runOnUiThread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        setImageStatus(false);
-                    }
-                });
+        runOnUiThread(() -> setImageStatus(false));
     }
 }

@@ -11,9 +11,9 @@ public class Net {
 
     /**
      * Costruttore della rete
-     * @param ssid
-     * @param bssid
-     * @param level
+     * @param ssid nome della rete
+     * @param bssid indirizzo mac della rete
+     * @param level livello del segnale
      */
     public Net(String ssid, String bssid, int level)
     {
@@ -58,7 +58,7 @@ public class Net {
 
     /**
      * funzione che setta il bssid
-     * @param bssid
+     * @param bssid indirizzo mac
      */
     public void setBssid(String bssid) {
         this.bssid = bssid;
@@ -66,7 +66,7 @@ public class Net {
 
     /**
      * funzione che setta l'ssid
-     * @param ssid
+     * @param ssid nome della rete
      */
     public void setSsid(String ssid) {
         this.ssid = ssid;
@@ -74,7 +74,7 @@ public class Net {
 
     /**
      * funzione che setta il livello del segnale
-     * @param level
+     * @param level livello del segnale
      */
     public void setLevel(int level) {
         this.level = level;

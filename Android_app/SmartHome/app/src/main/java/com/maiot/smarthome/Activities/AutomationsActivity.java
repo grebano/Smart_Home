@@ -12,7 +12,6 @@ import com.maiot.smarthome.R;
 
 import Devices.DeviceList;
 import Devices.SmartDevice;
-import Miscellaneous.Constants;
 import Services.ShuttersService;
 
 
@@ -36,7 +35,7 @@ public class AutomationsActivity extends AppCompatActivity {
 
     /**
      * Metodo che viene chiamato quando l'activity viene creata
-     * @param savedInstanceState
+     * @param savedInstanceState stato dell'istanza
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,9 +193,7 @@ public class AutomationsActivity extends AppCompatActivity {
      * Metodo che gestisce il click sul bottone per tornare alla schermata precedente
      */
     private void goBackButton(){
-        bttAutomationsBack.setOnClickListener(view -> {
-            finish();
-        });
+        bttAutomationsBack.setOnClickListener(view -> finish());
     }
 
 
