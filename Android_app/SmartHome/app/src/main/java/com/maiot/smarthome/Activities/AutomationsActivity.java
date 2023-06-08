@@ -210,25 +210,13 @@ public class AutomationsActivity extends AppCompatActivity {
      */
     private boolean thereAreAvailableDevices(boolean withToast)
     {
-        boolean lamps = false;
-        boolean shutters = false;
-        if(deviceList.getLightsList() != null) {
-            if (deviceList.getLightsList().size() > 0)
-                lamps = true;
-        }
-        if(deviceList.getShutterList() != null) {
-            if (deviceList.getShutterList().size() > 0)
-                shutters = true;
-        }
+
+        boolean shutters = deviceList.checkShutterCount(this, true) > 0;
+        boolean lamps = deviceList.checkLightsCount(this, true) > 0;
+
         if(withToast) {
             if((!lamps) && (!shutters)) {
                Toast.makeText(AutomationsActivity.this, "there are no available devices", Toast.LENGTH_SHORT).show();
-            }
-            else if(!lamps) {
-                Toast.makeText(AutomationsActivity.this, "there are no available lamps", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(AutomationsActivity.this, "there are no available shutters", Toast.LENGTH_SHORT).show();
             }
         }
         return (lamps || shutters);
