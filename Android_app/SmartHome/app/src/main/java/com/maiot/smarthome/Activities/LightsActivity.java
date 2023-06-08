@@ -261,10 +261,11 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     // avendo però aggiornato lo stato dei vari dispositivi
     private void setImageStatus(boolean withHttpRequest)
     {
+        int count = deviceList.checkLightsCount(this, false);
         if(!withHttpRequest) {
-            if (deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
+            if (count > 0) {
                 // visibilità immagini stato e settaggio testo pulsanti
-                for (int i = 0; i < deviceList.getLightsList().size(); i++) {
+                for (int i = 0; i < count; i++) {
                     // la lampada è accesa
                     if (deviceList.getLightsList().get(i).getLocalStatus()) {
                         onImages[i].setVisibility(View.VISIBLE);
@@ -287,8 +288,8 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             }
         }
         else {
-            if (deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
-                for (int i = 0; i < deviceList.getLightsList().size(); i++) {
+            if (count > 0) {
+                for (int i = 0; i < count; i++) {
                     // richieste http /ping
                     deviceList.getLightsList().get(i).getHttpStatus();
                 }
@@ -307,18 +308,16 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        if (deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
-            if (index < deviceList.getLightsList().size()) {
-                // inversione dello stato della lampada indicizzata
-                if (!deviceList.getLightsList().get(index).getLocalStatus()) {
+        int count = deviceList.checkLightsCount(this, false);
+        if (count > 0 && index < count) {
+            // inversione dello stato della lampada indicizzata
+            if (!deviceList.getLightsList().get(index).getLocalStatus()) {
 
-                    deviceList.getLightsList().get(index).setStatus(true);
-                }
-                else {
-                    deviceList.getLightsList().get(index).setStatus(false);
-                }
+                deviceList.getLightsList().get(index).setStatus(true);
                 return;
             }
+            deviceList.getLightsList().get(index).setStatus(false);
+            return;
         }
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }

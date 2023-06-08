@@ -271,10 +271,11 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     // avendo però aggiornato lo stato dei vari dispositivi
     private void setImageStatus(boolean withHttpRequest)
     {
+        int count = deviceList.checkShutterCount(this, false);
         if(!withHttpRequest) {
-            if (deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
+            if (count > 0) {
                 // visibilità immagini stato e settaggio testo pulsanti
-                for (int i = 0; i < deviceList.getShutterList().size(); i++) {
+                for (int i = 0; i < count; i++) {
                     // la tapparella è aperta
                     if (deviceList.getShutterList().get(i).getLocalStatus()) {
                         openImages[i].setVisibility(View.VISIBLE);
@@ -298,8 +299,8 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         }
         else
         {
-            if (deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
-                for (int i = 0; i < deviceList.getShutterList().size(); i++) {
+            if (count > 0) {
+                for (int i = 0; i < count; i++) {
                     // richieste http /ping
                     deviceList.getShutterList().get(i).getHttpStatus();
                 }
@@ -317,18 +318,16 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        if (deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
-            if (index < deviceList.getShutterList().size()) {
-                // inversione dello stato della tapparella indicizzata
-                if (!deviceList.getShutterList().get(index).getLocalStatus()) {
+        int count = deviceList.checkShutterCount(this, false);
+        if (count > 0 && index < count) {
+            // inversione dello stato della tapparella indicizzata
+            if (!deviceList.getShutterList().get(index).getLocalStatus()) {
 
-                    deviceList.getShutterList().get(index).setStatus(true);
-                }
-                else {
-                    deviceList.getShutterList().get(index).setStatus(false);
-                }
+                deviceList.getShutterList().get(index).setStatus(true);
                 return;
             }
+            deviceList.getShutterList().get(index).setStatus(false);
+            return;
         }
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
     }
