@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private Button bttAutomations = null;
     private Button bttSettings = null;
 
+    private Button bttInfo = null;
+
     private WifiManager wifiManager = null;
 
     private LocationManager locationManager = null;
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         bttSettings = findViewById(R.id.bttSettings);
         button_start_settings_activity();
+
+        bttInfo = findViewById(R.id.bttInfo);
+        button_start_info_activity();
 
         // gestione dei permessi riguardanti la posizione
         getLocationPermission();
@@ -122,6 +127,19 @@ public class MainActivity extends AppCompatActivity {
         bttSettings.setOnClickListener(view -> {
             Intent intent = new Intent(getString(R.string.LAUNCH_SETTINGS_ACTIVITY));
             intent.putExtra(getString(R.string.LABEL_MESSAGE_SETTINGS), "settings");
+            //la funzione sotto vuole un intent e un intero che è quello che viene restituito nella backpropagation
+            //per capire quale activity è stata lanciata (è un id in pratica)
+            startActivity(intent);
+        });
+    }
+
+    /**
+     * funzione che gestisce il passaggio alla activity delle informazioni
+     */
+    private void button_start_info_activity() {
+        bttInfo.setOnClickListener(view -> {
+            Intent intent = new Intent(getString(R.string.LAUNCH_INFO_ACTIVITY));
+            intent.putExtra(getString(R.string.LABEL_MESSAGE_INFO), "info");
             //la funzione sotto vuole un intent e un intero che è quello che viene restituito nella backpropagation
             //per capire quale activity è stata lanciata (è un id in pratica)
             startActivity(intent);

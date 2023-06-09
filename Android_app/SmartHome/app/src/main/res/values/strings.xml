@@ -6,11 +6,13 @@
     <string name="LAUNCH_SHUTTERS_ACTIVITY">com.maiot.smarthome.Activities.ShuttersActivity</string>
     <string name="LAUNCH_AUTOMATIONS_ACTIVITY">com.maiot.smarthome.Activities.AutomationsActivity</string>
     <string name="LAUNCH_SETTINGS_ACTIVITY">com.maiot.smarthome.Activities.SettingsActivity</string>
+    <string name="LAUNCH_INFO_ACTIVITY">com.maiot.smarthome.Activities.InfoActivity</string>
 
     <string name="LABEL_MESSAGE_LIGHTS">Label_Message_lights</string>
     <string name="LABEL_MESSAGE_SHUTTERS">Label_Message_shutters</string>
     <string name="LABEL_MESSAGE_AUTOMATIONS">Label_Message_automations</string>
     <string name="LABEL_MESSAGE_SETTINGS">Label_Message_settings</string>
+    <string name="LABEL_MESSAGE_INFO">Label_Message_info</string>
 
     <!-- Automatic mode in shutters and lights -->
     <string name="AUTOMATIC_MODE">Automatic mode activated!</string>
@@ -29,6 +31,12 @@
     <string name="turn_on">Turn On</string>
     <string name="close">Close</string>
     <string name="open">Open</string>
+
+    <!-- Info -->
+    <string name="intro">This app allows you to control your smart devices in different ways.</string>
+    <string name="auto">1) Automatic mode: the app will turn on and off your devices following specific criteria that you can set in the settings page. For example it will open your shutters in the morning automatically.</string>
+    <string name="manual">2) Manual mode: the app will turn on the device when you press the button, and will turn it off when you press the button again.</string>
+    <string name="automations">3) Automations: there are some predefined automations that you can use to turn on/off the device. They are based on common events, such as the sunset or the sunrise.</string>
 
 
 </resources>

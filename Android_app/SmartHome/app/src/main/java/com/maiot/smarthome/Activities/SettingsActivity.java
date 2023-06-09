@@ -110,7 +110,6 @@ public class SettingsActivity extends AppCompatActivity {
      * funzione che setta gli hint degli edit text controllando che i valori iniziali non siano nulli
      */
     private void setHintEditText() {
-        //TODO: 10/05/2021 settare anche gli hint per tapparelle e wifi (magari usare dei loop)
 
         if (IpAddr_MacAddr.SHUTTER1_IP != null && !IpAddr_MacAddr.SHUTTER1_IP.equals("")) {
             ip_shutter_1.setHint(IpAddr_MacAddr.SHUTTER1_IP);

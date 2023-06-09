@@ -137,4 +137,34 @@
             />
     </LinearLayout>
 
+
+    <!-- Layout informazioni -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:gravity="center">
+
+        <!-- Immagine informazioni -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/info"
+            android:layout_marginRight="20dp"
+            />
+
+        <!-- Bottone per gestire le informazioni -->
+        <Button
+            android:id="@+id/bttInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Info"
+            android:textSize="15dp"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+    </LinearLayout>
+
 </LinearLayout>
