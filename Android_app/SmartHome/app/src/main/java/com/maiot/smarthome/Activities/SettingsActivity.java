@@ -1,5 +1,6 @@
 package com.maiot.smarthome.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
@@ -14,6 +15,8 @@ import com.maiot.smarthome.R;
 
 import Miscellaneous.Constants;
 import Miscellaneous.IpAddr_MacAddr;
+import Services.LightsService;
+import Services.ShuttersService;
 
 /**
  * Classe che rappresenta l'activity che gestisce le impostazioni
@@ -165,6 +168,18 @@ public class SettingsActivity extends AppCompatActivity {
             macLamp1EditText();
             macLamp2EditText();
             macLamp3EditText();
+
+            // rilancio il servizio delle tapparelle
+            if (ShuttersService.isRunning) {
+                stopService(new Intent(this, ShuttersService.class));
+                startForegroundService(new Intent(this, ShuttersService.class));
+            }
+
+            // rilancio il servizio delle lampade
+            if (LightsService.isRunning) {
+                stopService(new Intent(this, LightsService.class));
+                startForegroundService(new Intent(this, LightsService.class));
+            }
 
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
             finish();
