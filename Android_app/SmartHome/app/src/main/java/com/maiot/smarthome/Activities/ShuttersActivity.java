@@ -202,7 +202,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             bttShuttersModeAuto.setClickable(false);
             bttShuttersModeManual.setClickable(true);
 
-            if(checkIfThereAreShutters()) {
+            if(deviceList.checkShutterCount(this,true) > 0) {
 
                 // visualizzazione a schermo
                 Toast.makeText(ShuttersActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();

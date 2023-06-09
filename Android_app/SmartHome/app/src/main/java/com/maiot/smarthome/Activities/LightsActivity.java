@@ -194,7 +194,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             bttLightsModeAuto.setClickable(false);
             bttLightsModeManual.setClickable(true);
 
-            if(checkIfThereAreLamps()) {
+            if(deviceList.checkLightsCount(this, true) > 0) {
 
                 // visualizzazione a schermo
                 Toast.makeText(LightsActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
