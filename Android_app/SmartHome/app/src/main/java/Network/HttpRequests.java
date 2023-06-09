@@ -22,6 +22,7 @@ public class HttpRequests {
     // oggetti dell'interfaccia usata per restituire informazioni (http response)
     ArrayList<HttpRequestCompleted> httpRequestList;
 
+
     /**
      * Costruttore della classe, con associazione alla classe http request (in ingresso ogg. interfaccia)
      * @param url indirizzo ip del dispositivo
@@ -33,6 +34,7 @@ public class HttpRequests {
         httpRequestList = new ArrayList<>(givenHttpRequestList);
     }
 
+
     /**
      * wrapper per la richiesta http
      * @param path path della richiesta
@@ -40,6 +42,15 @@ public class HttpRequests {
     public void Request(String path)
     {
         DoaRequest(this.url,path);
+    }
+
+
+    /**
+     * funzione che restituisce l'url del dispositivo
+     */
+    public String getUrl()
+    {
+        return this.url;
     }
 
 

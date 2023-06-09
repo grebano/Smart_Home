@@ -137,11 +137,11 @@ public class LightsService extends Service implements WifiScanCompleted {
                             if(smartDevice != null) {
                                 if (smartDevice.getNearestRouterMac().equals(net.getBssid())) {
                                     Log.i(TAG,"Found a device for mac : " + net.getBssid());
-                                    if (net.getLevel() > Constants.WIFI_NEAR_THRESHOLD && !smartDevice.getLocalStatus()) {
+                                    if (net.getLevel() > Constants.WIFI_NEAR_THRESHOLD && !smartDevice.getStatus()) {
                                         // accendo la luce
                                         smartDevice.setStatus(true);
                                     }
-                                    else if (net.getLevel() < Constants.WIFI_FAR_THRESHOLD && smartDevice.getLocalStatus()) {
+                                    else if (net.getLevel() < Constants.WIFI_FAR_THRESHOLD && smartDevice.getStatus()) {
                                         // spengo la luce
                                         smartDevice.setStatus(false);
                                     }

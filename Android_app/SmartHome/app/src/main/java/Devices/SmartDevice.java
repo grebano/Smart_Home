@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import Interfaces.HttpRequestCompleted;
+import Interfaces.ISmartDevice;
 import Miscellaneous.Constants;
 import Network.HttpRequests;
 
@@ -12,13 +13,14 @@ import Network.HttpRequests;
  * Classe che rappresenta un dispositivo smart
  */
 
-public class SmartDevice implements HttpRequestCompleted {
+public class SmartDevice implements HttpRequestCompleted, ISmartDevice {
 
     private final String TAG = "SmartDevice";
     private boolean status;
     private boolean isOnline = false;
     private final String nearestRouterMac;
     private final HttpRequests httpRequests;
+
 
     /**
      * Costruttore del dispositivo, con associazione alla classe http request (in ingresso ogg. interfaccia)
@@ -56,6 +58,7 @@ public class SmartDevice implements HttpRequestCompleted {
      * funzione che setterà lo stato del dispositivo
      * @param status boolean che rappresenta lo stato del dispositivo
      */
+    @Override
     public void setStatus(boolean status)
     {
         if(status)
@@ -64,14 +67,27 @@ public class SmartDevice implements HttpRequestCompleted {
             httpRequests.Request(Constants.OFF_PATH);
     }
 
+
     /**
      * funzione che restituisce lo stato del dispositivo
      * @return boolean
      */
-    public boolean getLocalStatus()
+    @Override
+    public boolean getStatus()
     {
         return this.status;
     }
+
+
+    /**
+     * funzione che restituisce il path http del dispositivo
+     * @return String
+     */
+    @Override
+    public String getPath() {
+        return this.httpRequests.getUrl();
+    }
+
 
     /**
      * funzione che esegue una richiesta http per ottenere lo stato del dispositivo
@@ -89,6 +105,7 @@ public class SmartDevice implements HttpRequestCompleted {
     public String getNearestRouterMac() {
         return this.nearestRouterMac;
     }
+
 
     /**
      * funzione da implementare per la gestione della risposta http
@@ -111,6 +128,11 @@ public class SmartDevice implements HttpRequestCompleted {
         Log.e(TAG,"Empty http Result");
     }
 
+
+    /**
+     * funzione che restituisce lo stato del dispositivo
+     * @return boolean
+     */
     public boolean checkIfOnline()
     {
         Log.i(TAG, "checkIfOnline: " + this.isOnline);

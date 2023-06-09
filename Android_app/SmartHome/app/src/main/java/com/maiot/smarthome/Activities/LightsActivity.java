@@ -267,7 +267,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
                 // visibilità immagini stato e settaggio testo pulsanti
                 for (int i = 0; i < count; i++) {
                     // la lampada è accesa
-                    if (deviceList.getLightsList().get(i).getLocalStatus()) {
+                    if (deviceList.getLightsList().get(i).getStatus()) {
                         onImages[i].setVisibility(View.VISIBLE);
                         offImages[i].setVisibility(View.INVISIBLE);
                         buttons[i].setText(R.string.turn_off);
@@ -311,7 +311,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
         int count = deviceList.checkLightsCount();
         if (count > 0 && index < count) {
             // inversione dello stato della lampada indicizzata
-            if (!deviceList.getLightsList().get(index).getLocalStatus()) {
+            if (!deviceList.getLightsList().get(index).getStatus()) {
 
                 deviceList.getLightsList().get(index).setStatus(true);
                 return;

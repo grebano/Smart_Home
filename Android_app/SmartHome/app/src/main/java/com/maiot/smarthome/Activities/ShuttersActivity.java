@@ -273,7 +273,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
                 // visibilità immagini stato e settaggio testo pulsanti
                 for (int i = 0; i < count; i++) {
                     // la tapparella è aperta
-                    if (deviceList.getShutterList().get(i).getLocalStatus()) {
+                    if (deviceList.getShutterList().get(i).getStatus()) {
                         openImages[i].setVisibility(View.VISIBLE);
                         closedImages[i].setVisibility(View.INVISIBLE);
                         buttons[i].setText(R.string.close);
@@ -317,7 +317,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         int count = deviceList.checkShutterCount();
         if (count > 0 && index < count) {
             // inversione dello stato della tapparella indicizzata
-            if (!deviceList.getShutterList().get(index).getLocalStatus()) {
+            if (!deviceList.getShutterList().get(index).getStatus()) {
 
                 deviceList.getShutterList().get(index).setStatus(true);
                 return;
