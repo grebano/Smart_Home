@@ -141,13 +141,13 @@ public class SettingsActivity extends AppCompatActivity {
             mac_lamp_3.setHint(IpAddr_MacAddr.LAMP3_MAC);
         }
         //------------------------------------------------------------------------------------------------
-        opening_time.setHint(Constants.MORNING_BEGINNING_TIME);
-        closing_time.setHint(Constants.NIGHT_BEGINNING_TIME);
+        opening_time.setHint(""+Constants.MORNING_BEGINNING_TIME);
+        closing_time.setHint(""+Constants.NIGHT_BEGINNING_TIME);
         //------------------------------------------------------------------------------------------------
-        high_Level_threshold.setHint(Constants.WIFI_NEAR_THRESHOLD);
-        low_Level_threshold.setHint(Constants.WIFI_FAR_THRESHOLD);
+        high_Level_threshold.setHint(""+Constants.WIFI_NEAR_THRESHOLD);
+        low_Level_threshold.setHint(""+Constants.WIFI_FAR_THRESHOLD);
         //------------------------------------------------------------------------------------------------
-        http_timeout.setHint(Constants.DEVICE_ONLINE_DELAY);
+        http_timeout.setHint(""+Constants.DEVICE_ONLINE_DELAY);
 
     }
 
