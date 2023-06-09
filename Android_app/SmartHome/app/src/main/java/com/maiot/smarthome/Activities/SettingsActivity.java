@@ -468,4 +468,29 @@ public class SettingsActivity extends AppCompatActivity {
         mac_lamp_3.setFilters(filters);
     }
 
+    /**
+     * filtro per la edittext del timeout http
+     * che controlla che il numero inserito sia composto da 3 cifre
+     * e che non sia negativo
+     */
+    private void timeoutEditTextFilter() {
+        InputFilter[] filters = new InputFilter[1];
+        filters[0] = (source, start, end, dest, dstart, dend) -> {
+            if (end > start) {
+                String destTxt = dest.toString();
+                String resultingTxt = destTxt.substring(0, dstart)
+                        + source.subSequence(start, end)
+                        + destTxt.substring(dend);
+                if (!resultingTxt.matches("^\\d{1,3}$")) {
+                    return "";
+                } else {
+                    if (Integer.parseInt(resultingTxt) < 0) {
+                        return "";
+                    }
+                }
+            }
+            return null;
+        };
+        http_timeout.setFilters(filters);
+    }
 }
