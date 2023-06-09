@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SmartHome</string>
+
+    <!-- Activities -->
     <string name="LAUNCH_LIGHTS_ACTIVITY">com.maiot.smarthome.Activities.LightsActivity</string>
     <string name="LAUNCH_SHUTTERS_ACTIVITY">com.maiot.smarthome.Activities.ShuttersActivity</string>
     <string name="LAUNCH_AUTOMATIONS_ACTIVITY">com.maiot.smarthome.Activities.AutomationsActivity</string>
@@ -10,14 +12,19 @@
     <string name="LABEL_MESSAGE_AUTOMATIONS">Label_Message_automations</string>
     <string name="LABEL_MESSAGE_SETTINGS">Label_Message_settings</string>
 
+    <!-- Automatic mode in shutters and lights -->
     <string name="AUTOMATIC_MODE">Automatic mode activated!</string>
 
+    <!-- Automations -->
     <string name="DAY_MODE_ON">Day mode activated!</string>
     <string name="NIGHT_MODE_ON">Night mode activated!</string>
     <string name="HOME_GYM_MODE_ON">Home gym mode activated!</string>
     <string name="VACATION_MODE_ON">Vacation mode activated!</string>
 
+    <!-- Errors -->
     <string name="NULL_OBJECT">Trying to access to a null object</string>
+
+    <!-- Xml -->
     <string name="turn_off">Turn Off</string>
     <string name="turn_on">Turn On</string>
     <string name="close">Close</string>
