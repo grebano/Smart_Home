@@ -87,14 +87,16 @@ public class HttpRequests {
                         Log.e(TAG,"Error connecting to device via http - error opening stream");
                     }
                 } finally {
-                    assert urlConnection != null;
-                    urlConnection.disconnect();
+                    if (urlConnection != null) {
+                        urlConnection.disconnect();
+                    }
                 }
             } catch (IOException e) {
                 Log.e(TAG,"Error connecting to device via http - connection failed");
             }
-            assert urlConnection != null;
-            urlConnection.disconnect();
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
 
             // invio della risposta alle classi "iscritte"
             for(HttpRequestCompleted requestCompleted : httpRequestList)

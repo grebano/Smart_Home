@@ -72,7 +72,7 @@ public class AutomationsActivity extends AppCompatActivity {
      */
     private void dayMode() {
         bttDayMode.setOnClickListener(view -> {
-            if(thereAreAvailableDevices(true)) {
+            if(thereAreAvailableDevices()) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE_ON, Toast.LENGTH_SHORT).show();
 
@@ -108,7 +108,7 @@ public class AutomationsActivity extends AppCompatActivity {
      */
     private void nightMode() {
         bttNightMode.setOnClickListener(view -> {
-            if(thereAreAvailableDevices(true)) {
+            if(thereAreAvailableDevices()) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE_ON, Toast.LENGTH_SHORT).show();
 
@@ -137,7 +137,7 @@ public class AutomationsActivity extends AppCompatActivity {
      */
     private void homeGymMode() {
         bttHomeGymMode.setOnClickListener(view -> {
-            if(thereAreAvailableDevices(true)) {
+            if(thereAreAvailableDevices()) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE_ON, Toast.LENGTH_SHORT).show();
 
@@ -166,7 +166,7 @@ public class AutomationsActivity extends AppCompatActivity {
      */
     private void vacationMode() {
         bttVacationMode.setOnClickListener(view -> {
-            if(thereAreAvailableDevices(true)) {
+            if(thereAreAvailableDevices()) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE_ON, Toast.LENGTH_SHORT).show();
 
@@ -199,20 +199,13 @@ public class AutomationsActivity extends AppCompatActivity {
 
     /**
      * Metodo che controlla se ci sono dispositivi disponibili per le automazioni
-     * @param withToast true se si vuole visualizzare un toast in caso non ci siano dispositivi disponibili
      * @return true se ci sono dispositivi disponibili, false altrimenti
      */
-    private boolean thereAreAvailableDevices(boolean withToast)
+    private boolean thereAreAvailableDevices()
     {
 
         boolean shutters = deviceList.checkShutterCount(this, true) > 0;
         boolean lamps = deviceList.checkLightsCount(this, true) > 0;
-
-        if(withToast) {
-            if((!lamps) && (!shutters)) {
-               Toast.makeText(AutomationsActivity.this, "there are no available devices", Toast.LENGTH_SHORT).show();
-            }
-        }
         return (lamps || shutters);
     }
 }

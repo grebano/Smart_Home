@@ -168,4 +168,5 @@ public class LightsService extends Service implements WifiScanCompleted {
         Handler handler = new Handler();
         handler.postDelayed(() -> wifiManager.startScan(), Constants.LIGHTS_DELAY_IN_MILLIS);
     }
+
 }

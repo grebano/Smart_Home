@@ -89,7 +89,7 @@ public class DeviceList {
         handler.postDelayed(() -> {
             for(SmartDevice smartDevice : shutterList)
             {
-                if(!smartDevice.checkIfOnline())
+                if(smartDevice.checkIfOnline())
                 {
                     shutterList.remove(smartDevice);
                     Log.i(TAG,"Shutter removed -> not online");

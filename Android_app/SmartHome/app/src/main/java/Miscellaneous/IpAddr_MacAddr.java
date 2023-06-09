@@ -15,7 +15,7 @@ public class IpAddr_MacAddr {
     public static String SHUTTER3_MAC = "";
     //----------------------------------------------------------
     //----------------------------------------------------------
-    public static String LAMP1_IP = "192.168.1.24";
+    public static String LAMP1_IP = "192.168.1.7";
     public static String LAMP1_MAC = "b2:b7:09:23:92:2d";
     //----------------------------------------------------------
     public static String LAMP2_IP = "";

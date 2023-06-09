@@ -113,6 +113,7 @@ public class SmartDevice implements HttpRequestCompleted {
 
     public boolean checkIfOnline()
     {
+        Log.i(TAG, "checkIfOnline: " + this.isOnline);
         return this.isOnline;
     }
 }
