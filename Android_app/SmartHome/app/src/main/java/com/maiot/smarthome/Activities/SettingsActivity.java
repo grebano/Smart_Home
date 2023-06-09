@@ -120,6 +120,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (IpAddr_MacAddr.SHUTTER3_IP != null && !IpAddr_MacAddr.SHUTTER3_IP.equals("")) {
             ip_shutter_3.setHint(IpAddr_MacAddr.SHUTTER3_IP);
         }
+        //--------------------------------------------------------------------------------------------
         if (IpAddr_MacAddr.LAMP1_IP != null && !IpAddr_MacAddr.LAMP1_IP.equals("")) {
             ip_lamp_1.setHint(IpAddr_MacAddr.LAMP1_IP);
         }
@@ -129,6 +130,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (IpAddr_MacAddr.LAMP3_IP != null && !IpAddr_MacAddr.LAMP3_IP.equals("")) {
             ip_lamp_3.setHint(IpAddr_MacAddr.LAMP3_IP);
         }
+        //------------------------------------------------------------------------------------------------
         if (IpAddr_MacAddr.LAMP1_MAC != null && !IpAddr_MacAddr.LAMP1_MAC.equals("")) {
             mac_lamp_1.setHint(IpAddr_MacAddr.LAMP1_MAC);
         }
@@ -138,6 +140,15 @@ public class SettingsActivity extends AppCompatActivity {
         if (IpAddr_MacAddr.LAMP3_MAC != null && !IpAddr_MacAddr.LAMP3_MAC.equals("")) {
             mac_lamp_3.setHint(IpAddr_MacAddr.LAMP3_MAC);
         }
+        //------------------------------------------------------------------------------------------------
+        opening_time.setHint(Constants.MORNING_BEGINNING_TIME);
+        closing_time.setHint(Constants.NIGHT_BEGINNING_TIME);
+        //------------------------------------------------------------------------------------------------
+        high_Level_threshold.setHint(Constants.WIFI_NEAR_THRESHOLD);
+        low_Level_threshold.setHint(Constants.WIFI_FAR_THRESHOLD);
+        //------------------------------------------------------------------------------------------------
+        http_timeout.setHint(Constants.DEVICE_ONLINE_DELAY);
+
     }
 
 
