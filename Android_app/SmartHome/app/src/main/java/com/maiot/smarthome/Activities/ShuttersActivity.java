@@ -143,7 +143,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             // visibilità layout e pulsanti in base all'esistenza dei dispositivi
             for(LinearLayout linearLayout : layouts)
             {
-                if(deviceList.getShutterList() != null) {
+                if(checkIfThereAreShutters()) {
                     if (i < deviceList.getShutterList().size()) {
                         linearLayout.setVisibility(View.VISIBLE);
                         buttons[i].setVisibility(View.VISIBLE);
@@ -202,7 +202,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
             bttShuttersModeAuto.setClickable(false);
             bttShuttersModeManual.setClickable(true);
 
-            if(deviceList.checkShutterCount(this,true) > 0) {
+            if(checkIfThereAreShutters()) {
 
                 // visualizzazione a schermo
                 Toast.makeText(ShuttersActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
@@ -267,7 +267,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     // avendo però aggiornato lo stato dei vari dispositivi
     private void setImageStatus(boolean withHttpRequest)
     {
-        int count = deviceList.checkShutterCount(this, false);
+        int count = deviceList.checkShutterCount();
         if(!withHttpRequest) {
             if (count > 0) {
                 // visibilità immagini stato e settaggio testo pulsanti
@@ -314,7 +314,7 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        int count = deviceList.checkShutterCount(this, false);
+        int count = deviceList.checkShutterCount();
         if (count > 0 && index < count) {
             // inversione dello stato della tapparella indicizzata
             if (!deviceList.getShutterList().get(index).getLocalStatus()) {
@@ -335,6 +335,15 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
     private void goBackButton(){
         bttShuttersBack = findViewById(R.id.bttShuttersBack);
         bttShuttersBack.setOnClickListener(view -> finish());
+    }
+
+    /**
+     * funzione che controlla se ci sono tapparelle nella lista dei dispositivi
+     * @return true se ci sono tapparelle, false altrimenti
+     */
+    private boolean checkIfThereAreShutters()
+    {
+        return deviceList.checkShutterCount() > 0;
     }
 
     /**

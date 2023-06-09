@@ -132,7 +132,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
 
             for(LinearLayout linearLayout : layouts)
             {
-                if(deviceList.getLightsList() != null)
+                if(checkIfThereAreLamps())
                 {
                     if(i < deviceList.getLightsList().size()) {
                         linearLayout.setVisibility(View.VISIBLE);
@@ -194,7 +194,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
             bttLightsModeAuto.setClickable(false);
             bttLightsModeManual.setClickable(true);
 
-            if(deviceList.checkLightsCount(this,true) > 0) {
+            if(checkIfThereAreLamps()) {
 
                 // visualizzazione a schermo
                 Toast.makeText(LightsActivity.this, R.string.AUTOMATIC_MODE, Toast.LENGTH_SHORT).show();
@@ -261,7 +261,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     // avendo però aggiornato lo stato dei vari dispositivi
     private void setImageStatus(boolean withHttpRequest)
     {
-        int count = deviceList.checkLightsCount(this, false);
+        int count = deviceList.checkLightsCount();
         if(!withHttpRequest) {
             if (count > 0) {
                 // visibilità immagini stato e settaggio testo pulsanti
@@ -308,7 +308,7 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private void toggleDeviceStatus(int index)
     {
         index -= 1;
-        int count = deviceList.checkLightsCount(this, false);
+        int count = deviceList.checkLightsCount();
         if (count > 0 && index < count) {
             // inversione dello stato della lampada indicizzata
             if (!deviceList.getLightsList().get(index).getLocalStatus()) {
@@ -329,6 +329,15 @@ public class LightsActivity extends AppCompatActivity implements HttpRequestComp
     private void goBackButton(){
         bttLightsBack = findViewById(R.id.bttLightsBack);
         bttLightsBack.setOnClickListener(view -> finish());
+    }
+
+    /**
+     * funzione che controlla se ci sono luci nella lista dei dispositivi
+     * @return true se ci sono luci, false altrimenti
+     */
+    private boolean checkIfThereAreLamps()
+    {
+        return deviceList.checkLightsCount() > 0;
     }
 
     /**
