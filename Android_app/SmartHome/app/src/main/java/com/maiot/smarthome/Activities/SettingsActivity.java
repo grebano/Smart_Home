@@ -37,6 +37,9 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText high_Level_threshold = null;
     private EditText low_Level_threshold = null;
 
+    // tempo di timeout per la connessione http
+    private EditText http_timeout = null;
+
     // indirizzi ip e mac delle tapparelle
     private EditText ip_shutter_1 = null;
     private EditText ip_shutter_2 = null;
@@ -81,6 +84,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         low_Level_threshold = findViewById(R.id.low_Level_threshold);
 
+        http_timeout = findViewById(R.id.http_timeout);
+
         ip_shutter_1 = findViewById(R.id.ip_shutter_1);
 
         ip_shutter_2 = findViewById(R.id.ip_shutter_2);
@@ -104,7 +109,7 @@ public class SettingsActivity extends AppCompatActivity {
      * funzione che setta gli hint degli edit text controllando che i valori iniziali non siano nulli
      */
     private void setHintEditText() {
-        // TODO: 10/05/2021 settare anche gli hint per tapparelle e wifi (magari usare dei loop)
+        //TODO: 10/05/2021 settare anche gli hint per tapparelle e wifi (magari usare dei loop)
 
         if (IpAddr_MacAddr.SHUTTER1_IP != null && !IpAddr_MacAddr.SHUTTER1_IP.equals("")) {
             ip_shutter_1.setHint(IpAddr_MacAddr.SHUTTER1_IP);
@@ -156,6 +161,8 @@ public class SettingsActivity extends AppCompatActivity {
 
             highLevelThresholdEditText();
             lowLevelThresholdEditText();
+
+            timeoutEditText();
 
             ipShutter1EditText();
             ipShutter2EditText();
@@ -258,6 +265,24 @@ public class SettingsActivity extends AppCompatActivity {
         }
         Constants.WIFI_FAR_THRESHOLD = Integer.parseInt(low_Level_threshold.getText().toString());
         Log.i(TAG, "lowLevelThresholdEditText: " + Constants.WIFI_FAR_THRESHOLD);
+    }
+
+    /**
+     * funzione che gestisce il tempo di timeout
+     */
+    private void timeoutEditText() {
+        // controllo che il campo non sia vuoto
+        if (http_timeout.getText().toString().equals("")) {
+            Log.i(TAG, "timeoutEditText: campo vuoto");
+            return;
+        }
+        // controllo che il tempo inserito sia valido
+        if (Integer.parseInt(http_timeout.getText().toString()) < 0 || Integer.parseInt(http_timeout.getText().toString()) > 1000) {
+            Log.i(TAG, "timeoutEditText: tempo inserito non valido");
+            return;
+        }
+        Constants.DEVICE_ONLINE_DELAY = Integer.parseInt(http_timeout.getText().toString());
+        Log.i(TAG, "timeoutEditText: " + Constants.DEVICE_ONLINE_DELAY);
     }
 
     /**

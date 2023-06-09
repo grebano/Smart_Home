@@ -120,6 +120,18 @@ public class DeviceList {
     }
 
     /**
+     * Metodo che controlla il numero di lampade disponibili
+     * @return count
+     */
+    public int checkLightsCount()
+    {
+        if(lightsList != null) {
+            return lightsList.size();
+        }
+        return 0;
+    }
+
+    /**
      * Metodo che controlla se ci sono tapparelle disponibili
      * @param withToast booleano che indica se visualizzare o meno il toast
      * @return count
@@ -135,6 +147,18 @@ public class DeviceList {
                 }
             }
             return count;
+        }
+        return 0;
+    }
+
+    /**
+     * Metodo che controlla se ci sono tapparelle disponibili
+     * @return count
+     */
+    public int checkShutterCount()
+    {
+        if(shutterList != null) {
+            return shutterList.size();
         }
         return 0;
     }

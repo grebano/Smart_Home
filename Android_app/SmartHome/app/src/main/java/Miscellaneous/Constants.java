@@ -25,7 +25,7 @@ public class Constants {
     public static final int SHUTTER_TIMER_DELAY_IN_MILLIS = 0;
     public static final int SHUTTER_TIMER_PERIOD_IN_MILLIS = 120000;
     public static final int LIGHTS_DELAY_IN_MILLIS = 30000;
-    public static final int DEVICE_ONLINE_DELAY = 500;
+    public static int DEVICE_ONLINE_DELAY = 500;
     public static int NIGHT_BEGINNING_TIME = 18;
     public static int MORNING_BEGINNING_TIME = 7;
     //--------------------------------------------------------

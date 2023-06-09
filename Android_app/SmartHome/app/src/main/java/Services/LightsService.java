@@ -83,7 +83,6 @@ public class LightsService extends Service implements WifiScanCompleted {
         // notifico l'utente che il servizio è attivo
         addNotification();
         return START_STICKY;
-
     }
 
 
@@ -133,7 +132,7 @@ public class LightsService extends Service implements WifiScanCompleted {
             for (Net net : networks) {
                 if(net != null) {
                     // controllo se la rete è presente nella lista dei dispositivi
-                    if(deviceList.getLightsList() != null && deviceList.getLightsList().size() > 0) {
+                    if(checkIfThereAreLamps()) {
                         for (SmartDevice smartDevice : deviceList.getLightsList()) {
                             if(smartDevice != null) {
                                 if (smartDevice.getNearestRouterMac().equals(net.getBssid())) {
@@ -159,6 +158,15 @@ public class LightsService extends Service implements WifiScanCompleted {
         }
         delayedScan();
         Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+    }
+
+    /**
+     * funzione che controlla se ci sono luci nella lista dei dispositivi
+     * @return true se ci sono luci, false altrimenti
+     */
+    private boolean checkIfThereAreLamps()
+    {
+        return deviceList.checkLightsCount() > 0;
     }
 
     /**

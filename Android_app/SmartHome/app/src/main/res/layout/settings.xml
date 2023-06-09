@@ -57,12 +57,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set the time limits for the shutters"
-                android:textSize="15dp"
+                android:text="-- Set shutters timings --"
+                android:textSize="17dp"
                 android:fontFamily="serif-monospace"
                 android:textStyle="bold"
                 android:textColor="@color/Settings_Title"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:visibility="visible"
                 />
 
@@ -135,8 +135,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set the wifi thresholds"
-                android:textSize="15dp"
+                android:text="-- Set wifi thresholds --"
+                android:textSize="17dp"
                 android:fontFamily="serif-monospace"
                 android:textStyle="bold"
                 android:textColor="@color/Settings_Title"
@@ -209,12 +209,63 @@
                     />
             </LinearLayout>
 
+            <!-- textview per il tempo di timeout -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-- Set Http timeout --"
+                android:textSize="17dp"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textColor="@color/Settings_Title"
+                android:layout_marginTop="40dp"
+                android:visibility="visible"
+                />
+
+            <!-- layout per il tempo di timeout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:visibility="visible">
+
+                <!-- textview per il tempo di timeout -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Timeout :"
+                    android:textSize="15dp"
+                    android:fontFamily="serif-monospace"
+                    android:textStyle="bold"
+                    android:textColor="@color/Settings_Title"
+                    android:visibility="visible"
+                    />
+
+                <!-- edittext per il tempo di timeout -->
+                <EditText
+                    android:id="@+id/http_timeout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="ms"
+                    android:inputType="text"
+                    android:textColor="@color/Settings_Title"
+                    android:textColorHint="@color/Settings_Title"
+                    android:textSize="15dp"
+                    android:fontFamily="serif-monospace"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    />
+
+            </LinearLayout>
+
             <!-- textview per ip e mac tapparelle -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set the ip of the shutters"
-                android:textSize="15dp"
+                android:text="-- Set shutters ip address --"
+                android:textSize="17dp"
                 android:fontFamily="serif-monospace"
                 android:textStyle="bold"
                 android:textColor="@color/Settings_Title"
@@ -351,8 +402,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set the ip and mac of the lamps"
-                android:textSize="15dp"
+                android:text="-- Set lamps ip and mac --"
+                android:textSize="17dp"
                 android:fontFamily="serif-monospace"
                 android:textStyle="bold"
                 android:textColor="@color/Settings_Title"

@@ -105,7 +105,7 @@ public class ShuttersService extends Service {
             @Override
             public void run() {
                 currentTime = new SimpleDateFormat("HH", Locale.getDefault()).format(new Date());
-                if(deviceList.getShutterList() != null && deviceList.getShutterList().size() > 0) {
+                if(checkIfThereAreShutters()) {
                     // se l'ora corrente è compresa nell'intervallo specificato
                     if (Integer.parseInt(currentTime) >= Constants.NIGHT_BEGINNING_TIME ||
                             Integer.parseInt(currentTime) <= Constants.MORNING_BEGINNING_TIME) {
@@ -126,6 +126,15 @@ public class ShuttersService extends Service {
         };
         // si schedula un'azione ogni x min senza delay iniziale
         timer.scheduleAtFixedRate(timerTask,Constants.SHUTTER_TIMER_DELAY_IN_MILLIS,Constants.SHUTTER_TIMER_PERIOD_IN_MILLIS);
+    }
+
+    /**
+     * funzione che controlla se ci sono tapparelle nella lista dei dispositivi
+     * @return true se ci sono tapparelle, false altrimenti
+     */
+    private boolean checkIfThereAreShutters()
+    {
+        return deviceList.checkShutterCount() > 0;
     }
 
     /**

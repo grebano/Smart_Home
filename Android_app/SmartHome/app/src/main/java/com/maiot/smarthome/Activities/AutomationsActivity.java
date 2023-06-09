@@ -84,7 +84,7 @@ public class AutomationsActivity extends AppCompatActivity {
                 }
 
                 // apertura tapparelle e spegnimento luci
-                if (deviceList.getShutterList() != null) {
+                if (deviceList.checkShutterCount() > 0) {
                     for (SmartDevice shutter : deviceList.getShutterList()) {
                         shutter.setStatus(true);
                     }
@@ -92,7 +92,7 @@ public class AutomationsActivity extends AppCompatActivity {
                     Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
                 }
 
-                if (deviceList.getLightsList() != null) {
+                if (deviceList.checkLightsCount() > 0) {
                     for (SmartDevice light : deviceList.getLightsList()) {
                         light.setStatus(false);
                     }
@@ -115,13 +115,13 @@ public class AutomationsActivity extends AppCompatActivity {
                 // si controlla che il servizio stia girando, in caso contrario lo si avvia
                 if (ShuttersService.isRunning) {
                     Log.i(TAG, "ShuttersService is already running");
-                } else {
+                } else if(deviceList.checkShutterCount() > 0) {
                     startForegroundService(new Intent(this, ShuttersService.class));
                     Log.i(TAG, "ShuttersService is not running");
                 }
 
                 // spegnimento luci
-                if (deviceList.getLightsList() != null) {
+                if (deviceList.checkLightsCount() > 0) {
                     for (SmartDevice light : deviceList.getLightsList()) {
                         light.setStatus(false);
                     }
