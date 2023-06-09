@@ -64,6 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
         // inizializzazione dei filtri per gli input
         ipEditTextFilter();
         macEditTextFilter();
+        timeoutEditTextFilter();
 
         // gestione del click sul bottone per tornare alla main activity
         goBackButton();
