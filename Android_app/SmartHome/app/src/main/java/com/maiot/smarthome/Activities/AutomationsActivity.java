@@ -12,6 +12,7 @@ import com.maiot.smarthome.R;
 
 import Devices.DeviceList;
 import Devices.SmartDevice;
+import Services.LightsService;
 import Services.ShuttersService;
 
 
@@ -77,11 +78,7 @@ public class AutomationsActivity extends AppCompatActivity {
                 Toast.makeText(AutomationsActivity.this, R.string.DAY_MODE_ON, Toast.LENGTH_SHORT).show();
 
                 // si controlla che il servizio stia girando, nel caso lo si arresta
-                if (ShuttersService.isRunning) {
-                    stopService(new Intent(this, ShuttersService.class));
-                } else {
-                    Log.i(TAG, "ShuttersService is not running");
-                }
+                stopAllServices();
 
                 // apertura tapparelle e spegnimento luci
                 if (deviceList.checkShutterCount() > 0) {
@@ -112,10 +109,11 @@ public class AutomationsActivity extends AppCompatActivity {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.NIGHT_MODE_ON, Toast.LENGTH_SHORT).show();
 
+                // si controlla che il servizio stia girando, nel caso lo si arresta
+                stopAllServices();
+
                 // si controlla che il servizio stia girando, in caso contrario lo si avvia
-                if (ShuttersService.isRunning) {
-                    Log.i(TAG, "ShuttersService is already running");
-                } else if(deviceList.checkShutterCount() > 0) {
+                if(deviceList.checkShutterCount() > 0) {
                     startForegroundService(new Intent(this, ShuttersService.class));
                     Log.i(TAG, "ShuttersService is not running");
                 }
@@ -140,6 +138,9 @@ public class AutomationsActivity extends AppCompatActivity {
             if(thereAreAvailableDevices()) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.HOME_GYM_MODE_ON, Toast.LENGTH_SHORT).show();
+
+                // si controlla che il servizio stia girando, nel caso lo si arresta
+                stopAllServices();
 
                 if (deviceList.getShutterList() != null) {
                     // chiusura tapparelle e accensione luce sala pesi
@@ -169,6 +170,9 @@ public class AutomationsActivity extends AppCompatActivity {
             if(thereAreAvailableDevices()) {
                 // visualizzazione a schermo
                 Toast.makeText(AutomationsActivity.this, R.string.VACATION_MODE_ON, Toast.LENGTH_SHORT).show();
+
+                // si controlla che il servizio stia girando, nel caso lo si arresta
+                stopAllServices();
 
                 // chiusura tapparelle e spegnimento luci
                 if (deviceList.getShutterList() != null) {
@@ -208,5 +212,36 @@ public class AutomationsActivity extends AppCompatActivity {
         boolean lamps = deviceList.checkLightsCount(this, true) > 0;
         return (lamps || shutters);
     }
+
+    /**
+     * Metodo che arresta il servizio delle tapparelle se sta girando
+     */
+    private void stopShuttersService() {
+        if (ShuttersService.isRunning) {
+            stopService(new Intent(this, ShuttersService.class));
+        } else {
+            Log.i(TAG, "ShuttersService is not running");
+        }
+    }
+
+    /**
+     * Merodo che arresta il servizio delle lampade se sta girando
+     */
+    private void stopLightsService() {
+        if (LightsService.isRunning) {
+            stopService(new Intent(this, LightsService.class));
+        } else {
+            Log.i(TAG, "LightsService is not running");
+        }
+    }
+
+    /**
+     * Metodo che arresta tutti i servizi se stanno girando
+     */
+    private void stopAllServices() {
+        stopShuttersService();
+        stopLightsService();
+    }
+
 }
 
