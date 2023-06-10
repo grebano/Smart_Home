@@ -81,21 +81,9 @@ public class AutomationsActivity extends AppCompatActivity {
                 stopAllServices();
 
                 // apertura tapparelle e spegnimento luci
-                if (deviceList.checkShutterCount() > 0) {
-                    for (SmartDevice shutter : deviceList.getShutterList()) {
-                        shutter.setStatus(true);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
+                openAllShutters();
 
-                if (deviceList.checkLightsCount() > 0) {
-                    for (SmartDevice light : deviceList.getLightsList()) {
-                        light.setStatus(false);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
+                turnOffAllLights();
             }
         });
     }
@@ -113,19 +101,10 @@ public class AutomationsActivity extends AppCompatActivity {
                 stopAllServices();
 
                 // si controlla che il servizio stia girando, in caso contrario lo si avvia
-                if(deviceList.checkShutterCount() > 0) {
-                    startForegroundService(new Intent(this, ShuttersService.class));
-                    Log.i(TAG, "ShuttersService is not running");
-                }
+                startShuttersService();
 
                 // spegnimento luci
-                if (deviceList.checkLightsCount() > 0) {
-                    for (SmartDevice light : deviceList.getLightsList()) {
-                        light.setStatus(false);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
+                turnOffAllLights();
             }
         });
     }
@@ -142,22 +121,10 @@ public class AutomationsActivity extends AppCompatActivity {
                 // si controlla che il servizio stia girando, nel caso lo si arresta
                 stopAllServices();
 
-                if (deviceList.getShutterList() != null) {
-                    // chiusura tapparelle e accensione luce sala pesi
-                    for (SmartDevice shutter : deviceList.getShutterList()) {
-                        shutter.setStatus(false);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
-                if (deviceList.getLightsList() != null) {
-                    for (int i = 0; i < deviceList.getLightsList().size(); i++) {
-                        // la lampada 3 sarà quella in sala pesi
-                        deviceList.getLightsList().get(i).setStatus(i == 2);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
+                // chiusura tapparelle e accensione luce sala pesi
+                closeAllShutters();
+
+                turnOnGymLight();
             }
         });
     }
@@ -175,20 +142,9 @@ public class AutomationsActivity extends AppCompatActivity {
                 stopAllServices();
 
                 // chiusura tapparelle e spegnimento luci
-                if (deviceList.getShutterList() != null) {
-                    for (SmartDevice light : deviceList.getShutterList()) {
-                        light.setStatus(false);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
-                if (deviceList.getLightsList() != null) {
-                    for (SmartDevice light : deviceList.getLightsList()) {
-                        light.setStatus(false);
-                    }
-                } else {
-                    Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
-                }
+                closeAllShutters();
+
+                turnOffAllLights();
             }
         });
     }
@@ -242,6 +198,104 @@ public class AutomationsActivity extends AppCompatActivity {
         stopShuttersService();
         stopLightsService();
     }
+
+    /**
+     * Metodo che avvia il servizio delle tapparelle se non sta girando
+     */
+    private void startShuttersService() {
+        if (!ShuttersService.isRunning) {
+            startForegroundService(new Intent(this, ShuttersService.class));
+        } else {
+            Log.i(TAG, "ShuttersService is now running");
+        }
+    }
+
+    /**
+     * Metodo che avvia il servizio delle lampade se non sta girando
+     */
+    private void startLightsService() {
+        if (!LightsService.isRunning) {
+            startForegroundService(new Intent(this, LightsService.class));
+        } else {
+            Log.i(TAG, "LightsService is now running");
+        }
+    }
+
+    /**
+     * Metodo che avvia tutti i servizi se non stanno girando
+     */
+    private void startAllServices() {
+        startShuttersService();
+        startLightsService();
+    }
+
+    /**
+     * Metodo che apre tutte le tapparelle
+     */
+    private void openAllShutters() {
+        if (deviceList.getShutterList() != null) {
+            for (SmartDevice shutter : deviceList.getShutterList()) {
+                shutter.setStatus(true);
+            }
+        } else {
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        }
+    }
+
+    /**
+     * Metodo che chiude tutte le tapparelle
+     */
+    private void closeAllShutters() {
+        if (deviceList.getShutterList() != null) {
+            for (SmartDevice shutter : deviceList.getShutterList()) {
+                shutter.setStatus(false);
+            }
+        } else {
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        }
+    }
+
+    /**
+     * Metodo che accende tutte le luci
+     */
+    private void turnOnAllLights() {
+        if (deviceList.getLightsList() != null) {
+            for (SmartDevice light : deviceList.getLightsList()) {
+                light.setStatus(true);
+            }
+        } else {
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        }
+    }
+
+
+    /**
+     * Metodo che spegne tutte le luci
+     */
+    private void turnOffAllLights() {
+        if (deviceList.getLightsList() != null) {
+            for (SmartDevice light : deviceList.getLightsList()) {
+                light.setStatus(false);
+            }
+        } else {
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        }
+    }
+
+    /**
+     * Metodo che accende la luce della sala pesi
+     */
+    private void turnOnGymLight() {
+        if (deviceList.getLightsList() != null) {
+            for (int i = 0; i < deviceList.getLightsList().size(); i++) {
+                // la lampada 3 sarà quella in sala pesi
+                deviceList.getLightsList().get(i).setStatus(i == 2);
+            }
+        } else {
+            Log.e(TAG, getResources().getString(R.string.NULL_OBJECT));
+        }
+    }
+
 
 }
 
