@@ -168,6 +168,70 @@
 
     </LinearLayout>
 
+    <!-- Layout modalità full auto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <!-- Bottone per la modalità full auto -->
+        <Button
+            android:id="@+id/bttFullAutoMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Full Auto Mode"
+            android:textSize="15dp"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+
+        <!-- Immagine modalità full auto -->
+        <ImageView
+            android:id="@+id/imgFullAutoMode"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/automatic"
+            android:layout_marginLeft="10dp"
+            android:visibility="visible"
+            />
+    </LinearLayout>
+
+    <!-- Layout modalità benvenuto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <!-- Bottone per la modalità benvenuto -->
+        <Button
+            android:id="@+id/bttWelcomeMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="Welcome Mode"
+            android:textSize="15dp"
+            android:textColor="@color/textColor"
+            android:fontFamily="monospace"
+            />
+
+        <!-- Immagine modalità benvenuto -->
+        <ImageView
+            android:id="@+id/imgWelcomeMode"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/welcome"
+            android:layout_marginLeft="10dp"
+            android:visibility="visible"
+            />
+    </LinearLayout>
+
     <!-- Bottone per tornare indietro -->
     <Button
         android:id="@+id/bttAutomationsBack"
@@ -179,7 +243,7 @@
         android:fontFamily="monospace"
         android:clickable="true"
         android:backgroundTint="@color/ButtonBackground"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="80dp"
         android:layout_marginLeft="100dp"/>
 
 </LinearLayout>

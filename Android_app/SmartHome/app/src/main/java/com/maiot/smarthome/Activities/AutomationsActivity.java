@@ -27,6 +27,8 @@ public class AutomationsActivity extends AppCompatActivity {
     private Button bttNightMode = null;
     private Button bttHomeGymMode = null;
     private Button bttVacationMode = null;
+    private Button bttFullAutoMode = null;
+    private Button bttWelcomeMode = null;
 
     // bottone per tornare alla main activity
     private Button bttAutomationsBack = null;
@@ -63,8 +65,14 @@ public class AutomationsActivity extends AppCompatActivity {
         homeGymMode();
         bttVacationMode = findViewById(R.id.bttVacationMode);
         vacationMode();
+        bttFullAutoMode = findViewById(R.id.bttFullAutoMode);
+        fullAutoMode();
+        bttWelcomeMode = findViewById(R.id.bttWelcomeMode);
+        welcomeMode();
+
         bttAutomationsBack = findViewById((R.id.bttAutomationsBack));
         goBackButton();
+
 
     }
 
@@ -150,6 +158,45 @@ public class AutomationsActivity extends AppCompatActivity {
     }
 
     /**
+     * Metodo che gestisce il click sul bottone per la "full auto mode"
+     */
+    private void fullAutoMode() {
+        bttFullAutoMode.setOnClickListener(view -> {
+            if (thereAreAvailableDevices()) {
+                // visualizzazione a schermo
+                Toast.makeText(AutomationsActivity.this, R.string.FULL_AUTO_MODE_ON, Toast.LENGTH_SHORT).show();
+
+                // si controlla che il servizio stia girando, nel caso lo si arresta
+                stopAllServices();
+
+                // si controlla che il servizio stia girando, in caso contrario lo si avvia
+                startAllServices();
+            }
+        });
+    }
+
+    /**
+     * Metodo che gestisce il click sul bottone per la "welcome mode"
+     */
+    private void welcomeMode() {
+        bttWelcomeMode.setOnClickListener(view -> {
+            if (thereAreAvailableDevices()) {
+                // visualizzazione a schermo
+                Toast.makeText(AutomationsActivity.this, R.string.WELCOME_MODE_ON, Toast.LENGTH_SHORT).show();
+
+                // si controlla che il servizio stia girando, nel caso lo si arresta
+                stopAllServices();
+
+                // apertura tapparelle e accensione luci
+                openAllShutters();
+
+                turnOnAllLights();
+            }
+        });
+    }
+
+
+    /**
      * Metodo che gestisce il click sul bottone per tornare alla schermata precedente
      */
     private void goBackButton(){
@@ -163,7 +210,6 @@ public class AutomationsActivity extends AppCompatActivity {
      */
     private boolean thereAreAvailableDevices()
     {
-
         boolean shutters = deviceList.checkShutterCount(this, true) > 0;
         boolean lamps = deviceList.checkLightsCount(this, true) > 0;
         return (lamps || shutters);
