@@ -108,63 +108,99 @@
             />
     </LinearLayout>
 
-    <!-- Layout impostazioni -->
+    <!-- Layout distruzione servizi -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="40dp"
         android:gravity="center">
 
-        <!-- Immagine impostazioni -->
+        <!-- Immagine distruzione servizi -->
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/setting"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/stop"
             android:layout_marginRight="20dp"
             />
 
-        <!-- Bottone per gestire le impostazioni -->
+        <!-- Bottone per distruggere i servizi -->
         <Button
-            android:id="@+id/bttSettings"
+            android:id="@+id/bttStopServices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ButtonBackground"
-            android:text="Settings"
+            android:text="Stop all services"
             android:textSize="15dp"
             android:textColor="@color/textColor"
             android:fontFamily="monospace"
             />
     </LinearLayout>
 
-
-    <!-- Layout informazioni -->
+    <!-- Layout impostazioni e info -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         android:gravity="center">
 
-        <!-- Immagine informazioni -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/info"
-            android:layout_marginRight="20dp"
-            />
-
-        <!-- Bottone per gestire le informazioni -->
-        <Button
-            android:id="@+id/bttInfo"
+        <!-- Layout impostazioni -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/ButtonBackground"
-            android:text="Info"
-            android:textSize="15dp"
-            android:textColor="@color/textColor"
-            android:fontFamily="monospace"
-            />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <!-- Immagine impostazioni -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/setting"
+                android:layout_marginRight="10dp"
+                />
+
+            <!-- Bottone per gestire le impostazioni -->
+            <Button
+                android:id="@+id/bttSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/ButtonBackground"
+                android:text="Settings"
+                android:textSize="15dp"
+                android:textColor="@color/textColor"
+                android:fontFamily="monospace"
+                />
+        </LinearLayout>
+
+
+        <!-- Layout informazioni -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            android:gravity="center">
+
+            <!-- Immagine informazioni -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/info"
+                android:layout_marginRight="10dp"
+                />
+
+            <!-- Bottone per gestire le informazioni -->
+            <Button
+                android:id="@+id/bttInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/ButtonBackground"
+                android:text="Info"
+                android:textSize="15dp"
+                android:textColor="@color/textColor"
+                android:fontFamily="monospace"
+                />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

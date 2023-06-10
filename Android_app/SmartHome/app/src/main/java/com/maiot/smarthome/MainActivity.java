@@ -14,18 +14,24 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import Services.LightsService;
+import Services.ShuttersService;
 
 /**
  * Classe che rappresenta l'activity principale dell'applicazione
  */
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     private Button bttLights = null;
     private Button bttShutters = null;
     private Button bttAutomations = null;
+    private Button bttStopServices = null;
     private Button bttSettings = null;
 
     private Button bttInfo = null;
@@ -57,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
         bttAutomations = findViewById(R.id.bttAutomations);
         button_start_automations_activity();
+
+        bttStopServices = findViewById(R.id.bttStopServices);
+        button_stop_services();
 
         bttSettings = findViewById(R.id.bttSettings);
         button_start_settings_activity();
@@ -121,6 +130,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * funzione che gestisce l'arresto dei servizi
+     */
+    private void button_stop_services() {
+        bttStopServices.setOnClickListener(view -> {
+            // arresto dei servizi
+            stopAllServices();
+        });
+    }
+
+    /**
      * funzione che gestisce il passaggio alla activity delle impostazioni
      */
     private void button_start_settings_activity() {
@@ -144,6 +163,37 @@ public class MainActivity extends AppCompatActivity {
             //per capire quale activity è stata lanciata (è un id in pratica)
             startActivity(intent);
         });
+    }
+
+    /**
+     * Metodo che arresta il servizio delle tapparelle se sta girando
+     */
+    private void stopShuttersService() {
+        if (ShuttersService.isRunning) {
+            stopService(new Intent(this, ShuttersService.class));
+        } else {
+            Log.i(TAG, "ShuttersService is not running");
+        }
+    }
+
+    /**
+     * Merodo che arresta il servizio delle lampade se sta girando
+     */
+    private void stopLightsService() {
+        if (LightsService.isRunning) {
+            stopService(new Intent(this, LightsService.class));
+        } else {
+            Log.i(TAG, "LightsService is not running");
+        }
+    }
+
+    /**
+     * Metodo che arresta tutti i servizi se stanno girando
+     */
+    private void stopAllServices() {
+        stopShuttersService();
+        stopLightsService();
+        Toast.makeText(getApplicationContext(), "All services stopped", Toast.LENGTH_LONG).show();
     }
 
     //-------------------------------PERMESSI-POSIZIONE------------------------------------------------------------

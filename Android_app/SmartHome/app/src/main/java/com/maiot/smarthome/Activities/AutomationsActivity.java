@@ -331,6 +331,7 @@ public class AutomationsActivity extends AppCompatActivity {
     /**
      * Metodo che accende la luce della sala pesi
      */
+    //TODO: da modificare la logica dell'id della lampada
     private void turnOnGymLight() {
         if (deviceList.getLightsList() != null) {
             for (int i = 0; i < deviceList.getLightsList().size(); i++) {
