@@ -87,17 +87,6 @@ public class ShuttersActivity extends AppCompatActivity implements HttpRequestCo
         setImageStatus(true);
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        // iscrizione all'evento scansione completata
-        HttpRequestCompleted httpRequestCompleted = this;
-        deviceList = new DeviceList(httpRequestCompleted);
-
-        // inizializzazione immagini e pulsanti in base allo stato reale
-        setImageStatus(true);
-    }
-
     /**
      * inizializzazione delle views e set dei click Listener
      */

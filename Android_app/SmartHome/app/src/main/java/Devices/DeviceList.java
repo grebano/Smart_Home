@@ -28,12 +28,21 @@ public class DeviceList {
     {
         //--------------------Shutters-----------------------------------
         SmartDevice shutter1 = new SmartDevice(IpAddr_MacAddr.SHUTTER1_IP, IpAddr_MacAddr.SHUTTER1_MAC, httpRequestCompleted);
+        //SmartDevice shutter2 = new SmartDevice(IpAddr_MacAddr.SHUTTER2_IP, IpAddr_MacAddr.SHUTTER2_MAC, httpRequestCompleted);
+        //SmartDevice shutter3 = new SmartDevice(IpAddr_MacAddr.SHUTTER3_IP, IpAddr_MacAddr.SHUTTER3_MAC, httpRequestCompleted);
         shutterList = new ArrayList<>();
+        shutterList.add(shutter1);
+        //shutterList.add(shutter2);
+        //shutterList.add(shutter3);
         checkOnlineShutters();
         //--------------------Lamps--------------------------------------
         SmartDevice lamp1 = new SmartDevice(IpAddr_MacAddr.LAMP1_IP, IpAddr_MacAddr.LAMP1_MAC, httpRequestCompleted);
+        //SmartDevice lamp2 = new SmartDevice(IpAddr_MacAddr.LAMP2_IP, IpAddr_MacAddr.LAMP2_MAC, httpRequestCompleted);
+        //SmartDevice lamp3 = new SmartDevice(IpAddr_MacAddr.LAMP3_IP, IpAddr_MacAddr.LAMP3_MAC, httpRequestCompleted);
         lightsList = new ArrayList<>();
         lightsList.add(lamp1);
+        //lightsList.add(lamp2);
+        //lightsList.add(lamp3);
         checkOnlineLamps();
 
     }
@@ -89,7 +98,7 @@ public class DeviceList {
         handler.postDelayed(() -> {
             for(SmartDevice smartDevice : shutterList)
             {
-                if(smartDevice.checkIfOnline())
+                if(!smartDevice.checkIfOnline())
                 {
                     shutterList.remove(smartDevice);
                     Log.i(TAG,"Shutter removed -> not online");
