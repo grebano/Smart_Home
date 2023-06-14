@@ -28,10 +28,10 @@ The application is written in Java and xml and can be installed on any Android s
 ### Screenshots
 ![App](/Images/screenshots.jpg)
 
-## Arduino code
-The code is written in C++ and is saved in the file [arduino_code](Arduino_code/ArduinoSmartHome/ArduinoSmartHome.ino). It is commented and is easy to understandad is also possible to program the esp01 modules using PlatformIO adding ```#include <Arduino.h>``` at the beginning of the code and properly configuring the platformio.ini file.
+## :electric_plug:	 Arduino code
+The code is written in C++ and is saved in the file [arduino_code](Arduino_code/ArduinoSmartHome/ArduinoSmartHome.ino). It is commented and is easy to understand, is also possible to program the esp01 modules using PlatformIO adding ```#include <Arduino.h>``` at the beginning of the code and properly configuring the platformio.ini file.
 
-Is clearly necessary to modify the code in order to use it with your esp01 modules. You have to change the ssid and password of your wifi networkand you can also change the name of the devices that you want to control.
+Is clearly necessary to modify the code in order to use it with your esp01 modules. You have to change the ssid and password of your wifi network, you can also change the name of the devices that you want to control.
 
 In order to program the esp01 modules you have to connect them to the computer using an appropriate USB programmer. You can find a lot of tutorials on the internet. You may also need to modifiy the programmer by adding a button to put the esp01 in programming mode.
 
