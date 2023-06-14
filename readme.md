@@ -13,7 +13,7 @@ Each esp01 controls a relay module and has an ip address so it can be reached th
 - Android Studio (for Android app)
 
 ## :bulb: How it works
-The Android application sends http requests to the esp01 modules, which can turn on and off the relay modules. The relay modules are wired to the devices that we want to control (lights, shutters ...). The esp01 modules are connected to the local wifi network and have an ip address, so they can be reached by the Android application.
+The Android application sends http requests to the esp01 modules, which can turn on and off the relay modules. The modules are wired to the devices that we want to actually control (lights, shutters ...). Obviously the esp01 modules are connected to the local wifi network and have an ip address, so they can be reached by the Android application.
 
 ## :iphone: Android application
 The application is composed by 3 fragments:
@@ -24,5 +24,5 @@ The application is composed by 3 fragments:
 You can also find a settings page where you can set the ip address of the esp01 modules, shutters opening and closing time..., and an info page that briefly explains how the application works.
 
 ## Arduino code
-The code is written in C++ and is saved in the file `arduino_code.ino`. It is commented and is easy to understandad is also possible to program the esp01 modules using PlatformIO adding ```#include <Arduino.h>``` at the beginning of the code and properly configuring the platformio.ini file.
+The code is written in C++ and is saved in the file ![arduino_code](Arduino_code/ArduinoSmartHome/ArduinoSmartHome.ino). It is commented and is easy to understandad is also possible to program the esp01 modules using PlatformIO adding ```#include <Arduino.h>``` at the beginning of the code and properly configuring the platformio.ini file.
 
