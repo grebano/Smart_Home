@@ -2,8 +2,8 @@
 #include <ESP8266WebServer.h>
 
 // Insert right ssid and password
-const char* ssid = "enricostefania";
-const char* password = "3Civettesulcomo";
+const char* ssid = "ssid";
+const char* password = "password";
 
 // Set port 
 ESP8266WebServer server(80);
