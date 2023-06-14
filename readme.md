@@ -23,6 +23,8 @@ The application is composed by 3 fragments:
 
 You can also find a settings page where you can set the ip address of the esp01 modules, shutters opening and closing time..., and an info page that briefly explains how the application works.
 
+![App](/Images/screenshots.jpg)
+
 ## Arduino code
 The code is written in C++ and is saved in the file [arduino_code](Arduino_code/ArduinoSmartHome/ArduinoSmartHome.ino). It is commented and is easy to understandad is also possible to program the esp01 modules using PlatformIO adding ```#include <Arduino.h>``` at the beginning of the code and properly configuring the platformio.ini file.
 
