@@ -1,3 +1,4 @@
+![Intro](/Images/ESP01_SmartHome.png)
 # Smart Home Project :house_with_garden:	
 An home automation enviroment in wich an Android application interfaces with an Arduino in orded to control lights, security, doors, sensors... .
 The idea is to have an appliction that uses http methods to dialogue with esp01 modules, which can turn on and off multiple devices.
