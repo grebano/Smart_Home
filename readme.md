@@ -39,4 +39,4 @@ It should be possible to use an esp32 or other modules with wifi capabilities, b
 
 ### Esp01 relay module:
 
-![Esp01](/Images/esp01Relay.png)
+![Esp01](/Images/ESP01.png)
