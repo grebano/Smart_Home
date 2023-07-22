@@ -1,17 +1,21 @@
-#include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
+//#include <ESP8266WiFi.h>
+//#include <ESP8266WebServer.h>
+
+#include <WiFi.h>
+#include <WebServer.h>
 
 // Insert right ssid and password
-const char* ssid = "ssid";
-const char* password = "password";
+const char* ssid = "...";
+const char* password = "...";
 
 // Set port 
-ESP8266WebServer server(80);
+//ESP8266WebServer server(80);
+WebServer server(80);
 
 bool status = false;
 
 // Set connection parameters
-IPAddress ip(192, 168, 1, 11); //ESP static ip
+IPAddress ip(192, 168, 1, 10); //ESP static ip
 IPAddress gateway(192, 168, 1, 1);   //IP Address of your WiFi Router (Gateway)
 IPAddress subnet(255, 255, 255, 0);  //Subnet mask
 IPAddress dns(8, 8, 8, 8);  //DNS
@@ -58,7 +62,7 @@ void configWifi(){
   //WiFi.setAutoConnect(false);
   //WiFi.disconnect();
   WiFi.hostname(deviceName);
-  WiFi.config(ip, subnet, gateway, dns);
+  //WiFi.config(ip, subnet, gateway, dns); commentato su esp32
   WiFi.begin(ssid, password);    
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
